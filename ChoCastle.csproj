@@ -167,10 +167,7 @@
     <Content Include="App_Data\ChoCastleDB_log.ldf">
       <DependentUpon>ChoCastleDB.mdf</DependentUpon>
     </Content>
-    <Content Include="App_Data\temp.mdf" />
-    <Content Include="App_Data\temp_log.ldf">
-      <DependentUpon>temp.mdf</DependentUpon>
-    </Content>
+    <Content Include="App_Data\TextFile1.txt" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
