@@ -1,31 +1,104 @@
 ﻿@{
+    //Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Home Page";
 }
-
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner" style="background-image: url(/template/images/castle.jpg);" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+        <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="display-t js-fullheight">
+                            <div class="display-tc js-fullheight animate-box" data-animate-effect="fadein">
+                                <h1>the best chocolate <em>&amp;</em> cake <em>in</em> SMIT14</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</header>
+<div id="fh5co-slider" class="fh5co-section animate-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 animate-box">
+                <div class="fh5co-heading">
+                    <h2>Our Best <em>&amp;</em> Unique Menu</h2>
+                    <p>當年日本某太子妃舉行皇家世紀婚禮結束時，送給來賓的喜糖就是〝生巧克力〞，據說是瑞士的總理送的禮物，特殊的巧克力口感深受日本人的喜愛，從此生巧克力便在日本流行起來，日文中這個漢字(唸為nama)其實指的是「新鮮」。</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-push-1 animate-box">
+                <aside id="fh5co-slider-wrwap">
+                    <div class="flexslider">
+                        <ul class="slides">
+                            <li style="background-image: url(/Template/images/choco/生巧克力.jpg);">
+                                <div class="overlay-gradient"></div>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-12 col-md-offset-0 col-md-pull-10 slider-text slider-text-bg">
+                                            <div class="slider-text-inner">
+                                                <div class="desc">
+                                                    <h2>比利時 生巧克力65%</h2>
+                                                    <p>
+                                                        1999年我在比利時的布魯塞爾遇見一種充滿了奇妙滋味的巧克力，在口中彷彿一道黑色暖流融化在舌尖，一直是我無法言說的感官經驗。<br>
+                                                        這是一份經過比利時人精緻熔鍊的心意，比利時巧克力的標準作法，是將可可豆研磨至超乎妳想像的20微米，因為更細緻，所以巧克力的質感溫潤如絲絨，適當的甜度，在妳口中可以感受到一種輕柔滑順的幸福。
+                                                    </p>
+                                                    <p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="background-image: url(/Template/images/cake/生巧克力小蛋糕.jpg);">
+                                <div class="overlay-gradient"></div>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-12 col-md-offset-0 col-md-pull-10 slider-text slider-text-bg">
+                                            <div class="slider-text-inner">
+                                                <div class="desc">
+                                                    <h2>生巧克力小蛋糕</h2>
+                                                    <p>流心滑順的生巧克力小蛋糕，融合日本與法國製作的極致手藝製作，從內到外100%選用與GODIVA相同來自比利時的頂級巧克力製作，一滴水不添加，口感香濃卻不甜膩，六種內餡皆能呈現完全不同的美味。</p>
+                                                    <p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="background-image: url(/Template/images/cake/生巧克力捲.jpg);">
+                                <div class="overlay-gradient"></div>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-12 col-md-offset-0 col-md-pull-10 slider-text slider-text-bg">
+                                            <div class="slider-text-inner">
+                                                <div class="desc">
+                                                    <h2>生巧克力捲</h2>
+                                                    <p>
+                                                        比利時生巧克力 X 濃厚香堤拉巧克力內餡 X 日本戚風蛋糕，吃完這款法式生巧克力蛋糕捲，那種滲透到內心深處的新鮮感覺，彷彿為明天提供滿滿元氣。
+                                                    </p>
+                                                    <p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+<div id="fh5co-started" class="fh5co-section animate-box" style="background-image: url(/Template/images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row animate-box">
+            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                <h2>Order</h2>
+                <p>將喜歡的甜點加到購物車後，填寫結帳單及配送資訊，選擇線上刷卡/臨櫃轉帳/貨到付款/門市付款完成訂購，我們就會開始安排製作及出貨了。</p>
+                <p><a href="reservation.html" class="btn btn-primary btn-outline">Order Now</a></p>
+            </div>
+        </div>
     </div>
 </div>
