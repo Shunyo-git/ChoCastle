@@ -230,7 +230,7 @@
     <Content Include="Template\images\choco\生巧克力2.jpg" />
     <Content Include="Template\images\choco\生巧克力3.jpg" />
     <Content Include="Template\images\choco\生巧克力5.jfif" />
-    <Content Include="Template\images\choco\生巧克力65%25.jpg" />
+    <Content Include="Template\images\choco\生巧克力6.jpg" />
     <Content Include="Template\images\choco\紅茶生巧克力.jpg" />
     <Content Include="Template\images\choco\草莓生巧克力.jpg" />
     <Content Include="Template\images\choco\覆盆子生巧克力.png" />
@@ -247,6 +247,9 @@
     <Content Include="Template\images\img_1.jpeg" />
     <Content Include="Template\images\img_sm_1.jpeg" />
     <Content Include="Template\images\loader.gif" />
+    <Content Include="Template\images\members\戴玉涵.jpeg" />
+    <Content Include="Template\images\members\江雯婷.jpeg" />
+    <Content Include="Template\images\members\羅舜陽.jpg" />
     <Content Include="Template\images\person_1.jpg" />
     <Content Include="Template\js\bootstrap-datetimepicker.js" />
     <Content Include="Template\js\bootstrap.min.js" />
@@ -259,6 +262,7 @@
     <Content Include="Template\js\modernizr-2.6.2.min.js" />
     <Content Include="Template\js\moment.min.js" />
     <Content Include="Template\js\respond.min.js" />
+    <Content Include="Template\js\shoppingcar.js" />
     <Content Include="Template\js\zoomerang.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -313,6 +317,7 @@
     <Content Include="Template\fonts\icomoon\icomoon\selection.json" />
     <Content Include="Template\images\.DS_Store" />
     <Content Include="Template\js\.DS_Store" />
+    <Content Include="Views\Home\ProductDescription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

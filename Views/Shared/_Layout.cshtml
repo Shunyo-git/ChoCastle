@@ -34,7 +34,7 @@
                 @Html.Partial("_LoginPartial")
                 <div class="row">
                     <div class="col-xs-12 text-center logo-wrap">
-                        <div id="fh5co-logo"><a href="index.html">Chocolate Castle<span>.</span></a></div>
+                        <div id="fh5co-logo"><a href="@Url.Action("Index")">Chocolate Castle<span>.</span></a></div>
                     </div>
                     <div class="col-xs-12 text-center menu-1 menu-wrap">
                         <ul>
@@ -44,18 +44,13 @@
                                 <a href="menu.html">Chocolate</a>
                                 <ul class="dropdown">
                                     <li><a href="#">生巧克力</a></li>
-                                    <li><a href="#">松露</a></li>
-                                    <li><a href="#">珠寶盒</a></li>
+                                    <li><a href="#">餅乾</a></li>
                                 </ul>
                             </li>
                             <li>|</li>
-                            <li>@Html.ActionLink("Moon Festival", "", "")</li>
-                            <li>|</li>
                             <li>@Html.ActionLink("Cake", "", "")</li>
                             <li>|</li>
-                            <li>@Html.ActionLink("Baby Gift", "", "")</li>
-                            <li>|</li>
-                            <li>@Html.ActionLink("Wedding", "", "")</li>
+                            <li>@Html.ActionLink("Gift Box Collection", "", "")</li>
                             <li>|</li>
                         </ul>
                     </div>
@@ -71,18 +66,16 @@
             <div class="container">
                 <div class="row row-pb-md">
                     <div class="col-md-4 fh5co-widget">
-                        <h4>About</h4>
+                        <h4><a href="@Url.Action("About")">About</a></h4>
                         <p>SMIT 14大專題!!!<br>以下開放填寫心路歷程</p>
                     </div>
                     <div class="col-md-2 col-md-push-1 fh5co-widget">
                         <h4>Products</h4>
                         <ul class="fh5co-footer-links">
                             <li><a href="#">生巧克力</a></li>
-                            <li><a href="#">松露</a></li>
-                            <li><a href="#">珠寶盒</a></li>
+                            <li><a href="#">餅乾</a></li>
+                            <li><a href="#">禮盒系列</a></li>
                             <li><a href="#">經典蛋糕</a></li>
-                            <li><a href="#">彌月蛋糕</a></li>
-                            <li><a href="#">婚禮喜餅</a></li>
                         </ul>
                     </div>
 
@@ -99,7 +92,7 @@
                     <div class="col-md-4 col-md-push-1 fh5co-widget">
                         <h4>Contact</h4>
                         <ul class="fh5co-footer-links">
-                            <li>18F., No.51, Sec. 2, Gongyi Rd., <br>  Nantun Dist., Taichung City 408, Taiwan (R.O.C.)</li>
+                            <li>18F., No.51, Sec. 2, Gongyi Rd., <br>  Nantun Dist., Taichung City 408, Taiwan</li>
                             <li><a href="04-23265860">04-23265860</a></li>
                         </ul>
                     </div>
