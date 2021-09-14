@@ -324,6 +324,7 @@
     <Content Include="Template\images\.DS_Store" />
     <Content Include="Template\js\.DS_Store" />
     <Content Include="Views\Home\ProductDescription.cshtml" />
+    <Content Include="Views\Home\ProductCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
