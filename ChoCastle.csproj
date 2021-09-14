@@ -218,9 +218,15 @@
     <Content Include="Template\fonts\icomoon\icomoon\style.css" />
     <Content Include="Template\images\broken_noise.png" />
     <Content Include="Template\images\broken_noise_%402X.png" />
+    <Content Include="Template\images\cake\古典巧克力蛋糕.jpg" />
+    <Content Include="Template\images\cake\巧克力松露蛋糕.jpg" />
+    <Content Include="Template\images\cake\巧克力蛋糕捲.jpg" />
+    <Content Include="Template\images\cake\法式巧克力千層.jpg" />
     <Content Include="Template\images\cake\法式生巧克力塔.jpg" />
+    <Content Include="Template\images\cake\熔岩巧克力蛋糕.jpg" />
     <Content Include="Template\images\cake\生巧克力小蛋糕.jpg" />
     <Content Include="Template\images\cake\生巧克力捲.jpg" />
+    <Content Include="Template\images\cake\莓麗動人巧克力蛋糕.jpg" />
     <Content Include="Template\images\cake\金莎生巧克力塔.jfif" />
     <Content Include="Template\images\castle.jpg" />
     <Content Include="Template\images\choco\抹茶生巧克力.jpg" />
