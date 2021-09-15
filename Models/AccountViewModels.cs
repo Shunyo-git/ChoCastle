@@ -48,10 +48,19 @@ namespace ChoCastle.Models
 
     public class LoginViewModel
     {
+
+        //2021/9/15 by sean
+        //增加註冊時填入帳號名稱欄位
+        [Required]
+        [Display(Name = "帳號名稱")]
+        public string UserName { get; set; }
+
+        /*
         [Required]
         [Display(Name = "電子郵件")]
         [EmailAddress]
         public string Email { get; set; }
+        */
 
         [Required]
         [DataType(DataType.Password)]
@@ -64,6 +73,21 @@ namespace ChoCastle.Models
 
     public class RegisterViewModel
     {
+        //2021/9/15 by sean
+        //增加註冊時填入帳號名稱欄位
+        [Required]
+        [StringLength(10, ErrorMessage = "{0} 的長度至少必須為 {2} - 10個字元。", MinimumLength = 2)]
+        [Display(Name = "帳號名稱")]
+        public string UserName { get; set; }
+
+
+        //2021/9/15 by sean
+        //增加註冊時填入姓名欄位
+        [Required]
+        [StringLength(5, ErrorMessage = "{0} 的長度至少必須為 {2} - 10個字元。", MinimumLength = 2)]
+        [Display(Name = "姓名")]
+        public string ChineseName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "電子郵件")]
