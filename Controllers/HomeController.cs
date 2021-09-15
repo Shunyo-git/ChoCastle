@@ -27,5 +27,15 @@ namespace ChoCastle.Controllers
 
             return View();
         }
+
+        public ActionResult ProductDescription()
+        {
+            return View();
+        }
+
+        public ActionResult ProductCategory()
+        {
+            return View();
+        }
     }
 }
