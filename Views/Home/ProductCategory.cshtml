@@ -1,20 +1,28 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ProductCake";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<br />
-<br />
-<br />
-<br />
+<header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner" style="background-image: url(/Template/images/choco/生巧克力7.jpg);" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="display-t js-fullheight">
+                    <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
+                        <h1>生巧克力</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
-@*小標*@
 <div id="fh5co-featured-menu" class="fh5co-section">
     <div class="container">
         <div class="row">
             <div class="col-md-12 fh5co-heading animate-box">
-                <h2>Cake</h2>
+                <h2 style="font-family:'Microsoft JhengHei'">CAKE</h2>
                 <div class="row">
                     <div class="col-md-6">
                         <p>
@@ -28,63 +36,45 @@
                 </div>
             </div>
 
-
-            @*產品*@
             <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap">
                 <div class="fh5co-item animate-box">
-                    <a href="#"><img src="~/Template/images/cake/法式生巧克力塔.jpg" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co"></a>
-                    <h3 style="color: #B8860B ">法式生巧克力塔</h3><br>
-                    @*<span class="fh5co-price">NT$150</span>*@
-                    @*<p><link href="#" rel="stylesheet" />商品查看</p>*@                   
+                    <a href="@Url.Action("ProductDescription", "Home")"><img src="~/Template/images/cake/法式生巧克力塔.jpg" class="img-responsive" alt=""></a>
+                    <h3 style="color: #B8860B ">法式生巧克力塔</h3><br>                  
                 </div>
                 <div class="fh5co-item animate-box">
-                    <a href="#"><img src="~/Template/images/cake/巧克力松露蛋糕.jpg" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co"></a>
+                    <a href="@Url.Action("ProductDescription", "Home")"><img src="~/Template/images/cake/巧克力松露蛋糕.jpg" class="img-responsive" alt=""></a>
                     <h3 style="color: #B8860B ">巧克力松露蛋糕</h3><br>
-                    @*<span class="fh5co-price">NT$220</span>*@
-                    @*<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos nihil cupiditate ut vero alias quaerat inventore molestias vel suscipit explicabo.</p>*@
                 </div>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap">
                 <div class="fh5co-item margin_top animate-box">
-                    <a href="#"><img src="~/Template/images/cake/巧克力蛋糕捲.jpg" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co"></a>
+                    <a href="@Url.Action("ProductDescription", "Home")"><img src="~/Template/images/cake/巧克力蛋糕捲.jpg" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co"></a>
                     <h3 style="color: #B8860B ">巧克力蛋糕捲</h3><br>
-                    @*<span class="fh5co-price">NT$190</span>*@
-                    @*<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos nihil cupiditate ut vero alias quaerat inventore molestias vel suscipit explicabo.</p>*@
                 </div>
                 <div class="fh5co-item animate-box">
-                    <a href="#"><img src="~/Template/images/cake/熔岩巧克力蛋糕.jpg" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co"></a>
+                    <a href="@Url.Action("ProductDescription", "Home")"><img src="~/Template/images/cake/熔岩巧克力蛋糕.jpg" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co"></a>
                     <h3 style="color: #B8860B">熔岩巧克力蛋糕</h3><br>
-                    @*<span class="fh5co-price">NT$120</span>*@
-                    @*<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos nihil cupiditate ut vero alias quaerat inventore molestias vel suscipit explicabo.</p>*@
                 </div>
             </div>
             <div class="clearfix visible-sm-block visible-xs-block"></div>
             <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap">
                 <div class="fh5co-item animate-box">
-                    <a href="#"><img src="~/Template/images/cake/生巧克力小蛋糕.jpg" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co"></a>
+                    <a href="@Url.Action("ProductDescription", "Home")"><img src="~/Template/images/cake/生巧克力小蛋糕.jpg" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co"></a>
                     <h3 style="color: #B8860B">生巧克力小蛋糕</h3><br>
-                    @*<span class="fh5co-price">NT$95</span>*@
-                    @*<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos nihil cupiditate ut vero alias quaerat inventore molestias vel suscipit explicabo.</p>*@
                 </div>
                 <div class="fh5co-item animate-box">
-                    <a href="#"><img src="~/Template/images/cake/莓麗動人巧克力蛋糕.jpg" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co"></a>
+                    <a href="@Url.Action("ProductDescription", "Home")"><img src="~/Template/images/cake/莓麗動人巧克力蛋糕.jpg" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co"></a>
                     <h3 style="color: #B8860B">莓麗動人巧克力蛋糕</h3><br>
-                    @*<span class="fh5co-price">NT$120</span>*@
-                    @*<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos nihil cupiditate ut vero alias quaerat inventore molestias vel suscipit explicabo.</p>*@
                 </div>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap">
                 <div class="fh5co-item margin_top animate-box">
-                    <a href="#"><img src="~/Template/images/cake/法式巧克力千層.jpg" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co"></a>
+                    <a href="@Url.Action("ProductDescription", "Home")"><img src="~/Template/images/cake/法式巧克力千層.jpg" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co"></a>
                     <h3 style="color: #B8860B">法式巧克力千層</h3><br>
-                    @*<span class="fh5co-price">NT$165</span>*@
-                    @*<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos nihil cupiditate ut vero alias quaerat inventore molestias vel suscipit explicabo.</p>*@
                 </div>
                 <div class="fh5co-item animate-box">
-                    <a href="#"><img src="~/Template/images/cake/生巧克力捲.jpg" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co"></a>
+                    <a href="@Url.Action("ProductDescription", "Home")"><img src="~/Template/images/cake/生巧克力捲.jpg" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co"></a>
                     <h3 style="color: #B8860B ">生巧克力捲</h3><br>
-                    @*<span class="fh5co-price">NT$120</span>*@
-                    @*<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos nihil cupiditate ut vero alias quaerat inventore molestias vel suscipit explicabo.</p>*@
                 </div>
             </div>
         </div>
