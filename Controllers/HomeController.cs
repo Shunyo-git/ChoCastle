@@ -37,5 +37,10 @@ namespace ChoCastle.Controllers
         {
             return View();
         }
+
+        public ActionResult ShoppingFAQ()
+        {
+            return View();
+        }
     }
 }

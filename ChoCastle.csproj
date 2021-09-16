@@ -405,6 +405,7 @@
     <Content Include="Template\sass\_bootstrap-mincer.scss" />
     <Content Include="Template\sass\_bootstrap-sprockets.scss" />
     <Content Include="Views\Manage\Member.cshtml" />
+    <Content Include="Views\Home\ShoppingFAQ.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

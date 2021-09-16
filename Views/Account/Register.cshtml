@@ -7,17 +7,19 @@
 <br />
 <br />
 <br />
+<br />
+<br />
+<br />
 <div id="fh5co-started" class="fh5co-section animate-box" style="background-image: url(/Template/images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
         <div class="row animate-box">
             <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                <h2>@ViewBag.Title </h2>
+                <h2 style="font-family:'Microsoft JhengHei';color: #B8860B">建立新帳戶</h2>
 
                 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
                     @Html.AntiForgeryToken()
-                    <h4>建立新帳戶。</h4>
                     <hr />
                     @Html.ValidationSummary("", new { @class = "text-danger" })
                     <div class="form-group">
