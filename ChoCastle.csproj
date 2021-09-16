@@ -405,6 +405,7 @@
     <Content Include="Template\sass\_bootstrap-compass.scss" />
     <Content Include="Template\sass\_bootstrap-mincer.scss" />
     <Content Include="Template\sass\_bootstrap-sprockets.scss" />
+    <Content Include="Views\Manage\Member.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
