@@ -1791,7 +1791,7 @@ textarea {
     height: 200px;
     position: fixed;
     right: 0px;
-    bottom: 0px;
+    top: 80px;
     background-image:url(/Template/images/sunsun.png);
     background-position: center;
     background-repeat: no-repeat;

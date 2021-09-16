@@ -216,7 +216,6 @@
     <Content Include="Template\fonts\icomoon\icomoon\fonts\icomoon.svg" />
     <Content Include="Template\fonts\icomoon\icomoon\Read Me.txt" />
     <Content Include="Template\fonts\icomoon\icomoon\style.css" />
-    <Content Include="Template\images\black.jpg" />
     <Content Include="Template\images\broken_noise.png" />
     <Content Include="Template\images\broken_noise_%402X.png" />
     <Content Include="Template\images\cake\古典巧克力蛋糕.jpg" />
@@ -406,6 +405,7 @@
     <Content Include="Template\sass\_bootstrap-mincer.scss" />
     <Content Include="Template\sass\_bootstrap-sprockets.scss" />
     <Content Include="Views\Manage\Member.cshtml" />
+    <Content Include="Views\Home\ShoppingFAQ.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
