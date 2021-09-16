@@ -1784,3 +1784,17 @@ textarea {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+
+#sun {
+    width: 200px;
+    height: 200px;
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    background-image:url(/Template/images/sunsun.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-color: rgba(0, 0, 0, 0);
+}
