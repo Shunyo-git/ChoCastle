@@ -452,7 +452,6 @@ D:\專題\ChoCastle\bin\zh-Hant\Microsoft.Owin.Security.Facebook.resources.dll
 D:\專題\ChoCastle\bin\zh-Hant\Microsoft.Owin.Security.Google.resources.dll
 D:\專題\ChoCastle\bin\zh-Hant\Microsoft.Owin.Security.Twitter.resources.dll
 D:\專題\ChoCastle\bin\zh-Hant\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-D:\專題\ChoCastle\obj\Debug\ChoCastle.csproj.AssemblyReference.cache
 D:\專題\ChoCastle\obj\Debug\ChoCastle.csproj.CoreCompileInputs.cache
 D:\專題\ChoCastle\obj\Debug\ChoCastle.csproj.CopyComplete
 D:\專題\ChoCastle\obj\Debug\ChoCastle.dll
