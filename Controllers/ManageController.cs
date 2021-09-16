@@ -61,6 +61,7 @@ namespace ChoCastle.Controllers
                 : message == ManageMessageId.Error ? "發生錯誤。"
                 : message == ManageMessageId.AddPhoneSuccess ? "已新增您的電話號碼。"
                 : message == ManageMessageId.RemovePhoneSuccess ? "已移除您的電話號碼。"
+                : message == ManageMessageId.UpdateMemberSuccess ? "已更新您的會員資料。"  //2021/9/17 by sean
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -71,7 +72,13 @@ namespace ChoCastle.Controllers
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+               
             };
+
+
+             
+
+
             return View(model);
         }
 
@@ -322,11 +329,73 @@ namespace ChoCastle.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
-        //
-        // GET: /Manage/Member
-        public ActionResult Member()
+
+
+        // 2021/9/16
+        // GET: /Manage/MemberInfo
+        public async Task<ActionResult> Member()
         {
-            return View();
+            var model = new MemberViewModel();
+            var userId = User.Identity.GetUserId();
+            
+            var user = await UserManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                model.MemberID = user.MemberID;
+                model.UserName = user.UserName;
+                model.Email = user.Email;
+                model.ChineseName = user.ChineseName;
+                model.Gender = user.Gender;
+                model.PostCode = user.PostCode;
+                model.Address = user.Address;
+                model.Mobile = user.Mobile;
+                model.LineID = user.LineID;
+                model.Birthday = user.Birthday.ToShortDateString();
+            }
+
+            return View(model);
+        }
+        ////
+        //// GET: /Manage/Member
+        //public ActionResult Member()
+        //{
+           
+        //    return View();
+        //}
+
+        // 2021/9/17 by sean
+        // POST: /Account/Member
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Member(MemberViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                user.ChineseName = model.ChineseName;
+                //user.Email = model.Email;
+                user.Gender = model.Gender;
+                user.PostCode = model.PostCode;
+                user.Address = model.Address;
+                user.Mobile = model.Mobile;
+                user.LineID = model.LineID;
+                user.Birthday = DateTime.Parse(model.Birthday);
+
+                var result = await UserManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    var Newuser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                    if (Newuser != null)
+                    {
+                        return RedirectToAction("Index", new { Message = ManageMessageId.UpdateMemberSuccess });
+                    }
+                    
+                }
+                AddErrors(result);
+            }
+
+            // 如果執行到這裡，發生某項失敗，則重新顯示表單
+            return View(model);
         }
 
         protected override void Dispose(bool disposing)
@@ -388,9 +457,12 @@ namespace ChoCastle.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
+            UpdateMemberSuccess, //2021/9/17 by sean
             Error
         }
 
-#endregion
+
+        
+        #endregion
     }
 }

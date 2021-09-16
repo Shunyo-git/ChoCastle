@@ -11,7 +11,7 @@ namespace ChoCastle.Models
     {
         //2021/9/15 by sean
         //新增會員擴充屬性
-
+        public int MemberID { get; set; }
         public string ChineseName { get; set; }
         public string Gender { get; set; }
         public string PostCode { get; set; }
@@ -20,7 +20,7 @@ namespace ChoCastle.Models
         public string LineID { get; set; }
         public System.DateTime Birthday { get; set; }
 
-
+ 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // 注意 authenticationType 必須符合 CookieAuthenticationOptions.AuthenticationType 中定義的項目
