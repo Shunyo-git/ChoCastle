@@ -322,6 +322,13 @@ namespace ChoCastle.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
+        //
+        // GET: /Manage/Member
+        public ActionResult Member()
+        {
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
@@ -333,7 +340,7 @@ namespace ChoCastle.Controllers
             base.Dispose(disposing);
         }
 
-#region Helper
+        #region Helper
         // 新增外部登入時用來當做 XSRF 保護
         private const string XsrfKey = "XsrfId";
 
