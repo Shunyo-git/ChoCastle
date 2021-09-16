@@ -34,66 +34,74 @@
                 @Html.Partial("_LoginPartial")
                 <div class="row">
                     <div class="col-xs-12 text-center logo-wrap">
-                        <div id="fh5co-logo"><a href="@Url.Action("Index")">Chocolate Castle<span>.</span></a></div>
+                        <div id="fh5co-logo"><a href="@Url.Action("Index", "Home")">Chocolate Castle<span>.</span></a></div>
                     </div>
                     <div class="col-xs-12 text-center menu-1 menu-wrap">
                         <ul>
-                            @*<li class="active">@Html.ActionLink("首頁", "Index", "Home")</li>*@
+                            <li>|</li>
+                            <li>@Html.ActionLink("About us", "About", "")</li>
                             <li>|</li>
                             <li class="has-dropdown">
                                 <a href="@Url.Action("ProductCategory")">Chocolate</a>
                                 <ul class="dropdown">
-                                    <li><a href="#">生巧克力</a></li>
-                                    <li><a href="#">餅乾</a></li>
+                                    <li><a href="@Url.Action("ProductCategory")">生巧克力</a></li>
+                                    <li><a href="@Url.Action("ProductCategory")">餅乾</a></li>
                                 </ul>
                             </li>
                             <li>|</li>
-                            <li>@Html.ActionLink("Cake", "", "")</li>
+                            <li>@Html.ActionLink("Cake", "ProductCategory", "")</li>
                             <li>|</li>
-                            <li>@Html.ActionLink("Gift Box Collection", "", "")</li>
+                            <li>@Html.ActionLink("Gift Box Collection", "ProductCategory", "")</li>
                             <li>|</li>
+                            <li>@Html.ActionLink("Castle Weather", "", "")</li>
+                            <li>|</li>
+
                         </ul>
                     </div>
                 </div>
 
             </div>
         </nav>
-
+ 
 
         @RenderBody()
 
         <footer id="fh5co-footer" role="contentinfo" class="fh5co-section">
             <div class="container">
                 <div class="row row-pb-md">
-                    <div class="col-md-4 fh5co-widget">
-                        <h4><a href="@Url.Action("About")">About</a></h4>
-                        <p>SMIT 14大專題!!!<br>以下開放填寫心路歷程</p>
+                    <div class="col-md-3 col-md-push-1 fh5co-widget">
+                        <h4>About</h4>
+                        <ul class="fh5co-footer-links">
+                            <li><a href="@Url.Action("About","Home")">團隊介紹</a></li>
+                            <li><a href="@Url.Action("About","Home")">心路歷程</a></li>
+                            <li><a href="@Url.Action("About","Home")">城堡天氣實況</a></li>
+                        </ul>
                     </div>
-                    <div class="col-md-2 col-md-push-1 fh5co-widget">
+                    <div class="col-md-3 col-md-push-1 fh5co-widget">
                         <h4>Products</h4>
                         <ul class="fh5co-footer-links">
-                            <li><a href="#">生巧克力</a></li>
-                            <li><a href="#">餅乾</a></li>
-                            <li><a href="#">禮盒系列</a></li>
-                            <li><a href="#">經典蛋糕</a></li>
+                            <li><a href="@Url.Action("ProductCategory","Home")">生巧克力</a></li>
+                            <li><a href="@Url.Action("ProductCategory","Home")">餅乾</a></li>
+                            <li><a href="@Url.Action("ProductCategory","Home")">禮盒系列</a></li>
+                            <li><a href="@Url.Action("ProductCategory","Home")">經典蛋糕</a></li>
                         </ul>
                     </div>
 
-                    <div class="col-md-2 col-md-push-1 fh5co-widget">
+                    <div class="col-md-3 col-md-push-1 fh5co-widget">
                         <h4>Others</h4>
                         <ul class="fh5co-footer-links">
-                            <li><a href="#">購物常見問題</a></li>
+                            <li><a href="@Url.Action("ShoppingFAQ","Home")">購物常見問題</a></li>
                             <li><a href="#">客服信箱</a></li>
                             <li><a href="#">FaceBook</a></li>
                             <li><a href="#">Instagram</a></li>
                         </ul>
                     </div>
 
-                    <div class="col-md-4 col-md-push-1 fh5co-widget">
+                    <div class="col-md-3 col-md-push-1 fh5co-widget">
                         <h4>Contact</h4>
                         <ul class="fh5co-footer-links">
-                            <li>18F., No.51, Sec. 2, Gongyi Rd., <br>  Nantun Dist., Taichung City 408, Taiwan</li>
-                            <li><a href="04-23265860">04-23265860</a></li>
+                            <li><a href="#">18F., No.51, Sec. 2, <br> Gongyi Rd.,  Nantun Dist., <br> Taichung City 408,Taiwan</a></li>
+                            <li><a href="#">04-23265860</a></li>
                         </ul>
                     </div>
 
