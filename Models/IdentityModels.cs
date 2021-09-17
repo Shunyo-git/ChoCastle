@@ -20,7 +20,7 @@ namespace ChoCastle.Models
         public string LineID { get; set; }
         public System.DateTime Birthday { get; set; }
 
-
+ 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // 注意 authenticationType 必須符合 CookieAuthenticationOptions.AuthenticationType 中定義的項目
