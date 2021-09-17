@@ -11,14 +11,23 @@ namespace ChoCastle.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ShoppingDetail
     {
         public int CarID { get; set; }
         public Nullable<int> ProductID { get; set; }
+
+        [Display(Name = "產品名稱")]
         public string ProductName { get; set; }
+
+        [Display(Name = "單價")]
         public Nullable<int> UnitPrice { get; set; }
+
+        [Display(Name = "數量")]
         public Nullable<int> OrderQuantity { get; set; }
+
+        [Display(Name = "小計")]
         public Nullable<int> Subtotal { get; set; }
         public Nullable<System.DateTime> AddedDate { get; set; }
         public string ModifiedDate { get; set; }

@@ -636,3 +636,6 @@ D:\Git-Repos\ChoCastle\obj\Debug\ChoCastle.csproj.AssemblyReference.cache
 D:\Git-Repos\ChoCastle\obj\Debug\ChoCastle.Migrations.MemberID.resources
 D:\Git-Repos\ChoCastle\obj\Debug\ChoCastle.csproj.GenerateResource.cache
 D:\Git-Repos\ChoCastle\obj\Debug\ChoCastle.Migrations.MemberID1.resources
+D:\專題\ChoCastle\obj\Debug\ChoCastle.Migrations.MemberID.resources
+D:\專題\ChoCastle\obj\Debug\ChoCastle.Migrations.MemberID1.resources
+D:\專題\ChoCastle\obj\Debug\ChoCastle.csproj.GenerateResource.cache

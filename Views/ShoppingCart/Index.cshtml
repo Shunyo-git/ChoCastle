@@ -1,0 +1,97 @@
+﻿@model IEnumerable<ChoCastle.Models.ShoppingDetail>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div id="fh5co-started" class="fh5co-section animate-box" style="background-image: url(/Template/images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+
+        <div class="row animate-box text-capitalize">
+            <h2 style="color:#B8860B">購物車明細</h2>
+
+            <p>
+                [ @Html.ActionLink("繼續購物", "ProductCategory", "Home") ]
+                [ @Html.ActionLink("前往結帳", "ProductCategory", "Home") ]
+
+            </p>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnitPrice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderQuantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Subtotal)
+                    </th>
+                    @*<th>
+                    @Html.DisplayNameFor(model => model.AddedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModifiedDate)
+                </th>*@
+                    @*<th>
+                    @Html.DisplayNameFor(model => model.Product.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ShoppingCar.OrderName)
+                </th>*@
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnitPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderQuantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Subtotal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AddedDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ModifiedDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ShoppingCar.OrderName)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.CarID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.CarID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.CarID })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
