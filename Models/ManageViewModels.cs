@@ -16,7 +16,7 @@ namespace ChoCastle.Models
         //2021/9/17 by sean
         //新增會員擴充屬性
 
-
+        public int MemberID { get; set; }
         public string Email { get; set; }
         public string ChineseName { get; set; }
         public string Gender { get; set; }
@@ -104,6 +104,10 @@ namespace ChoCastle.Models
     {
 
         //public ApplicationUser GetUser { get; set; }
+
+        [Display(Name = "會員編號")]
+        public int MemberID { get; set; }
+
 
         [Display(Name = "帳號名稱")]
         public string UserName { get; set; }

@@ -1,0 +1,164 @@
+﻿@model ChoCastle.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div id="fh5co-started" class="fh5co-section animate-box" style="background-image: url(/Template/images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+       
+        <div class="row animate-box">
+            <div>
+                <h2 style="color:#B8860B">商品明細</h2>
+                <h4 style="color:#B8860B">Product</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ProductName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ProductSpec)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ProductSpec)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ProductDisc)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ProductDisc)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.isDisplay)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.isDisplay)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PurchasePrice)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.PurchasePrice)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.RetailPrice)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.RetailPrice)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SellingPrice)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.SellingPrice)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SalePrice)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.SalePrice)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.StockQty)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.StockQty)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AvailableQty)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AvailableQty)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AddedDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AddedDate)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AddedUserID)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AddedUserID)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ModifiedDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ModifiedDate)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ModifiedUserID)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ModifiedUserID)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ProductCategory.CategoryName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ProductCategory.CategoryName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Vendor.VendorName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Vendor.VendorName)
+                    </dd>
+
+                </dl>
+            </div>
+            <p>
+                @Html.ActionLink("編輯", "Edit", new { id = Model.ProductID }) |
+                @Html.ActionLink("返回列表", "Index")
+            </p>
+        </div>
+    </div>
+</div>
+
+
