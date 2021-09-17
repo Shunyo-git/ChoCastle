@@ -1,4 +1,4 @@
-﻿
+﻿@model ChoCastle.Models.ChoCastleDBEntities1
 @{
     ViewBag.Title = "ProductDescription";
 }
@@ -27,7 +27,10 @@
             </div>
             <div class="col-md-7 animate-box" data-animate-effect="fadeInRight">
                 <blockquote>
-                    <p>這是一份經過比利時人精緻熔鍊的心意，在這份心意之中，除了比利時的驕傲之外，還添加了Chochoco對於巧克力的堅持。比利時巧克力的標準作法，是將可可豆研磨至超乎妳想像的20微米，因為更細緻，所以巧克力的質感溫潤如絲絨，適當的甜度，在妳口中可以感受到一種輕柔滑順的幸福。</p>
+                    <p>
+                        @Model.Products.FirstOrDefault().ProductDisc
+                        這是一份經過比利時人精緻熔鍊的心意，在這份心意之中，除了比利時的驕傲之外，還添加了Chochoco對於巧克力的堅持。比利時巧克力的標準作法，是將可可豆研磨至超乎妳想像的20微米，因為更細緻，所以巧克力的質感溫潤如絲絨，適當的甜度，在妳口中可以感受到一種輕柔滑順的幸福。
+                    </p>
                 </blockquote>
             </div>
         </div>

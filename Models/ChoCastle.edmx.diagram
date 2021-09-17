@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cab4d6e9464247ac8cf3887b349581fe" Name="Diagram1" ZoomLevel="96">
+        <EntityTypeShape EntityType="ChoCastleDBModel.carriage" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChoCastleDBModel.Invoice" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChoCastleDBModel.OrderDetail" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChoCastleDBModel.Order" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChoCastleDBModel.ProductCategory" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChoCastleDBModel.Product" Width="1.5" PointX="6" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChoCastleDBModel.ShoppingCar" Width="1.5" PointX="6" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChoCastleDBModel.ShoppingDetail" Width="1.5" PointX="8.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChoCastleDBModel.Vendor" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="ChoCastleDBModel.FK_Orders_carriage" ManuallyRouted="false" />
+        <AssociationConnector Association="ChoCastleDBModel.FK_Invoice_dbo_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="ChoCastleDBModel.FK_OrderDetail_dbo_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="ChoCastleDBModel.FK_OrderDetail_dbo_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="ChoCastleDBModel.FK_ShoppingDetail_dbo_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="ChoCastleDBModel.FK_ShoppingDetail_dbo_ShoppingCar" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
