@@ -9,8 +9,6 @@ namespace ChoCastle.Controllers
     [RequireHttps]
     public class HomeController : Controller
     {
-        ChoCastle.Models.ChoCastleDBEntities1 db = new Models.ChoCastleDBEntities1();
-
         public ActionResult Index()
         {
             return View();
@@ -32,14 +30,12 @@ namespace ChoCastle.Controllers
 
         public ActionResult ProductDescription()
         {
-            db.Products = db.Products;
-            return View(db);
+            return View();
         }
 
         public ActionResult ProductCategory()
         {
-            db.Products = db.Products;
-            return View(db);
+            return View();
         }
 
         public ActionResult ShoppingFAQ()
