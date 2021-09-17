@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChoCastleDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Carriage">
+    <Key>
+      <PropertyRef Name="CarriageCompanyID" />
+    </Key>
+    <Property Name="CarriageCompanyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CarriageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AddedUserID" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedUserID" Type="Int32" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_Orders_carriage" FromRole="Carriage" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="InvoiceNumber" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceType" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceHeading" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InvoiceNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TotalPrice" Type="Int32" Nullable="false" />
+    <Property Name="TaxRate" Type="Int32" Nullable="false" />
+    <Property Name="Tax" Type="Int32" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Drawer" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CompanyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AddedUserID" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedUserID" Type="Int32" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_Invoice_dbo_Orders" FromRole="Invoice" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Qty" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <Property Name="Subtotal" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_dbo_Orders" FromRole="OrderDetail" ToRole="Orders" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetail_dbo_Products" FromRole="OrderDetail" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MemberID" Type="Int32" Nullable="false" />
+    <Property Name="OrderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ShipName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ShippingAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Delivery" Type="Int32" Nullable="false" />
+    <Property Name="ShippingCost" Type="Int32" Nullable="false" />
+    <Property Name="TotalAmount" Type="Int32" Nullable="false" />
+    <Property Name="Payment" Type="Int32" Nullable="false" />
+    <Property Name="PaymentTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="OrderStatus" Type="Int32" Nullable="false" />
+    <Property Name="RequiredDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="InvoiceNo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="InvoiceHeading" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InvoiceType" Type="Int32" />
+    <Property Name="CarriageCompanyID" Type="Int32" />
+    <Property Name="TrackingNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="DeliverDate" Type="DateTime" Precision="3" />
+    <Property Name="ReceiveDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Carriage" Relationship="Self.FK_Orders_carriage" FromRole="Orders" ToRole="Carriage" />
+    <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoice_dbo_Orders" FromRole="Orders" ToRole="Invoice" />
+    <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_dbo_Orders" FromRole="Orders" ToRole="OrderDetail" />
+  </EntityType>
+  <EntityType Name="ProductCategory">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SortID" Type="Int32" Nullable="false" />
+    <Property Name="isDisplay" Type="Boolean" Nullable="false" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AddedUserID" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedUserID" Type="Int32" />
+    <NavigationProperty Name="Products" Relationship="ChoCastleDBModel.FK_Products_ProductCategory" FromRole="ProductCategory" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProductSpec" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProductDisc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="isDisplay" Type="Boolean" Nullable="false" />
+    <Property Name="PurchasePrice" Type="Int32" />
+    <Property Name="RetailPrice" Type="Int32" Nullable="false" />
+    <Property Name="SellingPrice" Type="Int32" Nullable="false" />
+    <Property Name="SalePrice" Type="Int32" />
+    <Property Name="StockQty" Type="Int32" Nullable="false" />
+    <Property Name="AvailableQty" Type="Int32" Nullable="false" />
+    <Property Name="VendorID" Type="Int32" Nullable="false" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AddedUserID" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedUserID" Type="Int32" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_dbo_Products" FromRole="Products" ToRole="OrderDetail" />
+    <NavigationProperty Name="ShoppingDetails" Relationship="Self.FK_ShoppingDetail_dbo_Products" FromRole="Products" ToRole="ShoppingDetail" />
+    <NavigationProperty Name="ProductCategory" Relationship="ChoCastleDBModel.FK_Products_ProductCategory" FromRole="Product" ToRole="ProductCategory" />
+    <NavigationProperty Name="Vendor" Relationship="ChoCastleDBModel.FK_Products_Vendor" FromRole="Product" ToRole="Vendor" />
+  </EntityType>
+  <EntityType Name="ShoppingCar">
+    <Key>
+      <PropertyRef Name="CarID" />
+    </Key>
+    <Property Name="CarID" Type="Int32" Nullable="false" />
+    <Property Name="isLogin" Type="Int32" Nullable="false" />
+    <Property Name="MemberID" Type="Int32" />
+    <Property Name="OrderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShipName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="ShippingAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Delivery" Type="Int32" />
+    <Property Name="ShippingCost" Type="Int32" />
+    <Property Name="TotalAmount" Type="Int32" />
+    <Property Name="Payment" Type="Int32" />
+    <Property Name="RequiredDate" Type="DateTime" Precision="3" />
+    <Property Name="AddedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CompanyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="InvoiceHeading" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InvoiceType" Type="Int32" />
+    <NavigationProperty Name="ShoppingDetail" Relationship="Self.FK_ShoppingDetail_dbo_ShoppingCar" FromRole="ShoppingCar" ToRole="ShoppingDetail" />
+  </EntityType>
+  <EntityType Name="ShoppingDetail">
+    <Key>
+      <PropertyRef Name="CarID" />
+    </Key>
+    <Property Name="CarID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UnitPrice" Type="Int32" />
+    <Property Name="OrderQuantity" Type="Int32" />
+    <Property Name="Subtotal" Type="Int32" />
+    <Property Name="AddedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_ShoppingDetail_dbo_Products" FromRole="ShoppingDetail" ToRole="Products" />
+    <NavigationProperty Name="ShoppingCar" Relationship="Self.FK_ShoppingDetail_dbo_ShoppingCar" FromRole="ShoppingDetail" ToRole="ShoppingCar" />
+  </EntityType>
+  <EntityType Name="Vendor">
+    <Key>
+      <PropertyRef Name="VendorID" />
+    </Key>
+    <Property Name="VendorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VendorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContactName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AddedUserID" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedUserID" Type="Int32" />
+    <NavigationProperty Name="Products" Relationship="ChoCastleDBModel.FK_Products_Vendor" FromRole="Vendor" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK_Orders_carriage">
+    <End Role="Carriage" Type="Self.Carriage" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Carriage">
+        <PropertyRef Name="CarriageCompanyID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_dbo_Orders">
+    <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_dbo_Orders">
+    <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_dbo_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShoppingDetail_dbo_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="ShoppingDetail" Type="Self.ShoppingDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ShoppingDetail">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShoppingDetail_dbo_ShoppingCar">
+    <End Role="ShoppingCar" Type="Self.ShoppingCar" Multiplicity="1" />
+    <End Role="ShoppingDetail" Type="Self.ShoppingDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ShoppingCar">
+        <PropertyRef Name="CarID" />
+      </Principal>
+      <Dependent Role="ShoppingDetail">
+        <PropertyRef Name="CarID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ChoCastleDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Carriages" EntityType="Self.Carriage" />
+    <EntitySet Name="Invoices" EntityType="Self.Invoice" />
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ShoppingCars" EntityType="Self.ShoppingCar" />
+    <EntitySet Name="ShoppingDetails" EntityType="Self.ShoppingDetail" />
+    <EntitySet Name="Vendors" EntityType="Self.Vendor" />
+    <AssociationSet Name="FK_Orders_carriage" Association="Self.FK_Orders_carriage">
+      <End Role="Carriage" EntitySet="Carriages" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_dbo_Orders" Association="Self.FK_Invoice_dbo_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_dbo_Orders" Association="Self.FK_OrderDetail_dbo_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_dbo_Products" Association="Self.FK_OrderDetail_dbo_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShoppingDetail_dbo_Products" Association="Self.FK_ShoppingDetail_dbo_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ShoppingDetail" EntitySet="ShoppingDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShoppingDetail_dbo_ShoppingCar" Association="Self.FK_ShoppingDetail_dbo_ShoppingCar">
+      <End Role="ShoppingCar" EntitySet="ShoppingCars" />
+      <End Role="ShoppingDetail" EntitySet="ShoppingDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_ProductCategory" Association="ChoCastleDBModel.FK_Products_ProductCategory">
+      <End Role="ProductCategory" EntitySet="ProductCategories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Vendor" Association="ChoCastleDBModel.FK_Products_Vendor">
+      <End Role="Vendor" EntitySet="Vendors" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Products_ProductCategory">
+    <End Type="ChoCastleDBModel.ProductCategory" Role="ProductCategory" Multiplicity="1" />
+    <End Type="ChoCastleDBModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductCategory">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Vendor">
+    <End Type="ChoCastleDBModel.Vendor" Role="Vendor" Multiplicity="1" />
+    <End Type="ChoCastleDBModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendor">
+        <PropertyRef Name="VendorID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="VendorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
