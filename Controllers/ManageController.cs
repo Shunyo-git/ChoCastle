@@ -341,6 +341,7 @@ namespace ChoCastle.Controllers
             var user = await UserManager.FindByIdAsync(userId);
             if (user != null)
             {
+                model.MemberID = user.MemberID;
                 model.UserName = user.UserName;
                 model.Email = user.Email;
                 model.ChineseName = user.ChineseName;

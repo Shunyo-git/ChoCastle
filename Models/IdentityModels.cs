@@ -11,7 +11,7 @@ namespace ChoCastle.Models
     {
         //2021/9/15 by sean
         //新增會員擴充屬性
-
+        public int MemberID { get; set; }
         public string ChineseName { get; set; }
         public string Gender { get; set; }
         public string PostCode { get; set; }

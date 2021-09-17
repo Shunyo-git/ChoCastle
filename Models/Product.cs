@@ -11,7 +11,7 @@ namespace ChoCastle.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,28 +20,50 @@ namespace ChoCastle.Models
             this.OrderDetails = new HashSet<OrderDetail>();
             this.ShoppingDetails = new HashSet<ShoppingDetail>();
         }
-    
+
+        [Display(Name = "產品編號")]
         public int ProductID { get; set; }
+        [Display(Name = "分類編號")]
         public int CategoryID { get; set; }
+
+        [Display(Name = "產品名稱")]
         public string ProductName { get; set; }
+        [Display(Name = "產品規格")]
+        [DataType(DataType.MultilineText)]
         public string ProductSpec { get; set; }
+        [Display(Name = "產品說明")]
+        [DataType(DataType.MultilineText)]
         public string ProductDisc { get; set; }
+        [Display(Name = "是否上架")]
         public bool isDisplay { get; set; }
+        [Display(Name = "進價")]
         public Nullable<int> PurchasePrice { get; set; }
+        [Display(Name = "定價")]
         public int RetailPrice { get; set; }
+        [Display(Name = "售價")]
         public int SellingPrice { get; set; }
+        [Display(Name = "特價")]
         public Nullable<int> SalePrice { get; set; }
+        [Display(Name = "庫存")]
         public int StockQty { get; set; }
+        [Display(Name = "可賣數量")]
         public int AvailableQty { get; set; }
+        [Display(Name = "廠商編號")]
         public int VendorID { get; set; }
+        [Display(Name = "新增日期")]
         public System.DateTime AddedDate { get; set; }
+        [Display(Name = "新增者編號")]
         public int AddedUserID { get; set; }
+        [Display(Name = "更新日期")]
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        [Display(Name = "更新者編號")]
         public Nullable<int> ModifiedUserID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ShoppingDetail> ShoppingDetails { get; set; }
+        public virtual ProductCategory ProductCategory { get; set; }
+        public virtual Vendor Vendor { get; set; }
     }
 }

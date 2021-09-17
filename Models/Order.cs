@@ -43,7 +43,7 @@ namespace ChoCastle.Models
         public Nullable<System.DateTime> DeliverDate { get; set; }
         public Nullable<System.DateTime> ReceiveDate { get; set; }
     
-        public virtual carriage carriage { get; set; }
+        public virtual Carriage Carriage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice> Invoices { get; set; }
         public virtual OrderDetail OrderDetail { get; set; }

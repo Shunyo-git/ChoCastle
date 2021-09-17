@@ -11,16 +11,32 @@ namespace ChoCastle.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class ProductCategory
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ProductCategory()
+        {
+            this.Products = new HashSet<Product>();
+        }
+        [Display(Name = "分類編號")]
         public int CategoryID { get; set; }
+        [Display(Name = "分類名稱")]
         public string CategoryName { get; set; }
+        [Display(Name = "排序值")]
         public int SortID { get; set; }
+        [Display(Name = "上架")]
         public bool isDisplay { get; set; }
+        [Display(Name = "新增日期")]
         public System.DateTime AddedDate { get; set; }
+        [Display(Name = "新增者編號")]
         public int AddedUserID { get; set; }
+        [Display(Name = "更新日期")]
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        [Display(Name = "更新者編號")]
         public Nullable<int> ModifiedUserID { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

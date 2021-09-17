@@ -1,0 +1,112 @@
+﻿@model IEnumerable<ChoCastle.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div id="fh5co-started" class="fh5co-section animate-box" style="background-image: url(/Template/images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        
+
+        <div class="row animate-box text-capitalize">
+            <h2 style="color:#B8860B">商品列表</h2>
+
+            <p>
+                [@Html.ActionLink("新增商品", "Create")]
+            </p>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.isDisplay)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PurchasePrice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RetailPrice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SellingPrice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SalePrice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StockQty)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AvailableQty)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductCategory.CategoryName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Vendor.VendorName)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.isDisplay)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PurchasePrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RetailPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SellingPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SalePrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StockQty)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AvailableQty)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductCategory.CategoryName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Vendor.VendorName)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
