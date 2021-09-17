@@ -12,7 +12,7 @@ namespace ChoCastle.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class carriage
+    public partial class Carriage
     {
         public int CarriageCompanyID { get; set; }
         public string CarriageName { get; set; }
