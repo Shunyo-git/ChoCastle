@@ -133,5 +133,19 @@ namespace ChoCastle.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult SoppingCarOrderDetail()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SoppingCarOrderDetail(int id,string a)
+        {
+
+            return View();
+        }
     }
 }
