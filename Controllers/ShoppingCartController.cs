@@ -13,7 +13,7 @@ namespace ChoCastle.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        private ChoCastleDBEntities db = new ChoCastleDBEntities();
+        private ChoCastleDBEntities1 db = new ChoCastleDBEntities1();
 
         // GET: ShoppingCart
         public async Task<ActionResult> Index()

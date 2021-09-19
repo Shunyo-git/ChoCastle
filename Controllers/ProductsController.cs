@@ -17,7 +17,7 @@ namespace ChoCastle.Controllers
 {
     public class ProductsController : Controller
     {
-        private ChoCastleDBEntities db = new ChoCastleDBEntities();
+        private ChoCastleDBEntities1 db = new ChoCastleDBEntities1();
 
         // GET: Products
         public ActionResult Index()

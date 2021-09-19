@@ -11,7 +11,7 @@ namespace ChoCastle.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class Vendor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,28 +19,18 @@ namespace ChoCastle.Models
         {
             this.Products = new HashSet<Product>();
         }
-
-        [Display(Name = "供應商編號")]
+    
         public int VendorID { get; set; }
-        [Display(Name = "供應商名稱")]
         public string VendorName { get; set; }
-        [Display(Name = "電話")]
         public string Phone { get; set; }
-        [Display(Name = "地址")]
         public string Address { get; set; }
-        [Display(Name = "聯絡人")]
         public string ContactName { get; set; }
-        [Display(Name = "聯絡人EMAIL")]
         public string ContactEmail { get; set; }
-        [Display(Name = "新增日期")]
-        public System.DateTime AddedDate { get; set; }
-        [Display(Name = "新增者編號")]
-        public int AddedUserID { get; set; }
-        [Display(Name = "更新日期")]
+        public Nullable<System.DateTime> AddedDate { get; set; }
+        public Nullable<int> AddedUserID { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-        [Display(Name = "更新者編號")]
         public Nullable<int> ModifiedUserID { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
     }
