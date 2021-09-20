@@ -1,4 +1,4 @@
-﻿@model ChoCastle.Models.ChoCastleDBEntities1
+﻿@model  ChoCastle.Models.Product
 @{
     ViewBag.Title = "ProductDescription";
 }
@@ -12,14 +12,14 @@
 
 <script type="text/javascript">
     function buy() {
-        alert('');
+        alert('商品已加入購物車囉!!');
     }
 </script>
 <div id="fh5co-featured-testimony" class="fh5co-section">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2 style="font-family:'Microsoft JhengHei';color: #B8860B ;font-size:40px">比利時生巧克力65% -16片</h2>
+                <h2 style="font-family:'Microsoft JhengHei';color: #B8860B ;font-size:40px">@Model.ProductName</h2>
             </div>
 
             <div class="col-md-5 animate-box img-to-responsive animate-box" data-animate-effect="fadeInLeft">
@@ -27,10 +27,7 @@
             </div>
             <div class="col-md-7 animate-box" data-animate-effect="fadeInRight">
                 <blockquote>
-                    <p>
-                        @Model.Products.FirstOrDefault().ProductDisc
-                        這是一份經過比利時人精緻熔鍊的心意，在這份心意之中，除了比利時的驕傲之外，還添加了Chochoco對於巧克力的堅持。比利時巧克力的標準作法，是將可可豆研磨至超乎妳想像的20微米，因為更細緻，所以巧克力的質感溫潤如絲絨，適當的甜度，在妳口中可以感受到一種輕柔滑順的幸福。
-                    </p>
+                    <p>@Model.ProductDisc</p>
                 </blockquote>
             </div>
         </div>
@@ -43,11 +40,7 @@
                 <h2 style="font-family: Microsoft JhengHei;">產品規格</h2>
                 <div class="row">
                     <div class="col-md-6">
-                        <p>
-                            產品成份 - 比利時65%巧克力、法國鮮奶油、微量酒 (蛋奶素)<br />
-                            品味方式 - 搭配黑咖啡或熱紅茶，慢慢品嘗享用<br />
-                            訂購需知 - 冷藏保存一週
-                        </p>
+                        <p>@Model.ProductSpec</p>
                     </div>
                 </div>
             </div>

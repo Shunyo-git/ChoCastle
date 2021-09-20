@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ChoCastle.Models;
 
 namespace ChoCastle.Controllers
 {
@@ -13,7 +14,7 @@ namespace ChoCastle.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View(db.Products.OrderByDescending(model => model.AddedDate).Take(5).ToList());
         }
 
         public ActionResult About()
@@ -30,16 +31,15 @@ namespace ChoCastle.Controllers
             return View();
         }
 
-        public ActionResult ProductDescription()
+        public ActionResult ProductDescription(int ProductID)
         {
-            db.Products = db.Products;
-            return View(db);
+            return View(db.Products.Find(ProductID));
         }
 
-        public ActionResult ProductCategory()
+        public ActionResult ProductCategory(int? CategoryID)
         {
-            db.Products = db.Products;
-            return View(db);
+            CategoryID = CategoryID is null ? 1 : CategoryID;
+            return View(db.Products.Where(model => model.isDisplay.Value == true && model.CategoryID == CategoryID).ToList());
         }
 
         public ActionResult ShoppingFAQ()
