@@ -683,6 +683,7 @@
     <Content Include="TemplateBackEnd\lib\font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="TemplateBackEnd\lib\font-awesome\fonts\FontAwesome.otf" />
     <Content Include="Views\Shared\_LayoutBackEnd.cshtml" />
+    <Content Include="Views\Products\ProductManage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

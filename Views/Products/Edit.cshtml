@@ -2,148 +2,127 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutBackEnd.cshtml";
 }
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 
-
-
-<div id="fh5co-started" class="fh5co-section animate-box" style="background-image: url(/Template/images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
-    <div class="overlay"></div>
-    <div class="container">
-       
-        <div class="row animate-box">
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-
-            <div class="form-horizontal">
-                <h2 style="color:#B8860B">編輯商品</h2>
-                <h4 style="color:#B8860B">Product</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.ProductID)
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.CategoryID, "CategoryID", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.ProductSpec, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.ProductSpec, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.ProductSpec, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.ProductDisc, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.ProductDisc, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.ProductDisc, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.isDisplay, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.isDisplay)
-                            @Html.ValidationMessageFor(model => model.isDisplay, "", new { @class = "text-danger" })
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> 產品編輯</h3>
+        <div class="row mt">
+            <!--  DATE PICKERS -->
+            <div class="col-lg-12">
+                <div class="form-panel">
+                    <form action="#" class="form-horizontal style-form" method="post">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.ProductID)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CategoryID, "商品分類", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control form-control-inline input-medium default-date-picker" })
+                                @Html.ValidationMessageFor(model => model.VendorID, "", new { @class = "help-block" })
+                            </div>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ProductName, "商品名稱", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ProductSpec, "產品規格", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.EditorFor(model => model.ProductSpec, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.ValidationMessageFor(model => model.ProductSpec, "", new { @class = "help-block" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ProductDisc, "產品描述", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.EditorFor(model => model.ProductDisc, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.ValidationMessageFor(model => model.ProductDisc, "", new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.isDisplay, "是否上架", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.RadioButtonFor(model => model.isDisplay, true) @Html.Label("上架")
+                                @Html.RadioButtonFor(model => model.isDisplay, false) @Html.Label("下架")
+                                @Html.ValidationMessageFor(model => model.isDisplay, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PurchasePrice, "進價", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.EditorFor(model => model.PurchasePrice, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.ValidationMessageFor(model => model.PurchasePrice, "", new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.RetailPrice, "定價", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.EditorFor(model => model.RetailPrice, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.ValidationMessageFor(model => model.RetailPrice, "", new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SellingPrice, "售價", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.EditorFor(model => model.SellingPrice, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.ValidationMessageFor(model => model.SellingPrice, "", new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SalePrice, "特價", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.EditorFor(model => model.SalePrice, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.ValidationMessageFor(model => model.SalePrice, "", new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.StockQty, "庫存數量", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.EditorFor(model => model.StockQty, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.ValidationMessageFor(model => model.StockQty, "", new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AvailableQty, "可賣數量", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.EditorFor(model => model.AvailableQty, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.ValidationMessageFor(model => model.AvailableQty, "", new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.VendorID, "廠商編號", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.DropDownList("VendorID", null, htmlAttributes: new { @class = "form-control form-control-inline input-medium default-date-picker" })
+                                @Html.ValidationMessageFor(model => model.VendorID, "", new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">產品照片</label>
+                            <div class="col-md-4">
+                                <input type="file" class="default" />
+                            </div>
+                        </div>
+                        <div style="text-align:center">
+                            <button type="submit" class="btn btn-warning">儲存</button>
+                        </div>
+                    </form>
                 </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.PurchasePrice, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.PurchasePrice, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.PurchasePrice, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.RetailPrice, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.RetailPrice, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.RetailPrice, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.SellingPrice, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.SellingPrice, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.SellingPrice, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.SalePrice, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.SalePrice, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.SalePrice, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.StockQty, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.StockQty, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.StockQty, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.AvailableQty, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.AvailableQty, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.AvailableQty, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.VendorID, "VendorID", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("VendorID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.VendorID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save" class="btn btn-default" />
-                    </div>
-                </div>
+                <!-- /form-panel -->
             </div>
-            }
-
-            <div>
-                @Html.ActionLink("返回列表", "Index")
-            </div>
+            <!-- /col-lg-12 -->
         </div>
-    </div>
-</div>
+    </section>
+    <!-- /wrapper -->
+</section>
+<!-- /MAIN CONTENT -->
+<!--main content end-->
 
 
 

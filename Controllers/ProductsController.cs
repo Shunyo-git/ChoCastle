@@ -25,7 +25,11 @@ namespace ChoCastle.Controllers
             var products = db.Products.Include(p => p.ProductCategory).Include(p => p.Vendor);
             return View(products.ToList());
         }
-
+        public ActionResult ProductManage()
+        {
+            var products = db.Products.Include(p => p.ProductCategory).Include(p => p.Vendor);
+            return View(products.ToList());
+        }
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
@@ -94,8 +98,18 @@ namespace ChoCastle.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductID,CategoryID,ProductName,ProductSpec,ProductDisc,isDisplay,PurchasePrice,RetailPrice,SellingPrice,SalePrice,StockQty,AvailableQty,VendorID,AddedDate,AddedUserID,ModifiedDate,ModifiedUserID")] Product product)
         {
+            var userId = User.Identity.GetUserId();
+
+
             if (ModelState.IsValid)
             {
+                var user = UserManager.FindByIdAsync(userId);
+                if (user != null)
+                {
+                    product.AddedUserID = user.Id;
+                    product.AddedDate = DateTime.Now;
+                }
+
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -130,8 +144,16 @@ namespace ChoCastle.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ProductID,CategoryID,ProductName,ProductSpec,ProductDisc,isDisplay,PurchasePrice,RetailPrice,SellingPrice,SalePrice,StockQty,AvailableQty,VendorID,AddedDate,AddedUserID,ModifiedDate,ModifiedUserID")] Product product)
         {
+            var userId = User.Identity.GetUserId();
             if (ModelState.IsValid)
             {
+                var user = UserManager.FindByIdAsync(userId);
+                if (user != null)
+                {
+                    product.AddedUserID = user.Id;
+                    product.AddedDate = DateTime.Now;
+                }
+
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

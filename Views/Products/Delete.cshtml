@@ -2,171 +2,105 @@
 
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutBackEnd.cshtml";
 }
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-
-
-<div id="fh5co-started" class="fh5co-section animate-box" style="background-image: url(/Template/images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
-    <div class="overlay"></div>
-    <div class="container">
-      
-        <div class="row animate-box">
-            <h2 style="color:#B8860B">刪除商品</h2>
-            <h3 style="color:#B8860B">確定要永久刪除此商品?</h3>
-            <div>
-                <h4 style="color:#B8860B">商品明細</h4>
-                <hr />
-                <dl class="dl-horizontal">
-                    <dt>
-                        @Html.DisplayNameFor(model => model.ProductName)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.ProductName)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.ProductSpec)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.ProductSpec)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.ProductDisc)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.ProductDisc)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.isDisplay)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.isDisplay)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.PurchasePrice)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.PurchasePrice)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.RetailPrice)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.RetailPrice)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.SellingPrice)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.SellingPrice)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.SalePrice)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.SalePrice)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.StockQty)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.StockQty)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.AvailableQty)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.AvailableQty)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.AddedDate)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.AddedDate)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.AddedUserID)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.AddedUserID)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.ModifiedDate)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.ModifiedDate)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.ModifiedUserID)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.ModifiedUserID)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.ProductCategory.CategoryName)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.ProductCategory.CategoryName)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Vendor.VendorName)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Vendor.VendorName)
-                    </dd>
-
-                </dl>
-
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
-
-                    <div class="form-actions no-color">
-                        <input type="submit" value="Delete" class="btn btn-default" /> |
-                        @Html.ActionLink("返回列表", "Index")
-                    </div>
-                }
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i>產品刪除</h3>
+        <div class="row mt">
+            <!--  DATE PICKERS -->
+            <div class="col-lg-12">
+                <div class="form-panel">
+                    <form action="#" class="form-horizontal style-form" method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CategoryID, "商品分類", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.DisplayNameFor(model => model.ProductName)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ProductName, "商品名稱", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.DisplayFor(model => model.ProductName)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ProductSpec, "產品規格", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.DisplayNameFor(model => model.ProductSpec)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ProductDisc, "產品描述", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.DisplayFor(model => model.ProductDisc)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.isDisplay, "是否上架", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.DisplayNameFor(model => model.isDisplay)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PurchasePrice, "進價", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.DisplayFor(model => model.PurchasePrice)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.RetailPrice, "定價", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.DisplayNameFor(model => model.RetailPrice)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SellingPrice, "售價", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.DisplayFor(model => model.SellingPrice)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SalePrice, "特價", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.DisplayNameFor(model => model.SalePrice)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.StockQty, "庫存數量", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.DisplayFor(model => model.StockQty)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AvailableQty, "可賣數量", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.DisplayNameFor(model => model.AvailableQty)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.VendorID, "廠商編號", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.DisplayFor(model => model.VendorID)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">產品照片</label>                            
+                        </div>
+                        <div style="text-align:center">
+                            <button type="submit" class="btn btn-warning">確定刪除</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /form-panel -->
             </div>
+            <!-- /col-lg-12 -->
         </div>
-    </div>
-</div>
-
-
+    </section>
+    <!-- /wrapper -->
+</section>
+<!-- /MAIN CONTENT -->
+<!--main content end-->
