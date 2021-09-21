@@ -109,7 +109,7 @@ namespace ChoCastle.Models
         public int MemberID { get; set; }
 
 
-        [Display(Name = "帳號名稱")]
+        [Display(Name = "帳號")]
         public string UserName { get; set; }
 
         [Required]
