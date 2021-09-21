@@ -22,7 +22,7 @@
 
             <p>
                 [ @Html.ActionLink("繼續購物", "ProductCategory", "Home") ]
-                [ @Html.ActionLink("選擇收貨方式", "SoppingCarOrderDetail" ) ]
+                [ @Html.ActionLink("選擇收貨方式", "ShoppingCartDetail") ]
 
             </p>
             <table class="table">
@@ -39,18 +39,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Subtotal)
                     </th>
-                    @*<th>
-                    @Html.DisplayNameFor(model => model.AddedDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ModifiedDate)
-                </th>*@
-                    @*<th>
-                    @Html.DisplayNameFor(model => model.Product.ProductName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ShoppingCar.OrderName)
-                </th>*@
+                    <th>
+                        功能
+                    </th>
                 </tr>
 
                 @foreach (var item in Model)
@@ -68,22 +59,13 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Subtotal)
                         </td>
+
                         <td>
-                            @Html.DisplayFor(modelItem => item.AddedDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ModifiedDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Product.ProductName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ShoppingCar.OrderName)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.CarID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.CarID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.CarID })
+                            @*
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                            *@
+                            @Html.ActionLink("刪除", "Delete", new { id = item.ProductID })
                         </td>
                     </tr>
                 }

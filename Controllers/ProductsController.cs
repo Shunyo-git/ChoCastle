@@ -61,22 +61,21 @@ namespace ChoCastle.Controllers
             }
         }
 
-        public async Task<ActionResult> Create()
+        //Get
+        public ActionResult Create()
         {
             ViewBag.CategoryID = new SelectList(db.ProductCategories.OrderBy(x => x.SortID), "CategoryID", "CategoryName");
             ViewBag.VendorID = new SelectList(db.Vendors, "VendorID", "VendorName");
 
             var model = new Product();
-            var userId = User.Identity.GetUserId();
 
-            var user = await UserManager.FindByIdAsync(userId);
+            var user =  UserManager.FindById(User.Identity.GetUserId());
             if (user != null)
             {
                 model.AddedUserID = user.MemberID;
                 model.AddedDate = DateTime.Now;
-                //model.ModifiedUserID = user.MemberID;
-                //model.ModifiedDate = DateTime.Now;
-
+                model.ModifiedUserID = user.MemberID;
+                model.ModifiedDate = DateTime.Now;
             }
 
             return View(model);
@@ -91,14 +90,14 @@ namespace ChoCastle.Controllers
         public ActionResult Create([Bind(Include = "ProductID,CategoryID,ProductName,ProductSpec,ProductDisc,isDisplay,PurchasePrice,RetailPrice,SellingPrice,SalePrice,StockQty,AvailableQty,VendorID,AddedDate,AddedUserID,ModifiedDate,ModifiedUserID")] Product product)
         {
             var userId = User.Identity.GetUserId();
-
+             
 
             if (ModelState.IsValid)
             {
-                var user = UserManager.FindByIdAsync(userId);
+                var user =  UserManager.FindById(User.Identity.GetUserId());
                 if (user != null)
                 {
-                    product.AddedUserID = user.Id;
+                    product.AddedUserID = user.MemberID;
                     product.AddedDate = DateTime.Now;
                 }
 
@@ -140,10 +139,11 @@ namespace ChoCastle.Controllers
             var userId = User.Identity.GetUserId();
             if (ModelState.IsValid)
             {
-                var user = UserManager.FindByIdAsync(userId);
+                var user =  UserManager.FindById(User.Identity.GetUserId());
+                
                 if (user != null)
                 {
-                    product.AddedUserID = user.Id;
+                    product.AddedUserID = user.MemberID;
                     product.AddedDate = DateTime.Now;
                 }
 

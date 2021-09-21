@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+    <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -26,7 +27,7 @@
 </head>
 <body>
 
-    @using Microsoft.AspNet.Identity
+
     @if (Request.IsAuthenticated)
     {
         <section id="container">
@@ -86,12 +87,6 @@
                                 <a href="javascript:;">
                                     <i class="fa fa-book"></i>
                                     <span>訂單管理</span>
-                                </a>
-                            </li>
-                            <li class="sub-menu">
-                                <a href="javascript:;">
-                                    <i class="fa fa-tasks"></i>
-                                    <span>行事曆</span>
                                 </a>
                             </li>
                             <!-- sidebar menu end-->
