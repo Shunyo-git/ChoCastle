@@ -149,7 +149,7 @@ namespace ChoCastle.Controllers
 
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ProductManage");
             }
             ViewBag.CategoryID = new SelectList(db.ProductCategories, "CategoryID", "CategoryName", product.CategoryID);
             ViewBag.VendorID = new SelectList(db.Vendors, "VendorID", "VendorName", product.VendorID);
@@ -179,7 +179,7 @@ namespace ChoCastle.Controllers
             Product product = db.Products.Find(id);
             db.Products.Remove(product);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ProductManage");
         }
 
         protected override void Dispose(bool disposing)

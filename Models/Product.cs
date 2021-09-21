@@ -6,6 +6,7 @@
 //     如果重新產生程式碼，將會覆寫對這個檔案的手動變更。
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.ComponentModel.DataAnnotations;
 
 namespace ChoCastle.Models
 {
@@ -24,7 +25,9 @@ namespace ChoCastle.Models
         public int ProductID { get; set; }
         public int CategoryID { get; set; }
         public string ProductName { get; set; }
+        [DataType(DataType.MultilineText)]
         public string ProductSpec { get; set; }
+        [DataType(DataType.MultilineText)]
         public string ProductDisc { get; set; }
         public Nullable<bool> isDisplay { get; set; }
         public Nullable<int> PurchasePrice { get; set; }
