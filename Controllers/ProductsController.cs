@@ -63,7 +63,7 @@ namespace ChoCastle.Controllers
 
         public async Task<ActionResult> Create()
         {
-            ViewBag.CategoryID = new SelectList(db.ProductCategories, "CategoryID", "CategoryName");
+            ViewBag.CategoryID = new SelectList(db.ProductCategories.OrderBy(x => x.SortID), "CategoryID", "CategoryName");
             ViewBag.VendorID = new SelectList(db.Vendors, "VendorID", "VendorName");
 
             var model = new Product();
@@ -73,7 +73,7 @@ namespace ChoCastle.Controllers
             if (user != null)
             {
                 model.AddedUserID = user.MemberID;
-                model.AddedDate = DateTime.Now ;
+                model.AddedDate = DateTime.Now;
                 //model.ModifiedUserID = user.MemberID;
                 //model.ModifiedDate = DateTime.Now;
 
@@ -82,16 +82,8 @@ namespace ChoCastle.Controllers
             return View(model);
         }
 
-
-        // GET: Products/Create
-        //public ActionResult Create()
-        //{
-        //    ViewBag.CategoryID = new SelectList(db.ProductCategories, "CategoryID", "CategoryName");
-        //    ViewBag.VendorID = new SelectList(db.Vendors, "VendorID", "VendorName");
-        //    return View();
-        //}
-
         // POST: Products/Create
+        // 2021/9/21 By Rita
         // 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
@@ -112,10 +104,10 @@ namespace ChoCastle.Controllers
 
                 db.Products.Add(product);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ProductManage");
             }
 
-            ViewBag.CategoryID = new SelectList(db.ProductCategories, "CategoryID", "CategoryName", product.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.ProductCategories.OrderBy(model => model.SortID), "CategoryID", "CategoryName", product.CategoryID);
             ViewBag.VendorID = new SelectList(db.Vendors, "VendorID", "VendorName", product.VendorID);
             return View(product);
         }
@@ -132,12 +124,13 @@ namespace ChoCastle.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(db.ProductCategories, "CategoryID", "CategoryName", product.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.ProductCategories.OrderBy(model => model.SortID), "CategoryID", "CategoryName", product.CategoryID);
             ViewBag.VendorID = new SelectList(db.Vendors, "VendorID", "VendorName", product.VendorID);
             return View(product);
         }
 
         // POST: Products/Edit/5
+        // 2021/9/21 By Rita
         // 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
@@ -196,6 +189,114 @@ namespace ChoCastle.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        /// <summary>
+        /// 產品分類-列表
+        /// 2021/9/21 By Rita
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ProductCategory()
+        {
+            return View(db.ProductCategories.ToList());
+        }
+
+        /// <summary>
+        /// 產品分類-新增
+        /// 2021/9/21 By Rita
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CategoryCreate()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 產品分類-新增
+        /// 2021/9/21 By Rita
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CategoryCreate([Bind(Include = "CategoryID,CategoryName,SortID,isDisplay,AddedDate,AddedUserID,ModifiedDate,ModifiedUserID")] ProductCategory productCategory)
+        {
+            var userId = User.Identity.GetUserId();
+
+            if (ModelState.IsValid)
+            {
+                var user = UserManager.FindByIdAsync(userId);
+                if (user != null)
+                {
+                    productCategory.AddedUserID = user.Id;
+                    productCategory.AddedDate = DateTime.Now;
+                }
+
+                db.ProductCategories.Add(productCategory);
+                db.SaveChanges();
+                return RedirectToAction("ProductCategory");
+            }
+            return View(productCategory);
+        }
+
+        /// <summary>
+        /// 產品分類-編輯
+        /// 2021/9/21 By Rita
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CategoryEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ProductCategory product = db.ProductCategories.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return View(product);
+        }
+
+        /// <summary>
+        /// 產品分類-編輯
+        /// 2021/9/21 By Rita
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CategoryEdit([Bind(Include = "CategoryID, CategoryName, SortID, isDisplay, AddedDate, AddedUserID, ModifiedDate, ModifiedUserID")] ProductCategory productCategory)
+        {
+            var userId = User.Identity.GetUserId();
+            if (ModelState.IsValid)
+            {
+                var user = UserManager.FindByIdAsync(userId);
+                if (user != null)
+                {
+                    productCategory.ModifiedUserID = user.Id;
+                    productCategory.ModifiedDate = DateTime.Now;
+                }
+
+                db.Entry(productCategory).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("productCategory");
+            }
+            
+            return View(productCategory);
+        }
+
+        /// <summary>
+        /// 產品分類-刪除
+        /// 2021/9/21 By Rita
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CategoryDelete(int id)
+        {
+            ProductCategory productCategory = db.ProductCategories.Find(id);
+            db.ProductCategories.Remove(productCategory);
+            db.SaveChanges();
+
+            return RedirectToAction("ProductCategory");
         }
     }
 }

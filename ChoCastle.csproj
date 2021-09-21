@@ -684,6 +684,9 @@
     <Content Include="TemplateBackEnd\lib\font-awesome\fonts\FontAwesome.otf" />
     <Content Include="Views\Shared\_LayoutBackEnd.cshtml" />
     <Content Include="Views\Products\ProductManage.cshtml" />
+    <Content Include="Views\Products\ProductCategory.cshtml" />
+    <Content Include="Views\Products\CategoryCreate.cshtml" />
+    <Content Include="Views\Products\CategoryEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
