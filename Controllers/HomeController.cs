@@ -13,7 +13,7 @@ namespace ChoCastle.Controllers
         ChoCastle.Models.ChoCastleDBEntities1 db = new Models.ChoCastleDBEntities1();
 
         public ActionResult Index()
-        {
+        {            
             return View(db.Products.OrderByDescending(model => model.AddedDate).Take(5).ToList());
         }
 
@@ -39,6 +39,8 @@ namespace ChoCastle.Controllers
         public ActionResult ProductCategory(int? CategoryID)
         {
             CategoryID = CategoryID is null ? 1 : CategoryID;
+            ProductCategory productCategory = db.ProductCategories.Find(CategoryID);
+            ViewBag.CategoryID = productCategory.CategoryName;
             return View(db.Products.Where(model => model.isDisplay.Value == true && model.CategoryID == CategoryID).ToList());
         }
 

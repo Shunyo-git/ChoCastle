@@ -29,38 +29,38 @@
     @using Microsoft.AspNet.Identity
     @if (Request.IsAuthenticated)
     {
-        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-        {
-            @Html.AntiForgeryToken()
-            <section id="container">
-                <!--header start-->
-                <header class="header black-bg">
-                    <div class="sidebar-toggle-box">
-                        <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-                    </div>
-                    <!--logo start-->
-                    <a href="Products" class="logo"><b>城堡後台管理</b></a>
-                    <!--logo end-->
-                    <div class="nav notify-row" id="top_menu">
-                        <!--  notification start -->
-                        <ul class="nav top-menu"></ul>
-                    </div>
-                    <div class="top-menu">
-                        <ul class="nav pull-right top-menu">
-                            <li><a class="logout" href="javascript:document.getElementById('logoutForm').submit()">登出</a></li>
-                        </ul>
-                    </div>
-                </header>
-                <!--header end-->
-                <!--sidebar start-->
-                <aside>
+        <section id="container">
+            <!--header start-->
+            <header class="header black-bg">
+                <div class="sidebar-toggle-box">
+                    <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+                </div>
+                <!--logo start-->
+                <a href="@Url.Action("Index", "Products")" class="logo"><b>城堡後台管理</b></a>
+                <!--logo end-->
+                <div class="nav notify-row" id="top_menu">
+                    <!--  notification start -->
+                    <ul class="nav top-menu"></ul>
+                </div>
+                <div class="top-menu">
+                    <ul class="nav pull-right top-menu">
+                        <li><a class="logout" href="javascript:document.getElementById('logoutForm').submit()">登出</a></li>
+                    </ul>
+                </div>
+            </header>
+            <!--header end-->
+            <!--sidebar start-->
+            <aside>
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    @Html.AntiForgeryToken()
                     <div id="sidebar" class="nav-collapse ">
                         <!-- sidebar menu start-->
                         <ul class="sidebar-menu" id="nav-accordion">
                             <p class="centered"><a href="profile.html"><img src="~/Template/images/sunsun.png" class="img-circle" width="80"></a></p>
                             <h5 class="centered">@Html.ActionLink("您好 " + User.Identity.GetUserName().ToLower() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</h5>
                             <li class="mt">
-                                <a class="active" href="index.html">
+                                <a class="active" href="@Url.Action("Index" ,"Products")">
                                     <i class="fa fa-dashboard"></i>
                                     <span>城堡總覽</span>
                                 </a>
@@ -78,7 +78,7 @@
                                 </a>
                                 <ul class="sub">
                                     <li><a href="@Url.Action("ProductCategory", "Products")">產品分類</a></li>
-                                    <li><a href="calendar.html">廠商管理</a></li>
+                                    <li><a href="@Url.Action("Index", "Vendor")">廠商管理</a></li>
                                     <li><a href="@Url.Action("ProductManage", "Products")">產品管理</a></li>
                                 </ul>
                             </li>
@@ -96,28 +96,26 @@
                             </li>
                             <!-- sidebar menu end-->
                     </div>
-                </aside>
-                <!--sidebar end-->
-                <!--main content start-->
-                @RenderBody()
-                <!--main content end-->
-                <!--footer start-->
-                <footer class="site-footer">
-                    <div class="text-center">
-                        <p>
-                            &copy; Copyrights <strong>SMIT14</strong>. All Rights Reserved
-                        </p>
-                        <a href="index.html#" class="go-top">
-                            <i class="fa fa-angle-up"></i>
-                        </a>
-                    </div>
-                </footer>
-                <!--footer end-->
-            </section>
-
-        }
+                }
+            </aside>
+            <!--sidebar end-->
+            <!--main content start-->
+            @RenderBody()
+            <!--main content end-->
+            <!--footer start-->
+            <footer class="site-footer">
+                <div class="text-center">
+                    <p>
+                        &copy; Copyrights <strong>SMIT14</strong>. All Rights Reserved
+                    </p>
+                    <a href="index.html#" class="go-top">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+            </footer>
+            <!--footer end-->
+        </section>
     }
-
 
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="~/TemplateBackEnd/lib/jquery/jquery.min.js"></script>
