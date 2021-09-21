@@ -1,0 +1,67 @@
+﻿@model ChoCastle.Models.Vendor
+@{
+    ViewBag.Title = "VendorEdit";
+    Layout = "~/Views/Shared/_LayoutBackEnd.cshtml";
+}
+
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i>廠商新增</h3>
+        <div class="row mt">
+            <!--  DATE PICKERS -->
+            <div class="col-lg-12">
+                <div class="form-panel">
+                    <form class="form-horizontal style-form" method="post">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.VendorID)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.VendorName, "廠商名稱", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.EditorFor(model => model.VendorName, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.ValidationMessageFor(model => model.VendorName, "", new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Phone, "電話", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Address, "地址", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ContactName, "聯絡人", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.EditorFor(model => model.ContactName, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.ValidationMessageFor(model => model.ContactName, "", new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ContactEmail, "聯絡信箱", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3 col-xs-11">
+                                @Html.EditorFor(model => model.ContactEmail, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.ValidationMessageFor(model => model.ContactEmail, "", new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div style="text-align:center">
+                            <button type="submit" class="btn btn-warning">儲存</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /form-panel -->
+            </div>
+            <!-- /col-lg-12 -->
+        </div>
+    </section>
+    <!-- /wrapper -->
+</section>
+<!-- /MAIN CONTENT -->
+<!--main content end-->
