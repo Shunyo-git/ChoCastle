@@ -15,68 +15,76 @@
         alert('商品已加入購物車囉!!');
     }
 </script>
-<div id="fh5co-featured-testimony" class="fh5co-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 style="font-family:'Microsoft JhengHei';color: #B8860B ;font-size:40px">@Model.ProductName</h2>
-            </div>
 
-            <div class="col-md-5 animate-box img-to-responsive animate-box" data-animate-effect="fadeInLeft">
-                <img src="~/Template/images/choco/生巧克力.jpg" alt="">
-            </div>
-            <div class="col-md-7 animate-box" data-animate-effect="fadeInRight">
-                <blockquote>
-                    <p>@Model.ProductDisc</p>
-                </blockquote>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="fh5co-gallery" @*class="fh5co-section"*@>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 fh5co-heading animate-box">
-                <h2 style="font-family: Microsoft JhengHei;">產品規格</h2>
+
+
+<div class="form-panel">
+    <form class="form-horizontal style-form" method="post">
+        @Html.HiddenFor(model => model.ProductID)
+
+        <div id="fh5co-featured-testimony" class="fh5co-section">
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
-                        <p>@Model.ProductSpec</p>
+                    <div class="col-md-12">
+                        <h2 style="font-family:'Microsoft JhengHei';color: #B8860B ;font-size:40px">@Model.ProductName</h2>
+                    </div>
+
+                    <div class="col-md-5 animate-box img-to-responsive animate-box" data-animate-effect="fadeInLeft">
+                        <img src="~/Template/images/choco/生巧克力.jpg" alt="">
+                    </div>
+                    <div class="col-md-7 animate-box" data-animate-effect="fadeInRight">
+                        <blockquote>
+                            <p>@Model.ProductDisc</p>
+                        </blockquote>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-3 fh5co-gallery_item">
-                <div class="fh5co-bg-img" style="background-image: url(/Template/images/choco/生巧克力2.jpg);" data-trigger="zoomerang"></div>
-                <div class="fh5co-bg-img" style="background-image: url(/Template/images/choco/生巧克力3.jpg);" data-trigger="zoomerang"></div>
-            </div>
-            <div class="col-md-6 col-sm-6 fh5co-gallery_item">
-                <div class="fh5co-bg-img fh5co-gallery_big" style="background-image: url(/Template/images/choco/生巧克力6.jpg);" data-trigger="zoomerang"></div>
-            </div>
-            <div class="col-md-3 col-sm-3 fh5co-gallery_item">
-                <div class="fh5co-bg-img" style="background-image: url(/Template/images/choco/生巧克力5.jfif);" data-trigger="zoomerang"></div>
-                <div class="fh5co-bg-img" style="background-image: url(/Template/images/choco/紅茶生巧克力.jpg);" data-trigger="zoomerang"></div>
-            </div>
         </div>
-    </div>
-</div>
-
-
-
-
-
-<div id="fh5co-started" class="fh5co-section animate-box" style="background-image: url(/Template/images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row animate-box">
-            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-
-                <div>
-                    <div class="form-group quantity-box">
-                        <label class="control-label" style="font-family:'Microsoft JhengHei'">Order</label>
-                        <input class="form-control" value="0" min="0" max="20" type="number">
+        <div id="fh5co-gallery" @*class="fh5co-section"*@>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 fh5co-heading animate-box">
+                        <h2 style="font-family: Microsoft JhengHei;">產品規格</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>@Model.ProductSpec</p>
+                            </div>
+                        </div>
                     </div>
-                    <button type="button" class="btn btn-primary btn-outline" onclick="buy();">加入購物車</button>
+                    <div class="col-md-3 col-sm-3 fh5co-gallery_item">
+                        <div class="fh5co-bg-img" style="background-image: url(/Template/images/choco/生巧克力2.jpg);" data-trigger="zoomerang"></div>
+                        <div class="fh5co-bg-img" style="background-image: url(/Template/images/choco/生巧克力3.jpg);" data-trigger="zoomerang"></div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 fh5co-gallery_item">
+                        <div class="fh5co-bg-img fh5co-gallery_big" style="background-image: url(/Template/images/choco/生巧克力6.jpg);" data-trigger="zoomerang"></div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 fh5co-gallery_item">
+                        <div class="fh5co-bg-img" style="background-image: url(/Template/images/choco/生巧克力5.jfif);" data-trigger="zoomerang"></div>
+                        <div class="fh5co-bg-img" style="background-image: url(/Template/images/choco/紅茶生巧克力.jpg);" data-trigger="zoomerang"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+
+        <div id="fh5co-started" class="fh5co-section animate-box" style="background-image: url(/Template/images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row animate-box">
+                    <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+
+                        <div>
+                            <div class="form-group quantity-box">
+                                <label class="control-label" style="font-family:'Microsoft JhengHei'">Order</label>
+                                <input class="form-control" name="OrderQty" value="1" min="0" max="20" type="number">
+                                
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-outline">加入購物車</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
 </div>
