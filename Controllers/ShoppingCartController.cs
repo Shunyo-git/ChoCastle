@@ -7,14 +7,11 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ChoCastle.Models;
 using System.Data.SqlClient;
-
-
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-
+using ChoCastle.Models;
 
 namespace ChoCastle.Controllers
 {
@@ -248,9 +245,12 @@ namespace ChoCastle.Controllers
                 db.SaveChanges();
 
 
+
                 Order newOrder = new Order();
+                int OrderID = db.Orders.Count() + 1;
+                //newOrder.OrderID = OrderID;
                 newOrder.CompanyNumber = shoppingCart.CompanyNumber;
-               // newOrder.Delivery = (int)shoppingCart.Delivery;
+                newOrder.Delivery = (int)shoppingCart.Delivery;
                 newOrder.InvoiceHeading = shoppingCart.InvoiceHeading;
                 newOrder.InvoiceType = shoppingCart.InvoiceType;
                 newOrder.MemberID = (int)shoppingCart.MemberID;
@@ -261,12 +261,15 @@ namespace ChoCastle.Controllers
                 newOrder.RequiredDate = (DateTime)shoppingCart.RequiredDate;
                 newOrder.ShipName = shoppingCart.ShipName;
                 newOrder.ShippingAddress = shoppingCart.ShippingAddress;
-                // newOrder.TotalAmount = ;
-                db.Orders.Add(newOrder);
-                db.SaveChanges();
-            }
-            return RedirectToAction("Index", "ShoppingCart");
+                
 
+                //db.Orders.Add(newOrder);
+               
+               
+            }
+            ModelState.AddModelError("", "更新成功。");
+            //return RedirectToAction("Index", "ShoppingCart");
+            return View(shoppingCart);
         }
 
         // 2021/9/21 by sean

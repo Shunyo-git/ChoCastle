@@ -30,7 +30,7 @@
             @Html.HiddenFor(model => model.Payment)
             @Html.HiddenFor(model => model.AddedDate)
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "color:#FFF" })
 
             <div class="row animate-box text-capitalize">
                 <h2 style="color:#B8860B">選擇收貨方式</h2>
@@ -79,7 +79,7 @@
                         <div class="col-md-12">
                             <label for="Delivery">寄送方式</label>
 
-                            <select name="many" id="Delivery" class="form-control custom_select">
+                            <select name="Delivery" id="Delivery" class="form-control custom_select">
                                 <option value="1">1.宅配</option>
                                 <option value="2">2.7-11</option>
                                 <option value="3">3.全家</option>

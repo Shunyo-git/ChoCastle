@@ -44,9 +44,7 @@ namespace ChoCastle.Models
         /*** DELEGATE ***/
         private delegate void TGenerateListFromReader<T>(SqlDataReader returnData, ref List<T> tempList);
 
-
         /*****************************  BASE CLASS IMPLEMENTATION *****************************/
-
 
         #region Product
         private const string SP_Product_GetProductByID = "SP_Product_GetProductByID";
@@ -356,8 +354,6 @@ namespace ChoCastle.Models
 
         }
         #endregion
-
-        
 
         #region Order
         private const string SP_Order_GetOrderByOrderID = "SP_Order_GetOrderByOrderID";

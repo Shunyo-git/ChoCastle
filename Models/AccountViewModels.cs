@@ -87,10 +87,10 @@ namespace ChoCastle.Models
 
         //2021/9/15 by sean
         //增加註冊時填入姓名欄位
-        [Required]
-        [StringLength(5, ErrorMessage = "{0} 的長度至少必須為 {2} - 10個字元。", MinimumLength = 2)]
-        [Display(Name = "姓名")]
-        public string ChineseName { get; set; }
+        //[Required]
+        //[StringLength(5, ErrorMessage = "{0} 的長度至少必須為 {2} - 10個字元。", MinimumLength = 2)]
+        //[Display(Name = "姓名")]
+        //public string ChineseName { get; set; }
 
         [Required]
         [EmailAddress]
