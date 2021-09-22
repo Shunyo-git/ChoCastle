@@ -1,0 +1,130 @@
+﻿@model ChoCastle.Models.ShoppingCar
+
+@{
+    ViewBag.Title = "SoppingCarOrderDetail";
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+
+<div id="fh5co-started" class="fh5co-section animate-box" style="background-image: url(/Template/images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+
+        @using (Html.BeginForm("ShoppingCartDetail", "ShoppingCart", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            /*CarID, isLogin, MemberID, OrderName, ShipName, PhoneNumber, ShippingAddress, Delivery,  ShippingCost, TotalAmount, Payment, RequiredDate, AddedDate, ModifiedDate, CompanyNumber, InvoiceHeading,  InvoiceType
+            */
+            @Html.HiddenFor(model => model.CarID)
+            @Html.HiddenFor(model => model.isLogin)
+            @Html.HiddenFor(model => model.MemberID)
+            @Html.HiddenFor(model => model.ShippingCost)
+            @Html.HiddenFor(model => model.TotalAmount)
+            @Html.HiddenFor(model => model.Payment)
+            @Html.HiddenFor(model => model.AddedDate)
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="row animate-box text-capitalize">
+                <h2 style="color:#B8860B">選擇收貨方式</h2>
+                <p>
+                    [ @Html.ActionLink("繼續購物", "ProductCategory", "Home") ]
+                    [ @Html.ActionLink("查看購物明細", "Index") ]
+
+                </p>
+
+                <hr />
+
+                <div class="col-md-6 col-md-push-6 col-sm-6 col-sm-push-6" style="left:0px ">
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="OrderName">訂購人</label>
+                            @Html.EditorFor(model => model.OrderName, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                            @Html.ValidationMessageFor(model => model.OrderName, "", new { @class = "help-block" })
+
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="ShipName">收件人</label>
+                            @Html.EditorFor(model => model.ShipName, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                            @Html.ValidationMessageFor(model => model.ShipName, "", new { @class = "help-block" })
+
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="Phone">連絡電話</label>
+                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "help-block" })
+
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="Address">地址</label>
+                            @Html.EditorFor(model => model.ShippingAddress, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                            @Html.ValidationMessageFor(model => model.ShippingAddress, "", new { @class = "help-block" })
+
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="Delivery">寄送方式</label>
+
+                            <select name="many" id="Delivery" class="form-control custom_select">
+                                <option value="1">1.宅配</option>
+                                <option value="2">2.7-11</option>
+                                <option value="3">3.全家</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="RequireDate">希望配送日期</label>
+                            @Html.TextBoxFor(m => m.RequiredDate, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="CompanyNumber">統一編號</label>
+                            @Html.TextBoxFor(m => m.CompanyNumber, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="Heading">發票抬頭</label>
+                            @Html.TextBoxFor(m => m.InvoiceHeading, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="Invoice">發票型別</label>
+                            @Html.RadioButtonFor(Model => Model.InvoiceType, "1", new { @id = "Genderradio0", @name = "Gender" })1.二聯式
+
+                            @Html.RadioButtonFor(Model => Model.InvoiceType, "2", new { @id = "Genderradio1", @name = "Gender" })2.三聯式
+                            @Html.RadioButtonFor(Model => Model.InvoiceType, "3f", new { @id = "Genderradio1", @name = "Gender" })3.電子發票
+
+
+
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <input type="submit" class="btn btn-primary btn-outline btn-lg" value="送出">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+    </div>
+</div>

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+    <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -26,7 +27,7 @@
 </head>
 <body>
 
-    @using Microsoft.AspNet.Identity
+
     @if (Request.IsAuthenticated)
     {
         <section id="container">

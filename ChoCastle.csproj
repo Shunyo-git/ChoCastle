@@ -221,6 +221,7 @@
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>ChoCastleDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataAccessHelper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invoice.cs">
       <DependentUpon>ChoCastleDB.tt</DependentUpon>
@@ -244,6 +245,7 @@
     <Compile Include="Models\ShoppingDetail.cs">
       <DependentUpon>ChoCastleDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SQLDataAccessProvider.cs" />
     <Compile Include="Models\Vendor.cs">
       <DependentUpon>ChoCastleDB.tt</DependentUpon>
     </Compile>
@@ -672,7 +674,7 @@
     <Content Include="Views\ShoppingCart\Details.cshtml" />
     <Content Include="Views\ShoppingCart\Edit.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
-    <Content Include="Views\ShoppingCart\SoppingCarOrderDetail.cshtml" />
+    <Content Include="Views\ShoppingCart\ShoppingCartDetail.cshtml" />
     <Content Include="TemplateBackEnd\lib\advanced-datatable\images\Sorting icons.psd" />
     <Content Include="TemplateBackEnd\lib\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="TemplateBackEnd\lib\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
