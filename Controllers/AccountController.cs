@@ -153,7 +153,7 @@ namespace ChoCastle.Controllers
             if (ModelState.IsValid)
             {
                 
-                /20210923 newMemberID  產生會員編號
+                //20210923 newMemberID  產生會員編號
                 int  newMemberID = db.Database.SqlQuery<int>("SELECT CASE WHEN MAX(MemberID) IS NULL THEN 1 ELSE MAX(MemberID) + 1 END AS MemberID FROM AspNetUsers").ToList()[0];
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email,MemberID =  newMemberID };
                 var result = await UserManager.CreateAsync(user, model.Password);
