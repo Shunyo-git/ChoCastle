@@ -152,7 +152,7 @@ namespace ChoCastle.Controllers
             if (ModelState.IsValid)
             {
                 
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email ,MemberID = UserManager.Users.Count()+1};
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
