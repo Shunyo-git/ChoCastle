@@ -371,7 +371,10 @@ namespace ChoCastle.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                //20210924 newMemberID  產生會員編號
+                int newMemberID = db.Database.SqlQuery<int>("SELECT CASE WHEN MAX(MemberID) IS NULL THEN 1 ELSE MAX(MemberID) + 1 END AS MemberID FROM AspNetUsers").ToList()[0];
+
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email,MemberID = newMemberID };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -395,6 +398,9 @@ namespace ChoCastle.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            Session["isRestored"] = null;
+            Session["CartID"] = null;
+            Session["MemberID"] = null;
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }

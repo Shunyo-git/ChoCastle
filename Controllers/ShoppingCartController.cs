@@ -19,26 +19,74 @@ namespace ChoCastle.Controllers
     {
         private ChoCastleDBEntities1 db = new ChoCastleDBEntities1();
 
+        //2021/9/24 DataAccessFactory.CreateDefaultDataAccess()
+        //資料庫存取提供者
+        private SQLDataAccessProvider _da;
+        public SQLDataAccessProvider da
+        {
+            get
+            {
+                return _da ?? DataAccessFactory.CreateDefaultDataAccess();
+            }
+            private set
+            {
+                _da = value;
+            }
+        }
+
         // GET: ShoppingCart
         public ActionResult Index()
         {
+            int CartID = 0;
+            int isRestored = 0;
 
             //20210921 by sean
-            int CartID = 0;
-
-
             if (Session["CartID"] != null)
             {
                 CartID = Int32.Parse(Session["CartID"].ToString());
             }
-            var p0 = new SqlParameter("p0", CartID);
-            var parameters = new SqlParameter[] { p0 };
+            if (Session["isRestored"] != null)
+            {
+                isRestored = Int32.Parse(Session["isRestored"].ToString());
+            }
+
+            //2021/9/24 by sean
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = UserManager.FindById(User.Identity.GetUserId());
+                if (user != null )
+                {
+                    //如為會員 取得購物車紀錄
+                    if (isRestored == 0 && user.MemberID > 0)
+                    {
+                        int PrevCartID = da.GetCartID(user.MemberID);
+
+                        //如有舊購物車取回購物車
+                        if (PrevCartID > 0   )
+                        {
+                            if (CartID == 0) { 
+                                CartID = PrevCartID; 
+                            } 
+                            else {
+                                da.RemovePreviousCart(user.MemberID, CartID);
+                            }
+                        }
+
+                        Session["isRestored"] = 1;
+                        Session["CartID"] = CartID;
+                        Session["MemberID"] = user.MemberID;
+                    }
+                }
+            }
+             
+            //var p0 = new SqlParameter("p0", CartID);
+            //var parameters = new SqlParameter[] { p0 };
+
+            //var shoppingDetails = db.ShoppingDetails.SqlQuery("SELECT * FROM ShoppingDetail WHERE CarID = @p0", parameters).ToList();
             
-            // return View(await db.ShoppingDetails.Include(s => s.Product).Include(s => s.ShoppingCar).ToListAsync());
-            var shoppingDetails =  db.ShoppingDetails.SqlQuery("SELECT * FROM ShoppingDetail WHERE CarID = @p0", parameters).ToList();
+            var shoppingDetails = da.GetShoppingDetailsByCart(CartID);
             return View(shoppingDetails);
-
-
+            //return View(  db.ShoppingDetails.Include(s => s.Product).Include(s => s.ShoppingCar).ToListAsync());
 
 
         }
@@ -147,23 +195,10 @@ namespace ChoCastle.Controllers
         }
 
         [HttpGet, ActionName("Delete")]
-        public async Task<ActionResult> Delete(int id)
+        public ActionResult Delete(int ProductID, int CartID)
         {
-            //20210921 by sean
-            int CartID = 0;
-            if (Session["CartID"] != null)
-            {
-                CartID = Int32.Parse(Session["CartID"].ToString());
-            }
-            var p0 = new SqlParameter("p0", CartID);
-            var p1 = new SqlParameter("p1", id);
-            var parameters = new SqlParameter[] { p0, p1 };
-
-            // return View(await db.ShoppingDetails.Include(s => s.Product).Include(s => s.ShoppingCar).ToListAsync());
-            var shoppingDetails = db.ShoppingDetails.SqlQuery("SELECT * FROM ShoppingDetail WHERE CarID = @p0 and ProductID = @p1", parameters).ToList();
-
-            db.ShoppingDetails.RemoveRange(shoppingDetails);
-            await db.SaveChangesAsync();
+            //20210924 by sean
+            da.RemoveShoppingDetail(CartID, ProductID);
             return RedirectToAction("Index");
         }
 
@@ -206,14 +241,14 @@ namespace ChoCastle.Controllers
         {
 
             //20210921 by sean
-             
+
             if (ModelState.IsValid)
-            { 
+            {
                 var user = UserManager.FindById(User.Identity.GetUserId());
                 if (user != null)
                 {
                     shoppingCart.MemberID = user.MemberID;
-                    shoppingCart.isLogin = 1;                   
+                    shoppingCart.isLogin = 1;
                     shoppingCart.ModifiedDate = DateTime.Now;
                 }
 
@@ -261,13 +296,14 @@ namespace ChoCastle.Controllers
                 newOrder.RequiredDate = (DateTime)shoppingCart.RequiredDate;
                 newOrder.ShipName = shoppingCart.ShipName;
                 newOrder.ShippingAddress = shoppingCart.ShippingAddress;
-                
+
 
                 //db.Orders.Add(newOrder);
-               
-               
+
+
             }
-            ModelState.AddModelError("", "更新成功。");
+            ModelState.AddModelError("", "訂單已完成。");
+            
             //return RedirectToAction("Index", "ShoppingCart");
             return View(shoppingCart);
         }

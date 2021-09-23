@@ -9,9 +9,13 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Data.SqlClient;
 
 namespace ChoCastle.Controllers
 {
+
+
+
     [RequireHttps]
     public class HomeController : Controller
     {
@@ -51,6 +55,21 @@ namespace ChoCastle.Controllers
                 _userManager = value;
             }
         }
+        //2021/9/24 DataAccessFactory.CreateDefaultDataAccess()
+        //SQL 資料庫存取提供者
+        private SQLDataAccessProvider _da;
+        public SQLDataAccessProvider da
+        {
+            get
+            {
+                return _da ?? DataAccessFactory.CreateDefaultDataAccess();
+            }
+            private set
+            {
+                _da = value;
+            }
+        }
+
         // GET
         public ActionResult ProductDescription(int? ProductID)
         {
@@ -76,73 +95,84 @@ namespace ChoCastle.Controllers
 
             if (ModelState.IsValid)
             {
-                int CartID;
+                int CartID = 0;
+                int MemberID = 0;
                 ShoppingCar shoppingCart;
 
-                if (Session["CartID"] == null)
-                {
-                    CartID = db.ShoppingCars.Count() + 1;
-                    Session["CartID"] = CartID;
-
-                    shoppingCart = new ShoppingCar();
-
-                    shoppingCart.CarID = CartID;
-                    shoppingCart.AddedDate = DateTime.Now;
-
-                    var user = UserManager.FindById(User.Identity.GetUserId());
-                    if (user != null)
-                    {
-                        shoppingCart.MemberID = user.MemberID;
-                        shoppingCart.isLogin = 1;
-                        shoppingCart.OrderName = user.ChineseName;
-                    }
-                    else
-                    {
-                        shoppingCart.MemberID = 0;
-                        shoppingCart.isLogin = 0;
-                    }
-                    shoppingCart.ModifiedDate = DateTime.Now;
-                    db.ShoppingCars.Add(shoppingCart);
-                }
-                else
+                //是否有購物車
+                if (Session["CartID"] != null)
                 {
                     CartID = Int32.Parse(Session["CartID"].ToString());
-                    shoppingCart = db.ShoppingCars.Find(CartID);
+                }
+ 
+                if (CartID == 0)
+                {
+                    //無購物車
+                    //判斷是否為會員
                     var user = UserManager.FindById(User.Identity.GetUserId());
                     if (user != null)
                     {
-                        shoppingCart.MemberID = user.MemberID;
-                        shoppingCart.isLogin = 1;
-                        shoppingCart.OrderName = user.ChineseName;
-                        db.Entry(shoppingCart).State = EntityState.Modified;
+                        MemberID = user.MemberID;
+                        //如為會員 取得購物車紀錄
+                        CartID = da.GetCartID(MemberID);
+                        //如有舊購物車取回購物車
+                        if (CartID > 0)
+                        {
+                            Session["CartID"] = CartID;
+                        }
                     }
+
                 }
-                ShoppingDetail shoppingDetail = db.ShoppingDetails.Find(CartID);
+
+                //新增購物車
+                if (CartID == 0)
+                {
+                    //新增購物車
+                    //CartID = db.ShoppingCars.Count() + 1; 
+                    CartID = db.Database.SqlQuery<int>("SELECT CASE WHEN MAX(CarID) IS NULL THEN 1 ELSE MAX(CarID) + 1 END AS CartID FROM ShoppingCar").ToList()[0];
+                    shoppingCart = new ShoppingCar();
+                    shoppingCart.CarID = CartID;
+                    shoppingCart.MemberID = MemberID;
+                    shoppingCart.isLogin = User.Identity.IsAuthenticated ? 1:0 ;
+                    shoppingCart.AddedDate = DateTime.Now;
+                    shoppingCart.ModifiedDate = DateTime.Now;
+                    db.ShoppingCars.Add(shoppingCart);
+                    db.SaveChanges();
+                    Session["CartID"] = CartID;
+                }
+
+
+                //取得商品清單
+                ShoppingDetail shoppingDetail = da.GetCartShoppingDetailByProductID(product.ProductID, CartID);
 
                 if (shoppingDetail == null)
                 {
-                    shoppingDetail = new ShoppingDetail();
-                    shoppingDetail.CarID = CartID;
-                    shoppingDetail.OrderQuantity = Int32.Parse(Request.Form["OrderQty"]);
-                    shoppingDetail.ProductID = product.ProductID;
-                    shoppingDetail.ProductName = product.ProductName;
-                    shoppingDetail.UnitPrice = product.SellingPrice;
-                    shoppingDetail.Subtotal = shoppingDetail.UnitPrice * shoppingDetail.OrderQuantity;
-                    shoppingDetail.AddedDate = DateTime.Now;
-
-                    db.ShoppingDetails.Add(shoppingDetail);
+                    //新商品
+                    ShoppingDetail newItem = new ShoppingDetail();
+                    newItem.CarID = CartID;
+                    newItem.OrderQuantity = Int32.Parse(Request.Form["OrderQty"]);
+                    newItem.ProductID = product.ProductID;
+                    newItem.ProductName = product.ProductName;
+                    newItem.UnitPrice = product.SellingPrice;
+                    newItem.Subtotal = newItem.UnitPrice * newItem.OrderQuantity;
+                    newItem.AddedDate = DateTime.Now;
+                    //shoppingDetail.ModifiedDate = DateTime.Now;
+                    db.ShoppingDetails.Add(newItem);
+                    db.SaveChanges();
                 }
                 else
                 {
-                    shoppingDetail.OrderQuantity += 1;
-                    shoppingDetail.Subtotal = shoppingDetail.UnitPrice * shoppingDetail.OrderQuantity;
-
-                    db.Entry(shoppingDetail).State = EntityState.Modified;
-                    shoppingCart.TotalAmount = 0;
+                    //已有商品更新數量
+                    da.UpdateShoppingDetail(CartID, product.ProductID, shoppingDetail.ProductName, product.SellingPrice, (int)shoppingDetail.OrderQuantity + 1,0,DateTime.Now);
+                    
+                    //shoppingDetail.OrderQuantity += 1;
+                    //shoppingDetail.Subtotal = shoppingDetail.UnitPrice * shoppingDetail.OrderQuantity;
+                    //db.Entry(shoppingDetail).State = EntityState.Modified;
+                    //db.SaveChanges();
                 }
 
 
-                db.SaveChanges();
+                
             }
             return RedirectToAction("Index", "ShoppingCart");
             //return View(db.Products.Find(product.ProductID));
