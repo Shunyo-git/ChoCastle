@@ -12,28 +12,28 @@ namespace ChoCastle.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class Orders
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Order()
+        public Orders()
         {
-            this.Invoices = new HashSet<Invoice>();
+            this.Invoice = new HashSet<Invoice>();
         }
     
         public int OrderID { get; set; }
-        public System.DateTime OrderDate { get; set; }
-        public int MemberID { get; set; }
+        public Nullable<System.DateTime> OrderDate { get; set; }
+        public Nullable<int> MemberID { get; set; }
         public string OrderName { get; set; }
         public string ShipName { get; set; }
         public string PhoneNumber { get; set; }
         public string ShippingAddress { get; set; }
-        public int Delivery { get; set; }
-        public int ShippingCost { get; set; }
-        public int TotalAmount { get; set; }
-        public int Payment { get; set; }
-        public System.DateTime PaymentTime { get; set; }
-        public int OrderStatus { get; set; }
-        public System.DateTime RequiredDate { get; set; }
+        public Nullable<int> Delivery { get; set; }
+        public Nullable<int> ShippingCost { get; set; }
+        public Nullable<int> TotalAmount { get; set; }
+        public Nullable<int> Payment { get; set; }
+        public Nullable<System.DateTime> PaymentTime { get; set; }
+        public Nullable<int> OrderStatus { get; set; }
+        public Nullable<System.DateTime> RequiredDate { get; set; }
         public string InvoiceNo { get; set; }
         public string CompanyNumber { get; set; }
         public string InvoiceHeading { get; set; }
@@ -45,7 +45,7 @@ namespace ChoCastle.Models
     
         public virtual Carriage Carriage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Invoice> Invoices { get; set; }
+        public virtual ICollection<Invoice> Invoice { get; set; }
         public virtual OrderDetail OrderDetail { get; set; }
     }
 }

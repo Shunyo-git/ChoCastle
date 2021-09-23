@@ -6,28 +6,25 @@
 //     如果重新產生程式碼，將會覆寫對這個檔案的手動變更。
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
 
 namespace ChoCastle.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class Products
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public Products()
         {
-            this.OrderDetails = new HashSet<OrderDetail>();
-            this.ShoppingDetails = new HashSet<ShoppingDetail>();
+            this.OrderDetail = new HashSet<OrderDetail>();
+            this.ShoppingDetail = new HashSet<ShoppingDetail>();
         }
     
         public int ProductID { get; set; }
         public int CategoryID { get; set; }
         public string ProductName { get; set; }
-        [DataType(DataType.MultilineText)]
         public string ProductSpec { get; set; }
-        [DataType(DataType.MultilineText)]
         public string ProductDisc { get; set; }
         public Nullable<bool> isDisplay { get; set; }
         public Nullable<int> PurchasePrice { get; set; }
@@ -43,10 +40,10 @@ namespace ChoCastle.Models
         public Nullable<int> ModifiedUserID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetail { get; set; }
         public virtual ProductCategory ProductCategory { get; set; }
         public virtual Vendor Vendor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShoppingDetail> ShoppingDetails { get; set; }
+        public virtual ICollection<ShoppingDetail> ShoppingDetail { get; set; }
     }
 }

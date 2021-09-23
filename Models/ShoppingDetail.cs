@@ -6,7 +6,6 @@
 //     如果重新產生程式碼，將會覆寫對這個檔案的手動變更。
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
 
 namespace ChoCastle.Models
 {
@@ -16,19 +15,15 @@ namespace ChoCastle.Models
     public partial class ShoppingDetail
     {
         public int CarID { get; set; }
-        public Nullable<int> ProductID { get; set; }
-        [Display(Name = "產品名稱")]
+        public int ProductID { get; set; }
         public string ProductName { get; set; }
-        [Display(Name = "產品售價")]
         public Nullable<int> UnitPrice { get; set; }
-        [Display(Name = "訂購數量")]
         public Nullable<int> OrderQuantity { get; set; }
-        [Display(Name = "小計")]
         public Nullable<int> Subtotal { get; set; }
         public Nullable<System.DateTime> AddedDate { get; set; }
-        public string ModifiedDate { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
     
-        public virtual Product Product { get; set; }
+        public virtual Products Products { get; set; }
         public virtual ShoppingCar ShoppingCar { get; set; }
     }
 }

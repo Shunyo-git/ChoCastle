@@ -13,10 +13,10 @@ namespace ChoCastle.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ChoCastleDBEntities1 : DbContext
+    public partial class ChoCastleDBEntities2 : DbContext
     {
-        public ChoCastleDBEntities1()
-            : base("name=ChoCastleDBEntities1")
+        public ChoCastleDBEntities2()
+            : base("name=ChoCastleDBEntities2")
         {
         }
     
@@ -25,19 +25,18 @@ namespace ChoCastle.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<Carriage> Carriages { get; set; }
-        public virtual DbSet<Invoice> Invoices { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<ProductCategory> ProductCategories { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<ShoppingCar> ShoppingCars { get; set; }
-        public virtual DbSet<ShoppingDetail> ShoppingDetails { get; set; }
-        public virtual DbSet<Vendor> Vendors { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<Carriage> Carriage { get; set; }
+        public virtual DbSet<Invoice> Invoice { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetail { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<ProductCategory> ProductCategory { get; set; }
+        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<ShoppingCar> ShoppingCar { get; set; }
+        public virtual DbSet<Vendor> Vendor { get; set; }
+        public virtual DbSet<ShoppingDetail> ShoppingDetail { get; set; }
     }
 }

@@ -30,6 +30,6 @@ namespace ChoCastle.Models
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<int> ModifiedUserID { get; set; }
     
-        public virtual Order Order { get; set; }
+        public virtual Orders Orders { get; set; }
     }
 }
