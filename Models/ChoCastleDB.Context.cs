@@ -14,7 +14,7 @@ namespace ChoCastle.Models
     using System.Data.Entity.Infrastructure;
     
     public partial class ChoCastleDBEntities1 : DbContext
-    { 
+    {
         public ChoCastleDBEntities1()
             : base("name=ChoCastleDBEntities1")
         {
@@ -25,19 +25,19 @@ namespace ChoCastle.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Carriage> Carriages { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ShoppingCar> ShoppingCars { get; set; }
-        public virtual DbSet<ShoppingDetail> ShoppingDetails { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<ShoppingDetail> ShoppingDetails { get; set; }
     }
 }

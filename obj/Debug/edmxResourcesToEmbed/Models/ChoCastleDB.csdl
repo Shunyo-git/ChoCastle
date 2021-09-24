@@ -67,7 +67,18 @@
     <Property Name="AddedUserID" Type="Int32" Nullable="false" />
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
     <Property Name="ModifiedUserID" Type="Int32" />
-    <NavigationProperty Name="Order" Relationship="Self.FK_Orders_carriage" FromRole="Carriage" ToRole="Orders" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_carriage" FromRole="Carriage" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="PhotoID" />
+    </Key>
+    <Property Name="PhotoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="isMain" Type="Boolean" />
+    <Property Name="SortID" Type="Int32" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Image_Products" FromRole="Image" ToRole="Products" />
   </EntityType>
   <EntityType Name="Invoice">
     <Key>
@@ -90,38 +101,24 @@
     <Property Name="ModifiedUserID" Type="Int32" />
     <NavigationProperty Name="Order" Relationship="Self.FK_Invoice_dbo_Orders" FromRole="Invoice" ToRole="Orders" />
   </EntityType>
-  <EntityType Name="OrderDetail">
-    <Key>
-      <PropertyRef Name="OrderID" />
-    </Key>
-    <Property Name="OrderID" Type="Int32" Nullable="false" />
-    <Property Name="ProductID" Type="Int32" Nullable="false" />
-    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Qty" Type="Int32" Nullable="false" />
-    <Property Name="Price" Type="Int32" Nullable="false" />
-    <Property Name="Subtotal" Type="Int32" Nullable="false" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_dbo_Orders" FromRole="OrderDetail" ToRole="Orders" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetail_dbo_Products" FromRole="OrderDetail" ToRole="Products" />
-  </EntityType>
   <EntityType Name="Order">
     <Key>
       <PropertyRef Name="OrderID" />
     </Key>
-    <Property Name="OrderID" Type="Int32" Nullable="false" />
-    <Property Name="OrderDate" Type="DateTime" Precision="3" />
-    <Property Name="MemberID" Type="Int32" />
-    <Property Name="OrderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ShipName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-    <Property Name="ShippingAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Delivery" Type="Int32" />
-    <Property Name="ShippingCost" Type="Int32" />
-    <Property Name="TotalAmount" Type="Int32" />
-    <Property Name="Payment" Type="Int32" />
-    <Property Name="PaymentTime" Type="DateTime" Precision="3" />
-    <Property Name="OrderStatus" Type="Int32" />
-    <Property Name="RequiredDate" Type="DateTime" Precision="3" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MemberID" Type="Int32" Nullable="false" />
+    <Property Name="OrderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ShipName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ShippingAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Delivery" Type="Int32" Nullable="false" />
+    <Property Name="ShippingCost" Type="Int32" Nullable="false" />
+    <Property Name="TotalAmount" Type="Int32" Nullable="false" />
+    <Property Name="Payment" Type="Int32" Nullable="false" />
+    <Property Name="PaymentTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="OrderStatus" Type="Int32" Nullable="false" />
+    <Property Name="RequiredDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="InvoiceNo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
     <Property Name="CompanyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="InvoiceHeading" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -132,7 +129,6 @@
     <Property Name="ReceiveDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Carriage" Relationship="Self.FK_Orders_carriage" FromRole="Orders" ToRole="Carriage" />
     <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoice_dbo_Orders" FromRole="Orders" ToRole="Invoice" />
-    <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_dbo_Orders" FromRole="Orders" ToRole="OrderDetail" />
   </EntityType>
   <EntityType Name="ProductCategory">
     <Key>
@@ -169,7 +165,7 @@
     <Property Name="AddedUserID" Type="Int32" />
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
     <Property Name="ModifiedUserID" Type="Int32" />
-    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_dbo_Products" FromRole="Products" ToRole="OrderDetail" />
+    <NavigationProperty Name="Images" Relationship="Self.FK_Image_Products" FromRole="Products" ToRole="Image" />
     <NavigationProperty Name="ProductCategory" Relationship="Self.FK_Products_ProductCategory" FromRole="Products" ToRole="ProductCategory" />
     <NavigationProperty Name="Vendor" Relationship="Self.FK_Products_Vendor" FromRole="Products" ToRole="Vendor" />
     <NavigationProperty Name="ShoppingDetails" Relationship="Self.FK_ShoppingDetail_dbo_Products" FromRole="Products" ToRole="ShoppingDetail" />
@@ -213,6 +209,23 @@
     <Property Name="ModifiedUserID" Type="Int32" />
     <NavigationProperty Name="Products" Relationship="Self.FK_Products_Vendor" FromRole="Vendor" ToRole="Products" />
   </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OrderID" />
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="ProductName" />
+      <PropertyRef Name="Qty" />
+      <PropertyRef Name="Price" />
+      <PropertyRef Name="Subtotal" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Qty" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <Property Name="Subtotal" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+  </EntityType>
   <EntityType Name="ShoppingDetail">
     <Key>
       <PropertyRef Name="CarID" />
@@ -225,7 +238,7 @@
     <Property Name="OrderQuantity" Type="Int32" />
     <Property Name="Subtotal" Type="Int32" />
     <Property Name="AddedDate" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Product" Relationship="Self.FK_ShoppingDetail_dbo_Products" FromRole="ShoppingDetail" ToRole="Products" />
     <NavigationProperty Name="ShoppingCar" Relationship="Self.FK_ShoppingDetail_dbo_ShoppingCar" FromRole="ShoppingDetail" ToRole="ShoppingCar" />
   </EntityType>
@@ -258,14 +271,26 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Orders_carriage">
-    <End Role="Carriage" Type="Self.Carriage" Multiplicity="1" />
-    <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+    <End Role="Carriage" Type="Self.Carriage" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Carriage">
         <PropertyRef Name="CarriageCompanyID" />
       </Principal>
       <Dependent Role="Orders">
-        <PropertyRef Name="OrderID" />
+        <PropertyRef Name="CarriageCompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Image_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="1" />
+    <End Role="Image" Type="Self.Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="ProductID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -278,30 +303,6 @@
       </Principal>
       <Dependent Role="Invoice">
         <PropertyRef Name="OrderID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_OrderDetail_dbo_Orders">
-    <End Role="Orders" Type="Self.Order" Multiplicity="1" />
-    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Orders">
-        <PropertyRef Name="OrderID" />
-      </Principal>
-      <Dependent Role="OrderDetail">
-        <PropertyRef Name="OrderID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_OrderDetail_dbo_Products">
-    <End Role="Products" Type="Self.Product" Multiplicity="1" />
-    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Products">
-        <PropertyRef Name="ProductID" />
-      </Principal>
-      <Dependent Role="OrderDetail">
-        <PropertyRef Name="ProductID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -343,7 +344,7 @@
   </Association>
   <Association Name="FK_ShoppingDetail_dbo_ShoppingCar">
     <End Role="ShoppingCar" Type="Self.ShoppingCar" Multiplicity="1" />
-    <End Role="ShoppingDetail" Type="Self.ShoppingDetail" Multiplicity="0..1" />
+    <End Role="ShoppingDetail" Type="Self.ShoppingDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ShoppingCar">
         <PropertyRef Name="CarID" />
@@ -363,13 +364,14 @@
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
     <EntitySet Name="Carriages" EntityType="Self.Carriage" />
+    <EntitySet Name="Images" EntityType="Self.Image" />
     <EntitySet Name="Invoices" EntityType="Self.Invoice" />
-    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
     <EntitySet Name="Orders" EntityType="Self.Order" />
     <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
     <EntitySet Name="Products" EntityType="Self.Product" />
     <EntitySet Name="ShoppingCars" EntityType="Self.ShoppingCar" />
     <EntitySet Name="Vendors" EntityType="Self.Vendor" />
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
     <EntitySet Name="ShoppingDetails" EntityType="Self.ShoppingDetail" />
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -383,17 +385,13 @@
       <End Role="Carriage" EntitySet="Carriages" />
       <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
+    <AssociationSet Name="FK_Image_Products" Association="Self.FK_Image_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Image" EntitySet="Images" />
+    </AssociationSet>
     <AssociationSet Name="FK_Invoice_dbo_Orders" Association="Self.FK_Invoice_dbo_Orders">
       <End Role="Orders" EntitySet="Orders" />
       <End Role="Invoice" EntitySet="Invoices" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OrderDetail_dbo_Orders" Association="Self.FK_OrderDetail_dbo_Orders">
-      <End Role="Orders" EntitySet="Orders" />
-      <End Role="OrderDetail" EntitySet="OrderDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OrderDetail_dbo_Products" Association="Self.FK_OrderDetail_dbo_Products">
-      <End Role="Products" EntitySet="Products" />
-      <End Role="OrderDetail" EntitySet="OrderDetails" />
     </AssociationSet>
     <AssociationSet Name="FK_Products_ProductCategory" Association="Self.FK_Products_ProductCategory">
       <End Role="ProductCategory" EntitySet="ProductCategories" />
