@@ -23,7 +23,7 @@ namespace ChoCastle.Models
         public Nullable<System.DateTime> AddedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     
-        public virtual Products Products { get; set; }
+        public virtual Product Product { get; set; }
         public virtual ShoppingCar ShoppingCar { get; set; }
     }
 }

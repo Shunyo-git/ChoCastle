@@ -12,12 +12,12 @@ namespace ChoCastle.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Orders
+    public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Orders()
+        public Order()
         {
-            this.Invoice = new HashSet<Invoice>();
+            this.Invoices = new HashSet<Invoice>();
         }
     
         public int OrderID { get; set; }
@@ -45,7 +45,7 @@ namespace ChoCastle.Models
     
         public virtual Carriage Carriage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Invoice> Invoice { get; set; }
+        public virtual ICollection<Invoice> Invoices { get; set; }
         public virtual OrderDetail OrderDetail { get; set; }
     }
 }

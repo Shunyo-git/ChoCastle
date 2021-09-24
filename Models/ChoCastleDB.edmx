@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ChoCastleDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ChoCastleDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -449,11 +449,12 @@
             <End Role="ShoppingDetail" EntitySet="ShoppingDetail" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ChoCastleDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="AspNetRoles">
+        <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -461,7 +462,7 @@
           <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="AspNetUserClaims">
+        <EntityType Name="AspNetUserClaim">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -469,9 +470,9 @@
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="AspNetUserLogins">
+        <EntityType Name="AspNetUserLogin">
           <Key>
             <PropertyRef Name="LoginProvider" />
             <PropertyRef Name="ProviderKey" />
@@ -480,9 +481,9 @@
           <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="AspNetUsers">
+        <EntityType Name="AspNetUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -520,7 +521,7 @@
           <Property Name="AddedUserID" Type="Int32" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedUserID" Type="Int32" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_carriage" FromRole="Carriage" ToRole="Orders" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Orders_carriage" FromRole="Carriage" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -541,7 +542,7 @@
           <Property Name="AddedUserID" Type="Int32" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedUserID" Type="Int32" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Invoice_dbo_Orders" FromRole="Invoice" ToRole="Orders" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Invoice_dbo_Orders" FromRole="Invoice" ToRole="Orders" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -554,10 +555,10 @@
           <Property Name="Price" Type="Int32" Nullable="false" />
           <Property Name="Subtotal" Type="Int32" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_OrderDetail_dbo_Orders" FromRole="OrderDetail" ToRole="Orders" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_OrderDetail_dbo_Products" FromRole="OrderDetail" ToRole="Products" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_dbo_Orders" FromRole="OrderDetail" ToRole="Orders" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetail_dbo_Products" FromRole="OrderDetail" ToRole="Products" />
         </EntityType>
-        <EntityType Name="Orders">
+        <EntityType Name="Order">
           <Key>
             <PropertyRef Name="OrderID" />
           </Key>
@@ -584,7 +585,7 @@
           <Property Name="DeliverDate" Type="DateTime" Precision="3" />
           <Property Name="ReceiveDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Carriage" Relationship="Self.FK_Orders_carriage" FromRole="Orders" ToRole="Carriage" />
-          <NavigationProperty Name="Invoice" Relationship="Self.FK_Invoice_dbo_Orders" FromRole="Orders" ToRole="Invoice" />
+          <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoice_dbo_Orders" FromRole="Orders" ToRole="Invoice" />
           <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_dbo_Orders" FromRole="Orders" ToRole="OrderDetail" />
         </EntityType>
         <EntityType Name="ProductCategory">
@@ -601,7 +602,7 @@
           <Property Name="ModifiedUserID" Type="Int32" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Products_ProductCategory" FromRole="ProductCategory" ToRole="Products" />
         </EntityType>
-        <EntityType Name="Products">
+        <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ProductID" />
           </Key>
@@ -622,10 +623,10 @@
           <Property Name="AddedUserID" Type="Int32" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedUserID" Type="Int32" />
-          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_dbo_Products" FromRole="Products" ToRole="OrderDetail" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_dbo_Products" FromRole="Products" ToRole="OrderDetail" />
           <NavigationProperty Name="ProductCategory" Relationship="Self.FK_Products_ProductCategory" FromRole="Products" ToRole="ProductCategory" />
           <NavigationProperty Name="Vendor" Relationship="Self.FK_Products_Vendor" FromRole="Products" ToRole="Vendor" />
-          <NavigationProperty Name="ShoppingDetail" Relationship="Self.FK_ShoppingDetail_dbo_Products" FromRole="Products" ToRole="ShoppingDetail" />
+          <NavigationProperty Name="ShoppingDetails" Relationship="Self.FK_ShoppingDetail_dbo_Products" FromRole="Products" ToRole="ShoppingDetail" />
         </EntityType>
         <EntityType Name="ShoppingCar">
           <Key>
@@ -648,7 +649,7 @@
           <Property Name="CompanyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="InvoiceHeading" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="InvoiceType" Type="Int32" />
-          <NavigationProperty Name="ShoppingDetail" Relationship="Self.FK_ShoppingDetail_dbo_ShoppingCar" FromRole="ShoppingCar" ToRole="ShoppingDetail" />
+          <NavigationProperty Name="ShoppingDetails" Relationship="Self.FK_ShoppingDetail_dbo_ShoppingCar" FromRole="ShoppingCar" ToRole="ShoppingDetail" />
         </EntityType>
         <EntityType Name="Vendor">
           <Key>
@@ -679,14 +680,14 @@
           <Property Name="Subtotal" Type="Int32" />
           <Property Name="AddedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_ShoppingDetail_dbo_Products" FromRole="ShoppingDetail" ToRole="Products" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ShoppingDetail_dbo_Products" FromRole="ShoppingDetail" ToRole="Products" />
           <NavigationProperty Name="ShoppingCar" Relationship="Self.FK_ShoppingDetail_dbo_ShoppingCar" FromRole="ShoppingDetail" ToRole="ShoppingCar" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -697,10 +698,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -712,7 +713,7 @@
         </Association>
         <Association Name="FK_Orders_carriage">
           <End Role="Carriage" Type="Self.Carriage" Multiplicity="1" />
-          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Carriage">
               <PropertyRef Name="CarriageCompanyID" />
@@ -723,7 +724,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Invoice_dbo_Orders">
-          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="1" />
           <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orders">
@@ -735,7 +736,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderDetail_dbo_Orders">
-          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="1" />
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Orders">
@@ -747,7 +748,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderDetail_dbo_Products">
-          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
@@ -760,7 +761,7 @@
         </Association>
         <Association Name="FK_Products_ProductCategory">
           <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="1" />
-          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProductCategory">
               <PropertyRef Name="CategoryID" />
@@ -772,7 +773,7 @@
         </Association>
         <Association Name="FK_Products_Vendor">
           <End Role="Vendor" Type="Self.Vendor" Multiplicity="0..1" />
-          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Vendor">
               <PropertyRef Name="VendorID" />
@@ -783,7 +784,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ShoppingDetail_dbo_Products">
-          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
           <End Role="ShoppingDetail" Type="Self.ShoppingDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
@@ -807,23 +808,23 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="ChoCastleDBEntities2" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
-          <EntitySet Name="Carriage" EntityType="Self.Carriage" />
-          <EntitySet Name="Invoice" EntityType="Self.Invoice" />
-          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" />
-          <EntitySet Name="Orders" EntityType="Self.Orders" />
-          <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" />
-          <EntitySet Name="Products" EntityType="Self.Products" />
-          <EntitySet Name="ShoppingCar" EntityType="Self.ShoppingCar" />
-          <EntitySet Name="Vendor" EntityType="Self.Vendor" />
-          <EntitySet Name="ShoppingDetail" EntityType="Self.ShoppingDetail" />
+        <EntityContainer Name="ChoCastleDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Carriages" EntityType="Self.Carriage" />
+          <EntitySet Name="Invoices" EntityType="Self.Invoice" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ShoppingCars" EntityType="Self.ShoppingCar" />
+          <EntitySet Name="Vendors" EntityType="Self.Vendor" />
+          <EntitySet Name="ShoppingDetails" EntityType="Self.ShoppingDetail" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -833,36 +834,36 @@
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_carriage" Association="Self.FK_Orders_carriage">
-            <End Role="Carriage" EntitySet="Carriage" />
+            <End Role="Carriage" EntitySet="Carriages" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_Invoice_dbo_Orders" Association="Self.FK_Invoice_dbo_Orders">
             <End Role="Orders" EntitySet="Orders" />
-            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="Invoice" EntitySet="Invoices" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderDetail_dbo_Orders" Association="Self.FK_OrderDetail_dbo_Orders">
             <End Role="Orders" EntitySet="Orders" />
-            <End Role="OrderDetail" EntitySet="OrderDetail" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderDetail_dbo_Products" Association="Self.FK_OrderDetail_dbo_Products">
             <End Role="Products" EntitySet="Products" />
-            <End Role="OrderDetail" EntitySet="OrderDetail" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_Products_ProductCategory" Association="Self.FK_Products_ProductCategory">
-            <End Role="ProductCategory" EntitySet="ProductCategory" />
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_Products_Vendor" Association="Self.FK_Products_Vendor">
-            <End Role="Vendor" EntitySet="Vendor" />
+            <End Role="Vendor" EntitySet="Vendors" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_ShoppingDetail_dbo_Products" Association="Self.FK_ShoppingDetail_dbo_Products">
             <End Role="Products" EntitySet="Products" />
-            <End Role="ShoppingDetail" EntitySet="ShoppingDetail" />
+            <End Role="ShoppingDetail" EntitySet="ShoppingDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_ShoppingDetail_dbo_ShoppingCar" Association="Self.FK_ShoppingDetail_dbo_ShoppingCar">
-            <End Role="ShoppingCar" EntitySet="ShoppingCar" />
-            <End Role="ShoppingDetail" EntitySet="ShoppingDetail" />
+            <End Role="ShoppingCar" EntitySet="ShoppingCars" />
+            <End Role="ShoppingDetail" EntitySet="ShoppingDetails" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -874,9 +875,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ChoCastleDBModelStoreContainer" CdmEntityContainer="ChoCastleDBEntities2">
+        <EntityContainerMapping StorageEntityContainer="ChoCastleDBModelStoreContainer" CdmEntityContainer="ChoCastleDBEntities1">
           <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="ChoCastleDBModel.AspNetRoles">
+            <EntityTypeMapping TypeName="ChoCastleDBModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -884,7 +885,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="ChoCastleDBModel.AspNetUserClaims">
+            <EntityTypeMapping TypeName="ChoCastleDBModel.AspNetUserClaim">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -894,7 +895,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="ChoCastleDBModel.AspNetUserLogins">
+            <EntityTypeMapping TypeName="ChoCastleDBModel.AspNetUserLogin">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -903,7 +904,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="ChoCastleDBModel.AspNetUsers">
+            <EntityTypeMapping TypeName="ChoCastleDBModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ChineseName" ColumnName="ChineseName" />
@@ -928,7 +929,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Carriage">
+          <EntitySetMapping Name="Carriages">
             <EntityTypeMapping TypeName="ChoCastleDBModel.Carriage">
               <MappingFragment StoreEntitySet="Carriage">
                 <ScalarProperty Name="CarriageCompanyID" ColumnName="CarriageCompanyID" />
@@ -940,7 +941,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Invoice">
+          <EntitySetMapping Name="Invoices">
             <EntityTypeMapping TypeName="ChoCastleDBModel.Invoice">
               <MappingFragment StoreEntitySet="Invoice">
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
@@ -961,7 +962,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OrderDetail">
+          <EntitySetMapping Name="OrderDetails">
             <EntityTypeMapping TypeName="ChoCastleDBModel.OrderDetail">
               <MappingFragment StoreEntitySet="OrderDetail">
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
@@ -975,7 +976,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="ChoCastleDBModel.Orders">
+            <EntityTypeMapping TypeName="ChoCastleDBModel.Order">
               <MappingFragment StoreEntitySet="Orders">
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
@@ -1002,7 +1003,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProductCategory">
+          <EntitySetMapping Name="ProductCategories">
             <EntityTypeMapping TypeName="ChoCastleDBModel.ProductCategory">
               <MappingFragment StoreEntitySet="ProductCategory">
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
@@ -1017,7 +1018,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="ChoCastleDBModel.Products">
+            <EntityTypeMapping TypeName="ChoCastleDBModel.Product">
               <MappingFragment StoreEntitySet="Products">
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
@@ -1039,7 +1040,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ShoppingCar">
+          <EntitySetMapping Name="ShoppingCars">
             <EntityTypeMapping TypeName="ChoCastleDBModel.ShoppingCar">
               <MappingFragment StoreEntitySet="ShoppingCar">
                 <ScalarProperty Name="CarID" ColumnName="CarID" />
@@ -1062,7 +1063,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Vendor">
+          <EntitySetMapping Name="Vendors">
             <EntityTypeMapping TypeName="ChoCastleDBModel.Vendor">
               <MappingFragment StoreEntitySet="Vendor">
                 <ScalarProperty Name="VendorID" ColumnName="VendorID" />
@@ -1078,7 +1079,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ShoppingDetail">
+          <EntitySetMapping Name="ShoppingDetails">
             <EntityTypeMapping TypeName="ChoCastleDBModel.ShoppingDetail">
               <MappingFragment StoreEntitySet="ShoppingDetail">
                 <ScalarProperty Name="CarID" ColumnName="CarID" />
@@ -1114,7 +1115,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="無" />

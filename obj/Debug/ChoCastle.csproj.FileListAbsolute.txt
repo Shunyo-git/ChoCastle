@@ -374,7 +374,6 @@ C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\bin\zh-Hant\Microsoft.Owin.Secur
 C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\bin\zh-Hant\Microsoft.Owin.Security.Google.resources.dll
 C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\bin\zh-Hant\Microsoft.Owin.Security.Twitter.resources.dll
 C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\bin\zh-Hant\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\obj\Debug\ChoCastle.csproj.AssemblyReference.cache
 C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\obj\Debug\ChoCastle.csproj.CoreCompileInputs.cache
 C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\obj\Debug\ChoCastle.csproj.CopyComplete
 C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\obj\Debug\ChoCastle.dll
@@ -639,3 +638,4 @@ D:\Git-Repos\ChoCastle\obj\Debug\ChoCastle.Migrations.MemberID1.resources
 C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\obj\Debug\ChoCastle.Migrations.MemberID.resources
 C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\obj\Debug\ChoCastle.Migrations.MemberID1.resources
 C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\obj\Debug\ChoCastle.csproj.GenerateResource.cache
+C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\obj\Debug\ChoCastle.csproj.AssemblyReference.cache

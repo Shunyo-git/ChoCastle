@@ -17,7 +17,7 @@ namespace ChoCastle.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ShoppingCar()
         {
-            this.ShoppingDetail = new HashSet<ShoppingDetail>();
+            this.ShoppingDetails = new HashSet<ShoppingDetail>();
         }
     
         public int CarID { get; set; }
@@ -39,6 +39,6 @@ namespace ChoCastle.Models
         public Nullable<int> InvoiceType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShoppingDetail> ShoppingDetail { get; set; }
+        public virtual ICollection<ShoppingDetail> ShoppingDetails { get; set; }
     }
 }

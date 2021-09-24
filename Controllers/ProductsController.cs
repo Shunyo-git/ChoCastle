@@ -17,7 +17,7 @@ namespace ChoCastle.Controllers
 {
     public class ProductsController : Controller
     {
-        private ChoCastleDBEntities2 db = new ChoCastleDBEntities2();      
+        private ChoCastleDBEntities1 db = new ChoCastleDBEntities1();      
        
         // GET: Products
         public ActionResult Index()
@@ -118,6 +118,7 @@ namespace ChoCastle.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Product product = db.Products.Find(id);
             if (product == null)
             {

@@ -1,16 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ChoCastleDBModelStoreContainer" CdmEntityContainer="ChoCastleDBEntities1">
-    <EntitySetMapping Name="C__MigrationHistory">
-      <EntityTypeMapping TypeName="ChoCastleDBModel.C__MigrationHistory">
-        <MappingFragment StoreEntitySet="__MigrationHistory">
-          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-          <ScalarProperty Name="Model" ColumnName="Model" />
-          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="AspNetRoles">
       <EntityTypeMapping TypeName="ChoCastleDBModel.AspNetRole">
         <MappingFragment StoreEntitySet="AspNetRoles">
@@ -198,20 +188,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ShoppingDetails">
-      <EntityTypeMapping TypeName="ChoCastleDBModel.ShoppingDetail">
-        <MappingFragment StoreEntitySet="ShoppingDetail">
-          <ScalarProperty Name="CarID" ColumnName="CarID" />
-          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-          <ScalarProperty Name="OrderQuantity" ColumnName="OrderQuantity" />
-          <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Vendors">
       <EntityTypeMapping TypeName="ChoCastleDBModel.Vendor">
         <MappingFragment StoreEntitySet="Vendor">
@@ -225,6 +201,20 @@
           <ScalarProperty Name="AddedUserID" ColumnName="AddedUserID" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="ModifiedUserID" ColumnName="ModifiedUserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShoppingDetails">
+      <EntityTypeMapping TypeName="ChoCastleDBModel.ShoppingDetail">
+        <MappingFragment StoreEntitySet="ShoppingDetail">
+          <ScalarProperty Name="CarID" ColumnName="CarID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="OrderQuantity" ColumnName="OrderQuantity" />
+          <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

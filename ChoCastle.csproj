@@ -189,16 +189,16 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AspNetRoles.cs">
+    <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>ChoCastleDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AspNetUserClaims.cs">
+    <Compile Include="Models\AspNetUser.cs">
       <DependentUpon>ChoCastleDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AspNetUserLogins.cs">
+    <Compile Include="Models\AspNetUserClaim.cs">
       <DependentUpon>ChoCastleDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AspNetUsers.cs">
+    <Compile Include="Models\AspNetUserLogin.cs">
       <DependentUpon>ChoCastleDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Carriage.cs">
@@ -225,16 +225,16 @@
       <DependentUpon>ChoCastleDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>ChoCastleDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>ChoCastleDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Orders.cs">
+    <Compile Include="Models\Product.cs">
       <DependentUpon>ChoCastleDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductCategory.cs">
-      <DependentUpon>ChoCastleDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Products.cs">
       <DependentUpon>ChoCastleDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ShoppingCar.cs">
@@ -692,11 +692,6 @@
     <Content Include="Views\Vendor\Index.cshtml" />
     <Content Include="Views\Vendor\VendorCreate.cshtml" />
     <Content Include="Views\Vendor\VendorEdit.cshtml" />
-    <Content Include="Views\ControllerShoppingCars\Create.cshtml" />
-    <Content Include="Views\ControllerShoppingCars\Delete.cshtml" />
-    <Content Include="Views\ControllerShoppingCars\Details.cshtml" />
-    <Content Include="Views\ControllerShoppingCars\Edit.cshtml" />
-    <Content Include="Views\ControllerShoppingCars\Index.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
