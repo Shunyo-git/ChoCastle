@@ -189,21 +189,6 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>ChoCastleDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>ChoCastleDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserClaim.cs">
-      <DependentUpon>ChoCastleDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserLogin.cs">
-      <DependentUpon>ChoCastleDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Carriage.cs">
-      <DependentUpon>ChoCastleDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ChoCastleDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -221,32 +206,8 @@
     </Compile>
     <Compile Include="Models\DataAccessHelper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Invoice.cs">
-      <DependentUpon>ChoCastleDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Order.cs">
-      <DependentUpon>ChoCastleDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OrderDetail.cs">
-      <DependentUpon>ChoCastleDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Product.cs">
-      <DependentUpon>ChoCastleDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductCategory.cs">
-      <DependentUpon>ChoCastleDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ShoppingCar.cs">
-      <DependentUpon>ChoCastleDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ShoppingDetail.cs">
-      <DependentUpon>ChoCastleDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\SQLDataAccessProvider.cs" />
-    <Compile Include="Models\Vendor.cs">
-      <DependentUpon>ChoCastleDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

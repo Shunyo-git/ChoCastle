@@ -797,7 +797,7 @@
         </Association>
         <Association Name="FK_ShoppingDetail_dbo_ShoppingCar">
           <End Role="ShoppingCar" Type="Self.ShoppingCar" Multiplicity="1" />
-          <End Role="ShoppingDetail" Type="Self.ShoppingDetail" Multiplicity="*" />
+          <End Role="ShoppingDetail" Type="Self.ShoppingDetail" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="ShoppingCar">
               <PropertyRef Name="CarID" />
