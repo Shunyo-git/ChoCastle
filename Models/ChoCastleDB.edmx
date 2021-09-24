@@ -1,10 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="ChoCastleDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -111,20 +121,20 @@
           <Key>
             <PropertyRef Name="OrderID" />
           </Key>
-          <Property Name="OrderID" Type="int" Nullable="false" />
-          <Property Name="OrderDate" Type="datetime" />
-          <Property Name="MemberID" Type="int" />
-          <Property Name="OrderName" Type="nvarchar" MaxLength="50" />
-          <Property Name="ShipName" Type="nvarchar" MaxLength="50" />
-          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="15" />
-          <Property Name="ShippingAddress" Type="nvarchar" MaxLength="255" />
-          <Property Name="Delivery" Type="int" />
-          <Property Name="ShippingCost" Type="int" />
-          <Property Name="TotalAmount" Type="int" />
-          <Property Name="Payment" Type="int" />
-          <Property Name="PaymentTime" Type="datetime" />
-          <Property Name="OrderStatus" Type="int" />
-          <Property Name="RequiredDate" Type="datetime" />
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="OrderName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShipName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="ShippingAddress" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Delivery" Type="int" Nullable="false" />
+          <Property Name="ShippingCost" Type="int" Nullable="false" />
+          <Property Name="TotalAmount" Type="int" Nullable="false" />
+          <Property Name="Payment" Type="int" Nullable="false" />
+          <Property Name="PaymentTime" Type="datetime" Nullable="false" />
+          <Property Name="OrderStatus" Type="int" Nullable="false" />
+          <Property Name="RequiredDate" Type="datetime" Nullable="false" />
           <Property Name="InvoiceNo" Type="nvarchar" MaxLength="25" />
           <Property Name="CompanyNumber" Type="nvarchar" MaxLength="20" />
           <Property Name="InvoiceHeading" Type="nvarchar" MaxLength="50" />
@@ -191,21 +201,18 @@
           <Property Name="InvoiceHeading" Type="nvarchar" MaxLength="50" />
           <Property Name="InvoiceType" Type="int" />
         </EntityType>
-        <!--產生期間發現錯誤:
-警告 6002: 資料表/檢視 'ChoCastleDB.dbo.ShoppingDetail' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
         <EntityType Name="ShoppingDetail">
           <Key>
             <PropertyRef Name="CarID" />
-            <PropertyRef Name="ProductID" />
           </Key>
           <Property Name="CarID" Type="int" Nullable="false" />
-          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" />
           <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
           <Property Name="UnitPrice" Type="int" />
           <Property Name="OrderQuantity" Type="int" />
           <Property Name="Subtotal" Type="int" />
           <Property Name="AddedDate" Type="datetime" />
-          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Vendor">
           <Key>
@@ -351,7 +358,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ShoppingDetail_dbo_Products">
-          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="ShoppingDetail" Type="Self.ShoppingDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
@@ -364,7 +371,7 @@
         </Association>
         <Association Name="FK_ShoppingDetail_dbo_ShoppingCar">
           <End Role="ShoppingCar" Type="Self.ShoppingCar" Multiplicity="1" />
-          <End Role="ShoppingDetail" Type="Self.ShoppingDetail" Multiplicity="*" />
+          <End Role="ShoppingDetail" Type="Self.ShoppingDetail" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="ShoppingCar">
               <PropertyRef Name="CarID" />
@@ -375,6 +382,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ChoCastleDBModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -387,19 +395,8 @@
           <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShoppingCar" EntityType="Self.ShoppingCar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShoppingDetail" EntityType="Self.ShoppingDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ShoppingDetail" EntityType="Self.ShoppingDetail" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ShoppingDetail].[CarID] AS [CarID], 
-    [ShoppingDetail].[ProductID] AS [ProductID], 
-    [ShoppingDetail].[ProductName] AS [ProductName], 
-    [ShoppingDetail].[UnitPrice] AS [UnitPrice], 
-    [ShoppingDetail].[OrderQuantity] AS [OrderQuantity], 
-    [ShoppingDetail].[Subtotal] AS [Subtotal], 
-    [ShoppingDetail].[AddedDate] AS [AddedDate], 
-    [ShoppingDetail].[ModifiedDate] AS [ModifiedDate]
-    FROM [dbo].[ShoppingDetail] AS [ShoppingDetail]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -454,6 +451,16 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ChoCastleDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -562,20 +569,20 @@
           <Key>
             <PropertyRef Name="OrderID" />
           </Key>
-          <Property Name="OrderID" Type="Int32" Nullable="false" />
-          <Property Name="OrderDate" Type="DateTime" Precision="3" />
-          <Property Name="MemberID" Type="Int32" />
-          <Property Name="OrderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ShipName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="ShippingAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Delivery" Type="Int32" />
-          <Property Name="ShippingCost" Type="Int32" />
-          <Property Name="TotalAmount" Type="Int32" />
-          <Property Name="Payment" Type="Int32" />
-          <Property Name="PaymentTime" Type="DateTime" Precision="3" />
-          <Property Name="OrderStatus" Type="Int32" />
-          <Property Name="RequiredDate" Type="DateTime" Precision="3" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="OrderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShipName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShippingAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Delivery" Type="Int32" Nullable="false" />
+          <Property Name="ShippingCost" Type="Int32" Nullable="false" />
+          <Property Name="TotalAmount" Type="Int32" Nullable="false" />
+          <Property Name="Payment" Type="Int32" Nullable="false" />
+          <Property Name="PaymentTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OrderStatus" Type="Int32" Nullable="false" />
+          <Property Name="RequiredDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="InvoiceNo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="CompanyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="InvoiceHeading" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -649,7 +656,22 @@
           <Property Name="CompanyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="InvoiceHeading" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="InvoiceType" Type="Int32" />
-          <NavigationProperty Name="ShoppingDetails" Relationship="Self.FK_ShoppingDetail_dbo_ShoppingCar" FromRole="ShoppingCar" ToRole="ShoppingDetail" />
+          <NavigationProperty Name="ShoppingDetail" Relationship="Self.FK_ShoppingDetail_dbo_ShoppingCar" FromRole="ShoppingCar" ToRole="ShoppingDetail" />
+        </EntityType>
+        <EntityType Name="ShoppingDetail">
+          <Key>
+            <PropertyRef Name="CarID" />
+          </Key>
+          <Property Name="CarID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UnitPrice" Type="Int32" />
+          <Property Name="OrderQuantity" Type="Int32" />
+          <Property Name="Subtotal" Type="Int32" />
+          <Property Name="AddedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ShoppingDetail_dbo_Products" FromRole="ShoppingDetail" ToRole="Products" />
+          <NavigationProperty Name="ShoppingCar" Relationship="Self.FK_ShoppingDetail_dbo_ShoppingCar" FromRole="ShoppingDetail" ToRole="ShoppingCar" />
         </EntityType>
         <EntityType Name="Vendor">
           <Key>
@@ -666,22 +688,6 @@
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedUserID" Type="Int32" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Products_Vendor" FromRole="Vendor" ToRole="Products" />
-        </EntityType>
-        <EntityType Name="ShoppingDetail">
-          <Key>
-            <PropertyRef Name="CarID" />
-            <PropertyRef Name="ProductID" />
-          </Key>
-          <Property Name="CarID" Type="Int32" Nullable="false" />
-          <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UnitPrice" Type="Int32" />
-          <Property Name="OrderQuantity" Type="Int32" />
-          <Property Name="Subtotal" Type="Int32" />
-          <Property Name="AddedDate" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_ShoppingDetail_dbo_Products" FromRole="ShoppingDetail" ToRole="Products" />
-          <NavigationProperty Name="ShoppingCar" Relationship="Self.FK_ShoppingDetail_dbo_ShoppingCar" FromRole="ShoppingDetail" ToRole="ShoppingCar" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -784,7 +790,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ShoppingDetail_dbo_Products">
-          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
           <End Role="ShoppingDetail" Type="Self.ShoppingDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
@@ -812,6 +818,7 @@
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
         </Association>
         <EntityContainer Name="ChoCastleDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
@@ -823,8 +830,8 @@
           <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="ShoppingCars" EntityType="Self.ShoppingCar" />
-          <EntitySet Name="Vendors" EntityType="Self.Vendor" />
           <EntitySet Name="ShoppingDetails" EntityType="Self.ShoppingDetail" />
+          <EntitySet Name="Vendors" EntityType="Self.Vendor" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -876,6 +883,16 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ChoCastleDBModelStoreContainer" CdmEntityContainer="ChoCastleDBEntities1">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="ChoCastleDBModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="ChoCastleDBModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
@@ -1063,6 +1080,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ShoppingDetails">
+            <EntityTypeMapping TypeName="ChoCastleDBModel.ShoppingDetail">
+              <MappingFragment StoreEntitySet="ShoppingDetail">
+                <ScalarProperty Name="CarID" ColumnName="CarID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="OrderQuantity" ColumnName="OrderQuantity" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Vendors">
             <EntityTypeMapping TypeName="ChoCastleDBModel.Vendor">
               <MappingFragment StoreEntitySet="Vendor">
@@ -1076,20 +1107,6 @@
                 <ScalarProperty Name="AddedUserID" ColumnName="AddedUserID" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedUserID" ColumnName="ModifiedUserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ShoppingDetails">
-            <EntityTypeMapping TypeName="ChoCastleDBModel.ShoppingDetail">
-              <MappingFragment StoreEntitySet="ShoppingDetail">
-                <ScalarProperty Name="CarID" ColumnName="CarID" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="OrderQuantity" ColumnName="OrderQuantity" />
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
