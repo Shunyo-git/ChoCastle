@@ -18,8 +18,10 @@
     <div class="container">
 
         <div class="row animate-box text-capitalize">
-            <h2 style="color:#B8860B">購物車明細</h2>
-
+            <h2 style="color:#B8860B">購物車明細  </h2>
+            @*
+                MemberID =@Session["MemberID"]  CartID =@Session["CartID"]  isRestored =@Session["isRestored"]
+            *@
             <p>
                 [ @Html.ActionLink("繼續購物", "ProductCategory", "Home") ]
                 [ @Html.ActionLink("選擇收貨方式", "ShoppingCartDetail") ]
@@ -44,7 +46,7 @@
                     </th>
                 </tr>
 
-                @foreach (var item in Model)
+                @foreach (var item in Model.ToList())
                 {
                     <tr>
                         <td>
@@ -62,10 +64,10 @@
 
                         <td>
                             @*
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
                             *@
-                            @Html.ActionLink("刪除", "Delete", new { id = item.ProductID })
+                            @Html.ActionLink("刪除", "Delete", new { ProductID = item.ProductID, CartID = item.CarID })
                         </td>
                     </tr>
                 }

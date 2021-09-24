@@ -15,7 +15,7 @@ namespace ChoCastle.Models
     public partial class ShoppingDetail
     {
         public int CarID { get; set; }
-        public int ProductID { get; set; }
+        public Nullable<int> ProductID { get; set; }
         public string ProductName { get; set; }
         public Nullable<int> UnitPrice { get; set; }
         public Nullable<int> OrderQuantity { get; set; }

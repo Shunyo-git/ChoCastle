@@ -28,7 +28,7 @@ namespace ChoCastle.Models
                 if (ConfigurationManager.ConnectionStrings["DefaultConnection"] == null)
                     throw (new NullReferenceException("ConnectionString configuration is missing from you web.config. It should contain  <connectionStrings> <add key=\"DefaultConnectionString\" value=\"Server=(local);Integrated Security=True;Database=(DatabaseName)\" </connectionStrings>"));
 
-                string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnectionString"].ConnectionString;
+                string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
                 if (System.Web.HttpContext.Current.Request.ServerVariables["SERVER_NAME"].ToLower() == "www.SMIT14.com.tw")
                 {
@@ -45,6 +45,136 @@ namespace ChoCastle.Models
         private delegate void TGenerateListFromReader<T>(SqlDataReader returnData, ref List<T> tempList);
 
         /*****************************  BASE CLASS IMPLEMENTATION *****************************/
+
+        #region ShoppingCart
+        private const string SP_ShoppingCart_GetCartIdByMemberID= "SP_ShoppingCart_GetCartIdByMemberID";
+        private const string SP_ShoppingCart_RemovePreviousCartByMember = "SP_ShoppingCart_RemovePreviousCartByMember";
+        private const string SP_ShoppingDetail_GetShoppingDetailByCartID = "SP_ShoppingDetail_GetShoppingDetailByCartID";
+        private const string SP_ShoppingDetail_GetShoppingDetailByCartProduct = "SP_ShoppingDetail_GetShoppingDetailByCartProduct";
+        private const string SP_ShoppingDetail_UpdateItem = "SP_ShoppingDetail_UpdateItem";
+        private const string SP_ShoppingDetail_RemoveItem = "SP_ShoppingDetail_RemoveItem";
+
+        public int GetCartID(int MemberID)
+        {
+
+            SqlCommand sqlCmd = new SqlCommand();
+
+            AddParamToSQLCmd(sqlCmd, "@ReturnValue", SqlDbType.Int, 0, ParameterDirection.ReturnValue, null);
+
+            AddParamToSQLCmd(sqlCmd, "@MemberID", SqlDbType.Int, 0, ParameterDirection.Input, MemberID);
+            SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_ShoppingCart_GetCartIdByMemberID);
+            ExecuteScalarCmd(sqlCmd);
+
+            int returnValue = (int)sqlCmd.Parameters["@ReturnValue"].Value;
+
+            return (returnValue);
+
+        }
+        public bool RemovePreviousCart(int MemberID,int CartID)
+        {
+
+            SqlCommand sqlCmd = new SqlCommand();
+
+            AddParamToSQLCmd(sqlCmd, "@ReturnValue", SqlDbType.Int, 0, ParameterDirection.ReturnValue, null);
+
+            AddParamToSQLCmd(sqlCmd, "@MemberID", SqlDbType.Int, 0, ParameterDirection.Input, MemberID);
+            AddParamToSQLCmd(sqlCmd, "@CartID", SqlDbType.Int, 0, ParameterDirection.Input, CartID);
+            
+            SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_ShoppingCart_RemovePreviousCartByMember);
+            ExecuteScalarCmd(sqlCmd);
+
+            int returnValue = (int)sqlCmd.Parameters["@ReturnValue"].Value;
+
+            return (returnValue == 0 ? true : false);
+
+        }
+        public List<ShoppingDetail> GetShoppingDetailsByCart(int CartID)
+        {
+            //if (CartID <= 0)
+                //throw (new ArgumentOutOfRangeException("CartID"));
+
+            SqlCommand sqlCmd = new SqlCommand();
+
+            AddParamToSQLCmd(sqlCmd, "@CartID", SqlDbType.Int, 0, ParameterDirection.Input, CartID);
+
+            SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_ShoppingDetail_GetShoppingDetailByCartID);
+
+            List<ShoppingDetail> dataList = new List<ShoppingDetail>();
+             
+            TExecuteReaderCmd<ShoppingDetail>(sqlCmd, ShoppingDetail_TGenerateListFromReader<ShoppingDetail>, ref dataList);
+
+            return dataList;
+        }
+        public ShoppingDetail GetCartShoppingDetailByProductID(int ProductID, int CartID)
+        {
+
+
+            SqlCommand sqlCmd = new SqlCommand();
+
+            AddParamToSQLCmd(sqlCmd, "@ProductID", SqlDbType.Int, 0, ParameterDirection.Input, ProductID);
+            AddParamToSQLCmd(sqlCmd, "@CartID", SqlDbType.Int, 0, ParameterDirection.Input, CartID);
+
+
+            SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_ShoppingDetail_GetShoppingDetailByCartProduct);
+
+            List<ShoppingDetail> dataList = new List<ShoppingDetail>();
+
+            TExecuteReaderCmd<ShoppingDetail>(sqlCmd, ShoppingDetail_TGenerateListFromReader<ShoppingDetail>, ref dataList);
+
+            if (dataList.Count > 0)
+                return dataList[0];
+
+            else
+                return null;
+        }
+        public bool UpdateShoppingDetail(int CarID, int ProductID, string ProductName, int UnitPrice, int OrderQuantity, int Subtotal, System.DateTime AddedDate)
+        {
+
+            SqlCommand sqlCmd = new SqlCommand();
+
+            AddParamToSQLCmd(sqlCmd, "@ReturnValue", SqlDbType.Int, 0, ParameterDirection.ReturnValue, null);
+
+            AddParamToSQLCmd(sqlCmd, "@CarID", SqlDbType.Int, 0, ParameterDirection.Input, CarID);
+
+            AddParamToSQLCmd(sqlCmd, "@ProductID", SqlDbType.Int, 0, ParameterDirection.Input, ProductID);
+            AddParamToSQLCmd(sqlCmd, "@ProductName", SqlDbType.NVarChar, 100, ParameterDirection.Input, ProductName);
+            AddParamToSQLCmd(sqlCmd, "@UnitPrice", SqlDbType.Int, 0, ParameterDirection.Input, UnitPrice);
+            AddParamToSQLCmd(sqlCmd, "@OrderQuantity", SqlDbType.Int, 0, ParameterDirection.Input, OrderQuantity);
+            AddParamToSQLCmd(sqlCmd, "@Subtotal", SqlDbType.Int, 0, ParameterDirection.Input, Subtotal);
+            AddParamToSQLCmd(sqlCmd, "@AddedDate", SqlDbType.DateTime, 0, ParameterDirection.Input, AddedDate);
+            
+            SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_ShoppingDetail_UpdateItem);
+            ExecuteScalarCmd(sqlCmd);
+
+            int returnValue = (int)sqlCmd.Parameters["@ReturnValue"].Value;
+
+            return (returnValue == 0 ? true : false);
+
+        }
+
+        public bool RemoveShoppingDetail(int CartID, int ProductID)
+        {
+
+            if (CartID <= 0)
+                throw (new ArgumentOutOfRangeException("CartID"));
+            if (ProductID <= 0)
+                throw (new ArgumentOutOfRangeException("ProductID"));
+
+            SqlCommand sqlCmd = new SqlCommand();
+
+            AddParamToSQLCmd(sqlCmd, "@ReturnValue", SqlDbType.Int, 0, ParameterDirection.ReturnValue, null);
+            AddParamToSQLCmd(sqlCmd, "@CartID", SqlDbType.Int, 0, ParameterDirection.Input, CartID);
+            AddParamToSQLCmd(sqlCmd, "@ProductID", SqlDbType.Int, 0, ParameterDirection.Input, ProductID);
+
+            SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_ShoppingDetail_RemoveItem);
+            ExecuteScalarCmd(sqlCmd);
+
+            int returnValue = (int)sqlCmd.Parameters["@ReturnValue"].Value;
+
+            return (returnValue == 0 ? true : false);
+
+        }
+        #endregion
 
         #region Product
         private const string SP_Product_GetProductByID = "SP_Product_GetProductByID";
@@ -491,7 +621,7 @@ namespace ChoCastle.Models
             return (returnValue == 0 ? true : false);
 
         }
-        public int AddOrder(string SessionID)
+        public int AddOrder(int CartID)
         {
 
             SqlCommand sqlCmd = new SqlCommand();
@@ -499,7 +629,7 @@ namespace ChoCastle.Models
             AddParamToSQLCmd(sqlCmd, "@ReturnValue", SqlDbType.Int, 0, ParameterDirection.ReturnValue, null);
 
 
-            AddParamToSQLCmd(sqlCmd, "@SessionID", SqlDbType.NVarChar, 255, ParameterDirection.Input, SessionID);
+            AddParamToSQLCmd(sqlCmd, "@CartID", SqlDbType.Int, 0, ParameterDirection.Input, CartID);
 
             SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_Order_AddOrder);
             ExecuteScalarCmd(sqlCmd);
@@ -970,11 +1100,11 @@ namespace ChoCastle.Models
         }
 
         // ShoppinDetail
-        private void ShoppinDetail_TGenerateListFromReader<T>(SqlDataReader returnData, ref List<ShoppingDetail> dataList)
+        private void ShoppingDetail_TGenerateListFromReader<T>(SqlDataReader returnData, ref List<ShoppingDetail> dataList)
         {
             while (returnData.Read())
             {
-                /*
+                /* int CarID,int ProductID,string ProductName,int UnitPrice,int OrderQuantity,int Subtotal,System.DateTime AddedDate
                     public int CarID { get; set; }
                     public Nullable<int> ProductID { get; set; }
                     public string ProductName { get; set; }
@@ -1011,7 +1141,15 @@ namespace ChoCastle.Models
 
                
        
-                ShoppingDetail currentItem = new ShoppingDetail(); 
+                ShoppingDetail currentItem = new ShoppingDetail();
+                currentItem.CarID = CarID;
+                currentItem.ProductID = ProductID;
+                currentItem.ProductName = ProductName;
+                currentItem.UnitPrice = UnitPrice;
+                currentItem.OrderQuantity = OrderQuantity;
+                currentItem.Subtotal = Subtotal;
+                currentItem.AddedDate = AddedDate;
+                //currentItem.ModifiedDate = ModifiedDate;
 
                 dataList.Add(currentItem);
             }
