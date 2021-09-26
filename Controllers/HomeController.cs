@@ -163,8 +163,9 @@ namespace ChoCastle.Controllers
                 else
                 {
                     //已有商品更新數量
-                    da.UpdateShoppingDetail(CartID, product.ProductID, shoppingDetail.ProductName, product.SellingPrice, (int)shoppingDetail.OrderQuantity + 1, 0, DateTime.Now);
-
+                    int OrderQty = Int32.Parse(Request.Form["OrderQty"]);
+                    da.UpdateShoppingDetail(CartID, product.ProductID, shoppingDetail.ProductName, product.SellingPrice, (int)shoppingDetail.OrderQuantity + OrderQty, 0,DateTime.Now);
+                    
                     //shoppingDetail.OrderQuantity += 1;
                     //shoppingDetail.Subtotal = shoppingDetail.UnitPrice * shoppingDetail.OrderQuantity;
                     //db.Entry(shoppingDetail).State = EntityState.Modified;

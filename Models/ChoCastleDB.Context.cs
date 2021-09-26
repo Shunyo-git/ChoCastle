@@ -16,7 +16,7 @@ namespace ChoCastle.Models
     using System.Linq;
     
     public partial class ChoCastleDBEntities1 : DbContext
-    {
+    { 
         public ChoCastleDBEntities1()
             : base("name=ChoCastleDBEntities1")
         {
