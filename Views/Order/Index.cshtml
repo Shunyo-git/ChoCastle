@@ -42,25 +42,23 @@
                                         <td>
                                             @if (order.OrderStatus == 0)
                                             {
-                                                <button type="button" class="btn btn-danger">待處理</button>
+                                                <button type="button" class="btn btn-danger btn-xs">待處理</button>
                                             }
                                             else if (order.OrderStatus == 1)
                                             {
-                                                <button type="button" class="btn btn-primary">處理中</button>
+                                                <button type="button" class="btn btn-primary btn-xs">處理中</button>
                                             }
                                             else if (order.OrderStatus == 2)
                                             {
-                                                <button type="button" class="btn btn-success">已出貨</button>
+                                                <button type="button" class="btn btn-success btn-xs">已出貨</button>
                                             }
                                             else
                                             {
-                                                <button type="button" class="btn btn-warning">取消</button>
+                                                <button type="button" class="btn btn-warning btn-xs">取消</button>
                                             }
                                         </td>
                                         <td>
-                                            @*<button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>*@
-                                            <a class="btn btn-primary" href="@Url.Action("OrderDetail", "Order", new { id = order.OrderID })"><i class="fa fa-pencil"></i>訂單明細</a>
-                                            @*<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>*@
+                                            <a class="btn btn-primary btn-xs" href="@Url.Action("OrderDetail", "Order", new { id = order.OrderID })"><i class="fa fa-pencil"></i>訂單明細</a>                                        
                                         </td>
                                     </tr>
                                 }
