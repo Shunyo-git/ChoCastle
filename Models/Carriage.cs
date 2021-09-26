@@ -14,6 +14,12 @@ namespace ChoCastle.Models
     
     public partial class Carriage
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Carriage()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
         public int CarriageCompanyID { get; set; }
         public string CarriageName { get; set; }
         public System.DateTime AddedDate { get; set; }
@@ -21,6 +27,7 @@ namespace ChoCastle.Models
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<int> ModifiedUserID { get; set; }
     
-        public virtual Order Order { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

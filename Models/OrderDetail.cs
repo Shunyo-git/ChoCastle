@@ -21,8 +21,5 @@ namespace ChoCastle.Models
         public int Price { get; set; }
         public int Subtotal { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-    
-        public virtual Order Order { get; set; }
-        public virtual Product Product { get; set; }
     }
 }

@@ -104,7 +104,7 @@ namespace ChoCastle.Controllers
                 {
                     CartID = Int32.Parse(Session["CartID"].ToString());
                 }
- 
+
                 if (CartID == 0)
                 {
                     //無購物車
@@ -133,7 +133,7 @@ namespace ChoCastle.Controllers
                     shoppingCart = new ShoppingCar();
                     shoppingCart.CarID = CartID;
                     shoppingCart.MemberID = MemberID;
-                    shoppingCart.isLogin = User.Identity.IsAuthenticated ? 1:0 ;
+                    shoppingCart.isLogin = User.Identity.IsAuthenticated ? 1 : 0;
                     shoppingCart.AddedDate = DateTime.Now;
                     shoppingCart.ModifiedDate = DateTime.Now;
                     db.ShoppingCars.Add(shoppingCart);
@@ -173,7 +173,7 @@ namespace ChoCastle.Controllers
                 }
 
 
-                
+
             }
             return RedirectToAction("Index", "ShoppingCart");
             //return View(db.Products.Find(product.ProductID));

@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -84,7 +84,7 @@
                                 </ul>
                             </li>
                             <li class="sub-menu">
-                                <a href="javascript:;">
+                                <a href="@Url.Action("Index" ,"Order")">
                                     <i class="fa fa-book"></i>
                                     <span>訂單管理</span>
                                 </a>
@@ -96,7 +96,7 @@
                                 </a>
                             </li>
                             <!-- sidebar menu end-->
-</div>
+                    </div>
                 }
             </aside>
             <!--sidebar end-->
@@ -117,7 +117,6 @@
             <!--footer end-->
         </section>
     }
-
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="~/TemplateBackEnd/lib/jquery/jquery.min.js"></script>
 

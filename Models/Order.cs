@@ -46,6 +46,5 @@ namespace ChoCastle.Models
         public virtual Carriage Carriage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice> Invoices { get; set; }
-        public virtual OrderDetail OrderDetail { get; set; }
     }
 }
