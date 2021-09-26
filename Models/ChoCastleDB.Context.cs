@@ -12,6 +12,8 @@ namespace ChoCastle.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class ChoCastleDBEntities1 : DbContext
     {
@@ -36,8 +38,107 @@ namespace ChoCastle.Models
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ShoppingCar> ShoppingCars { get; set; }
+        public virtual DbSet<ShoppingDetail> ShoppingDetails { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
-        public virtual DbSet<ShoppingDetail> ShoppingDetails { get; set; }
+    
+        public virtual int SP_Order_AddOrder(Nullable<int> cartID)
+        {
+            var cartIDParameter = cartID.HasValue ?
+                new ObjectParameter("CartID", cartID) :
+                new ObjectParameter("CartID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Order_AddOrder", cartIDParameter);
+        }
+    
+        public virtual int SP_ShoppingCart_GetCartIdByMemberID(Nullable<int> memberID)
+        {
+            var memberIDParameter = memberID.HasValue ?
+                new ObjectParameter("MemberID", memberID) :
+                new ObjectParameter("MemberID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ShoppingCart_GetCartIdByMemberID", memberIDParameter);
+        }
+    
+        public virtual int SP_ShoppingCart_RemovePreviousCartByMember(Nullable<int> memberID, Nullable<int> cartID)
+        {
+            var memberIDParameter = memberID.HasValue ?
+                new ObjectParameter("MemberID", memberID) :
+                new ObjectParameter("MemberID", typeof(int));
+    
+            var cartIDParameter = cartID.HasValue ?
+                new ObjectParameter("CartID", cartID) :
+                new ObjectParameter("CartID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ShoppingCart_RemovePreviousCartByMember", memberIDParameter, cartIDParameter);
+        }
+    
+        public virtual ObjectResult<SP_ShoppingDetail_GetShoppingDetailByCartID_Result> SP_ShoppingDetail_GetShoppingDetailByCartID(Nullable<int> cartID)
+        {
+            var cartIDParameter = cartID.HasValue ?
+                new ObjectParameter("CartID", cartID) :
+                new ObjectParameter("CartID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ShoppingDetail_GetShoppingDetailByCartID_Result>("SP_ShoppingDetail_GetShoppingDetailByCartID", cartIDParameter);
+        }
+    
+        public virtual ObjectResult<SP_ShoppingDetail_GetShoppingDetailByCartProduct_Result> SP_ShoppingDetail_GetShoppingDetailByCartProduct(Nullable<int> cartID, Nullable<int> productID)
+        {
+            var cartIDParameter = cartID.HasValue ?
+                new ObjectParameter("CartID", cartID) :
+                new ObjectParameter("CartID", typeof(int));
+    
+            var productIDParameter = productID.HasValue ?
+                new ObjectParameter("ProductID", productID) :
+                new ObjectParameter("ProductID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ShoppingDetail_GetShoppingDetailByCartProduct_Result>("SP_ShoppingDetail_GetShoppingDetailByCartProduct", cartIDParameter, productIDParameter);
+        }
+    
+        public virtual int SP_ShoppingDetail_RemoveItem(Nullable<int> cartID, Nullable<int> productID)
+        {
+            var cartIDParameter = cartID.HasValue ?
+                new ObjectParameter("CartID", cartID) :
+                new ObjectParameter("CartID", typeof(int));
+    
+            var productIDParameter = productID.HasValue ?
+                new ObjectParameter("ProductID", productID) :
+                new ObjectParameter("ProductID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ShoppingDetail_RemoveItem", cartIDParameter, productIDParameter);
+        }
+    
+        public virtual int SP_ShoppingDetail_UpdateItem(Nullable<int> carID, Nullable<int> productID, string productName, Nullable<int> unitPrice, Nullable<int> orderQuantity, Nullable<int> subtotal, Nullable<System.DateTime> addedDate)
+        {
+            var carIDParameter = carID.HasValue ?
+                new ObjectParameter("CarID", carID) :
+                new ObjectParameter("CarID", typeof(int));
+    
+            var productIDParameter = productID.HasValue ?
+                new ObjectParameter("ProductID", productID) :
+                new ObjectParameter("ProductID", typeof(int));
+    
+            var productNameParameter = productName != null ?
+                new ObjectParameter("ProductName", productName) :
+                new ObjectParameter("ProductName", typeof(string));
+    
+            var unitPriceParameter = unitPrice.HasValue ?
+                new ObjectParameter("UnitPrice", unitPrice) :
+                new ObjectParameter("UnitPrice", typeof(int));
+    
+            var orderQuantityParameter = orderQuantity.HasValue ?
+                new ObjectParameter("OrderQuantity", orderQuantity) :
+                new ObjectParameter("OrderQuantity", typeof(int));
+    
+            var subtotalParameter = subtotal.HasValue ?
+                new ObjectParameter("Subtotal", subtotal) :
+                new ObjectParameter("Subtotal", typeof(int));
+    
+            var addedDateParameter = addedDate.HasValue ?
+                new ObjectParameter("AddedDate", addedDate) :
+                new ObjectParameter("AddedDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ShoppingDetail_UpdateItem", carIDParameter, productIDParameter, productNameParameter, unitPriceParameter, orderQuantityParameter, subtotalParameter, addedDateParameter);
+        }
     }
 }

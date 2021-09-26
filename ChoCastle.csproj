@@ -246,6 +246,12 @@
     <Compile Include="Models\ShoppingDetail.cs">
       <DependentUpon>ChoCastleDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SP_ShoppingDetail_GetShoppingDetailByCartID_Result.cs">
+      <DependentUpon>ChoCastleDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_ShoppingDetail_GetShoppingDetailByCartProduct_Result.cs">
+      <DependentUpon>ChoCastleDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SQLDataAccessProvider.cs" />
     <Compile Include="Models\Vendor.cs">
       <DependentUpon>ChoCastleDB.tt</DependentUpon>
@@ -696,6 +702,7 @@
     <Content Include="Views\Vendor\VendorCreate.cshtml" />
     <Content Include="Views\Vendor\VendorEdit.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\OrderDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

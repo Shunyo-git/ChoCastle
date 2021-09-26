@@ -19,8 +19,30 @@ namespace ChoCastle.Controllers
         ChoCastleDBEntities1 db = new ChoCastleDBEntities1();
         // GET: Order
         public ActionResult Index()
-        {   
+        {
             return View(db.Orders.ToList());
+        }
+
+        public ActionResult OrderDetail(int id)
+        {
+            OrderDetaillResult result = new OrderDetaillResult();
+            result.order = db.Orders.Find(id);
+            result.Detail = db.OrderDetails.Where(model => model.OrderID == id).ToList();
+            result.user = db.AspNetUsers.Where(model => model.MemberID == result.order.MemberID).FirstOrDefault();
+            foreach (var item in result.Detail)
+            {
+                result.DetailTotal += item.Price * item.Qty;
+            }
+
+            return View(result);
+        }
+
+        public class OrderDetaillResult
+        {
+            public Order order { get; set; }
+            public List<OrderDetail> Detail { get; set; }
+            public AspNetUser user { get; set; }
+            public int DetailTotal = 0;
         }
     }
 }

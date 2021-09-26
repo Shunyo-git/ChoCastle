@@ -186,6 +186,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ShoppingDetails">
+      <EntityTypeMapping TypeName="ChoCastleDBModel.ShoppingDetail">
+        <MappingFragment StoreEntitySet="ShoppingDetail">
+          <ScalarProperty Name="CarID" ColumnName="CarID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="OrderQuantity" ColumnName="OrderQuantity" />
+          <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Vendors">
       <EntityTypeMapping TypeName="ChoCastleDBModel.Vendor">
         <MappingFragment StoreEntitySet="Vendor">
@@ -215,20 +229,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ShoppingDetails">
-      <EntityTypeMapping TypeName="ChoCastleDBModel.ShoppingDetail">
-        <MappingFragment StoreEntitySet="ShoppingDetail">
-          <ScalarProperty Name="CarID" ColumnName="CarID" />
-          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-          <ScalarProperty Name="OrderQuantity" ColumnName="OrderQuantity" />
-          <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <AssociationSetMapping Name="AspNetUserRoles" TypeName="ChoCastleDBModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
       <EndProperty Name="AspNetRoles">
         <ScalarProperty Name="Id" ColumnName="RoleId" />
@@ -237,5 +237,38 @@
         <ScalarProperty Name="Id" ColumnName="UserId" />
       </EndProperty>
     </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="SP_Order_AddOrder" FunctionName="ChoCastleDBModel.Store.SP_Order_AddOrder" />
+    <FunctionImportMapping FunctionImportName="SP_ShoppingCart_GetCartIdByMemberID" FunctionName="ChoCastleDBModel.Store.SP_ShoppingCart_GetCartIdByMemberID" />
+    <FunctionImportMapping FunctionImportName="SP_ShoppingCart_RemovePreviousCartByMember" FunctionName="ChoCastleDBModel.Store.SP_ShoppingCart_RemovePreviousCartByMember" />
+    <FunctionImportMapping FunctionImportName="SP_ShoppingDetail_GetShoppingDetailByCartID" FunctionName="ChoCastleDBModel.Store.SP_ShoppingDetail_GetShoppingDetailByCartID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ChoCastleDBModel.SP_ShoppingDetail_GetShoppingDetailByCartID_Result">
+          <ScalarProperty Name="CarID" ColumnName="CarID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="OrderQuantity" ColumnName="OrderQuantity" />
+          <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_ShoppingDetail_GetShoppingDetailByCartProduct" FunctionName="ChoCastleDBModel.Store.SP_ShoppingDetail_GetShoppingDetailByCartProduct">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ChoCastleDBModel.SP_ShoppingDetail_GetShoppingDetailByCartProduct_Result">
+          <ScalarProperty Name="CarID" ColumnName="CarID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="OrderQuantity" ColumnName="OrderQuantity" />
+          <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_ShoppingDetail_RemoveItem" FunctionName="ChoCastleDBModel.Store.SP_ShoppingDetail_RemoveItem" />
+    <FunctionImportMapping FunctionImportName="SP_ShoppingDetail_UpdateItem" FunctionName="ChoCastleDBModel.Store.SP_ShoppingDetail_UpdateItem" />
   </EntityContainerMapping>
 </Mapping>

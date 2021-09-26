@@ -17,11 +17,11 @@
                         <thead>
                             <tr>
                                 <th><i class="fa fa-bullhorn"></i> 訂單編號</th>
-                                <th class="hidden-phone"><i class="fa fa-question-circle"></i> 訂購人</th>
-                                <th><i class="fa fa-bookmark"></i> 訂購日期</th>
-                                <th><i class=" fa fa-edit"></i> 訂單金額</th>
-                                <th><i class=" fa fa-edit"></i> 付款時間</th>
-                                <th><i class=" fa fa-edit"></i> 出貨狀態</th>
+                                <th class="hidden-phone"><i class="fa fa-user"></i> 訂購人</th>
+                                <th><i class="fa fa-calendar-o"></i> 訂購日期</th>
+                                <th><i class=" fa fa-money"></i> 訂單金額</th>
+                                <th><i class=" fa fa-check-circle"></i> 付款狀態</th>
+                                <th><i class=" fa fa-truck"></i> 出貨狀態</th>
                                 <th><i class=" fa fa-edit"></i> 操作</th>
                                 <th></th>
                             </tr>
@@ -31,21 +31,38 @@
                             {
                                 foreach (var order in Model)
                                 {
-                            <tr>
-                                <td>
-                                    <a href="basic_table.html#">@order.OrderID</a>
-                                </td>
-                                <td class="hidden-phone">@order.OrderName</td>
-                                <td>@order.OrderDate </td>
-                                <td>$ @order.TotalAmount</td>
-                                <td>@order.DeliverDate </td>
-                                <td>@order.OrderStatus</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                                    <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>訂單明細</button>
-                                    <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                </td>
-                            </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="@Url.Action("OrderDetail", "Order", new { id = order.OrderID })">@order.OrderID</a>
+                                        </td>
+                                        <td class="hidden-phone">@order.OrderName</td>
+                                        <td>@order.OrderDate </td>
+                                        <td>$ @order.TotalAmount</td>
+                                        <td>@order.DeliverDate </td>
+                                        <td>
+                                            @if (order.OrderStatus == 0)
+                                            {
+                                                <button type="button" class="btn btn-danger">待處理</button>
+                                            }
+                                            else if (order.OrderStatus == 1)
+                                            {
+                                                <button type="button" class="btn btn-primary">處理中</button>
+                                            }
+                                            else if (order.OrderStatus == 2)
+                                            {
+                                                <button type="button" class="btn btn-success">已出貨</button>
+                                            }
+                                            else
+                                            {
+                                                <button type="button" class="btn btn-warning">取消</button>
+                                            }
+                                        </td>
+                                        <td>
+                                            @*<button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>*@
+                                            <a class="btn btn-primary" href="@Url.Action("OrderDetail", "Order", new { id = order.OrderID })"><i class="fa fa-pencil"></i>訂單明細</a>
+                                            @*<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>*@
+                                        </td>
+                                    </tr>
                                 }
                             }
                         </tbody>

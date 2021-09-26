@@ -191,7 +191,22 @@
     <Property Name="CompanyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="InvoiceHeading" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="InvoiceType" Type="Int32" />
-    <NavigationProperty Name="ShoppingDetails" Relationship="Self.FK_ShoppingDetail_dbo_ShoppingCar" FromRole="ShoppingCar" ToRole="ShoppingDetail" />
+    <NavigationProperty Name="ShoppingDetail" Relationship="Self.FK_ShoppingDetail_dbo_ShoppingCar" FromRole="ShoppingCar" ToRole="ShoppingDetail" />
+  </EntityType>
+  <EntityType Name="ShoppingDetail">
+    <Key>
+      <PropertyRef Name="CarID" />
+    </Key>
+    <Property Name="CarID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UnitPrice" Type="Int32" />
+    <Property Name="OrderQuantity" Type="Int32" />
+    <Property Name="Subtotal" Type="Int32" />
+    <Property Name="AddedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_ShoppingDetail_dbo_Products" FromRole="ShoppingDetail" ToRole="Products" />
+    <NavigationProperty Name="ShoppingCar" Relationship="Self.FK_ShoppingDetail_dbo_ShoppingCar" FromRole="ShoppingDetail" ToRole="ShoppingCar" />
   </EntityType>
   <EntityType Name="Vendor">
     <Key>
@@ -225,22 +240,6 @@
     <Property Name="Price" Type="Int32" Nullable="false" />
     <Property Name="Subtotal" Type="Int32" Nullable="false" />
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="ShoppingDetail">
-    <Key>
-      <PropertyRef Name="CarID" />
-      <PropertyRef Name="ProductID" />
-    </Key>
-    <Property Name="CarID" Type="Int32" Nullable="false" />
-    <Property Name="ProductID" Type="Int32" Nullable="false" />
-    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UnitPrice" Type="Int32" />
-    <Property Name="OrderQuantity" Type="Int32" />
-    <Property Name="Subtotal" Type="Int32" />
-    <Property Name="AddedDate" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_ShoppingDetail_dbo_Products" FromRole="ShoppingDetail" ToRole="Products" />
-    <NavigationProperty Name="ShoppingCar" Relationship="Self.FK_ShoppingDetail_dbo_ShoppingCar" FromRole="ShoppingDetail" ToRole="ShoppingCar" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -344,7 +343,7 @@
   </Association>
   <Association Name="FK_ShoppingDetail_dbo_ShoppingCar">
     <End Role="ShoppingCar" Type="Self.ShoppingCar" Multiplicity="1" />
-    <End Role="ShoppingDetail" Type="Self.ShoppingDetail" Multiplicity="*" />
+    <End Role="ShoppingDetail" Type="Self.ShoppingDetail" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="ShoppingCar">
         <PropertyRef Name="CarID" />
@@ -370,9 +369,9 @@
     <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
     <EntitySet Name="Products" EntityType="Self.Product" />
     <EntitySet Name="ShoppingCars" EntityType="Self.ShoppingCar" />
+    <EntitySet Name="ShoppingDetails" EntityType="Self.ShoppingDetail" />
     <EntitySet Name="Vendors" EntityType="Self.Vendor" />
     <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
-    <EntitySet Name="ShoppingDetails" EntityType="Self.ShoppingDetail" />
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -413,5 +412,55 @@
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
     </AssociationSet>
+    <FunctionImport Name="SP_Order_AddOrder">
+      <Parameter Name="CartID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ShoppingCart_GetCartIdByMemberID">
+      <Parameter Name="MemberID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ShoppingCart_RemovePreviousCartByMember">
+      <Parameter Name="MemberID" Mode="In" Type="Int32" />
+      <Parameter Name="CartID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ShoppingDetail_GetShoppingDetailByCartID" ReturnType="Collection(ChoCastleDBModel.SP_ShoppingDetail_GetShoppingDetailByCartID_Result)">
+      <Parameter Name="CartID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ShoppingDetail_GetShoppingDetailByCartProduct" ReturnType="Collection(ChoCastleDBModel.SP_ShoppingDetail_GetShoppingDetailByCartProduct_Result)">
+      <Parameter Name="CartID" Mode="In" Type="Int32" />
+      <Parameter Name="ProductID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ShoppingDetail_RemoveItem">
+      <Parameter Name="CartID" Mode="In" Type="Int32" />
+      <Parameter Name="ProductID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ShoppingDetail_UpdateItem">
+      <Parameter Name="CarID" Mode="In" Type="Int32" />
+      <Parameter Name="ProductID" Mode="In" Type="Int32" />
+      <Parameter Name="ProductName" Mode="In" Type="String" />
+      <Parameter Name="UnitPrice" Mode="In" Type="Int32" />
+      <Parameter Name="OrderQuantity" Mode="In" Type="Int32" />
+      <Parameter Name="Subtotal" Mode="In" Type="Int32" />
+      <Parameter Name="AddedDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="SP_ShoppingDetail_GetShoppingDetailByCartID_Result">
+    <Property Type="Int32" Name="CarID" Nullable="false" />
+    <Property Type="Int32" Name="ProductID" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="UnitPrice" Nullable="true" />
+    <Property Type="Int32" Name="OrderQuantity" Nullable="true" />
+    <Property Type="Int32" Name="Subtotal" Nullable="true" />
+    <Property Type="DateTime" Name="AddedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="ModifiedDate" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="SP_ShoppingDetail_GetShoppingDetailByCartProduct_Result">
+    <Property Type="Int32" Name="CarID" Nullable="false" />
+    <Property Type="Int32" Name="ProductID" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="UnitPrice" Nullable="true" />
+    <Property Type="Int32" Name="OrderQuantity" Nullable="true" />
+    <Property Type="Int32" Name="Subtotal" Nullable="true" />
+    <Property Type="DateTime" Name="AddedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="ModifiedDate" Nullable="true" MaxLength="50" />
+  </ComplexType>
 </Schema>

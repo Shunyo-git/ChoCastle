@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d55f58f7ca004442afeccb285f60f236" Name="Diagram1">
+      <Diagram DiagramId="f4fc50423cb643d78731d9a2dbc19791" Name="Diagram1">
         <EntityTypeShape EntityType="ChoCastleDBModel.AspNetRole" Width="1.5" PointX="8.75" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ChoCastleDBModel.AspNetUserClaim" Width="1.5" PointX="13.25" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ChoCastleDBModel.AspNetUserLogin" Width="1.5" PointX="13.25" PointY="10.125" IsExpanded="true" />
@@ -16,9 +16,9 @@
         <EntityTypeShape EntityType="ChoCastleDBModel.ProductCategory" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ChoCastleDBModel.Product" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ChoCastleDBModel.ShoppingCar" Width="1.5" PointX="6" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChoCastleDBModel.ShoppingDetail" Width="1.5" PointX="8.25" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ChoCastleDBModel.Vendor" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ChoCastleDBModel.OrderDetail" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ChoCastleDBModel.ShoppingDetail" Width="1.5" PointX="8.25" PointY="2.5" IsExpanded="true" />
         <AssociationConnector Association="ChoCastleDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="ChoCastleDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="ChoCastleDBModel.FK_Orders_carriage" ManuallyRouted="false" />

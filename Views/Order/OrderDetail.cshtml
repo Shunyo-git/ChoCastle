@@ -1,0 +1,155 @@
+﻿@model ChoCastle.Controllers.OrderController.OrderDetaillResult
+@{
+    ViewBag.Title = "OrderDetail";
+    Layout = "~/Views/Shared/_LayoutBackEnd.cshtml";
+}
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> 訂單明細</h3>
+        <div class="row mt">
+            <div class="col-lg-6">
+                <div class="form-panel">
+                    <h4 class="mb"><i class="fa fa-angle-right"></i> 訂單資料</h4>
+                    <form class="form-horizontal style-form" method="get">
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">訂單編號</label>
+                            <div class="col-lg-10">
+                                <p class="form-control-static">@Model.order.OrderID</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">訂單日期</label>
+                            <div class="col-lg-10">
+                                <p class="form-control-static">@Model.order.OrderDate</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">訂單金額</label>
+                            <div class="col-lg-10">
+                                <p class="form-control-static">$ @Model.order.TotalAmount</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">付款方式</label>
+                            <div class="col-lg-10">
+                                @switch (Model.order.Payment)
+                                {
+                                    case 0:
+                                        <p class="form-control-static">刷卡</p>
+                                        break;
+                                    case 1:
+                                        <p class="form-control-static">貨到付款</p>
+                                        break;
+                                    case 2:
+                                        <p class="form-control-static">ATM 轉帳</p>
+                                        break;
+                                }
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">付款狀態</label>
+                            <div class="col-lg-10">
+                                <p class="form-control-static">###</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">出貨狀態</label>
+                            <div class="col-lg-10">
+
+                                @if (Model.order.OrderStatus == 0)
+                                {
+                                    <button type="button" class="btn btn-danger">待處理</button>
+                                }
+                                else if (Model.order.OrderStatus == 1)
+                                {
+                                    <button type="button" class="btn btn-primary">處理中</button>
+                                }
+                                else if (Model.order.OrderStatus == 2)
+                                {
+                                    <button type="button" class="btn btn-success">已出貨</button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-warning">取消</button>
+                                }
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-panel">
+                    <h4 class="mb"><i class="fa fa-angle-right"></i> 商品詳情</h4>
+                    <form class="form-horizontal style-form" method="get">
+                        <table class="table table-striped table-advance table-hover">
+                            <hr>
+                            <thead>
+                                <tr>
+                                    <th><i class="fa fa-bullhorn"></i> 商品名稱</th>
+                                    <th class="hidden-phone"><i class="fa fa-user"></i> 數量</th>
+                                    <th><i class="fa fa-calendar-o"></i> 單價</th>
+                                    <th><i class=" fa fa-money"></i> 單項總額</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Detail.Count > 0)
+                                {
+                                    foreach (var Detail in Model.Detail)
+                                    {
+                                        <tr>
+                                            <td>@Detail.ProductName</td>
+                                            <td>@Detail.Qty</td>
+                                            <td>$ @Detail.Price</td>
+                                            <td>$ @Detail.Subtotal</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                        <hr />
+                        <div style="text-align:right">
+                            <span style="text-align: right; color: red; font-size: xx-large; font-weight: bold;">訂單總金額: $ @Model.DetailTotal.ToString() 元</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-panel">
+                    <h4 class="mb"><i class="fa fa-angle-right"></i> 訂購人資訊</h4>
+                    <form class="form-horizontal style-form" method="get">
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">訂購人</label>
+                            <div class="col-lg-10">
+                                @*<p class="form-control-static">@Model.user.ChineseName</p>*@
+                                <p class="form-control-static">@Model.order.OrderName</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">連絡電話</label>
+                            <div class="col-lg-10">
+                                @*<p class="form-control-static">@Model.user.PhoneNumber</p>*@
+                                <p class="form-control-static">@Model.order.PhoneNumber</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">聯絡地址</label>
+                            <div class="col-lg-10">
+                                @*<p class="form-control-static">@Model.user.Address</p>*@
+                                <p class="form-control-static">@Model.order.ShippingAddress</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+
+    </section>
+    <!-- /wrapper -->
+</section>
+<!-- /MAIN CONTENT -->
+<!--main content end-->
