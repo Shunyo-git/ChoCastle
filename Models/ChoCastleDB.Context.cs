@@ -14,7 +14,7 @@ namespace ChoCastle.Models
     using System.Data.Entity.Infrastructure;
     
     public partial class ChoCastleDBEntities1 : DbContext
-    {
+    { 
         public ChoCastleDBEntities1()
             : base("name=ChoCastleDBEntities1")
         {

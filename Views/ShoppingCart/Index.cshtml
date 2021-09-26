@@ -30,16 +30,16 @@
             <table class="table">
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.ProductName)
+                       商品名稱
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.UnitPrice)
+                        單價
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.OrderQuantity)
+                        訂購數量
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Subtotal)
+                        小計
                     </th>
                     <th>
                         功能
@@ -50,8 +50,8 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ProductName)
-                        </td>
+                            <a href="@Url.Action("ProductDescription", "Home", new { ProductID = item.ProductID })"> @Html.DisplayFor(modelItem => item.ProductName)</a>
+</td>
                         <td>
                             @Html.DisplayFor(modelItem => item.UnitPrice)
                         </td>
