@@ -242,7 +242,7 @@ namespace ChoCastle.Controllers
                     db.SaveChanges();
                     return View(shoppingCart);
                 }
-                return RedirectToAction("Login", "Account", new { returnUrl = "ShoppingCart" });
+                return RedirectToAction("Login", "Account", new { returnUrl = "/ShoppingCart" });
 
             }
 

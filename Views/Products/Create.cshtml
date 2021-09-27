@@ -38,7 +38,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.ProductSpec, "產品規格", htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-3 col-xs-11">
-                                @Html.EditorFor(model => model.ProductSpec, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.TextAreaFor(model => model.ProductSpec, 10, 50, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium " } })
                                 @Html.ValidationMessageFor(model => model.ProductSpec, "", new { @class = "help-block" })
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.ProductDisc, "產品描述", htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-3 col-xs-11">
-                                @Html.EditorFor(model => model.ProductDisc, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.TextAreaFor(model => model.ProductDisc, 10, 50, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium " } })
                                 @Html.ValidationMessageFor(model => model.ProductDisc, "", new { @class = "help-block" })
                             </div>
                         </div>
