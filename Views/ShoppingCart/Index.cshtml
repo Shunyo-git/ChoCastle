@@ -22,15 +22,10 @@
             @*
                 MemberID =@Session["MemberID"]  CartID =@Session["CartID"]  isRestored =@Session["isRestored"]
             *@
-            <p>
-                [ @Html.ActionLink("繼續購物", "ProductCategory", "Home") ]
-                [ @Html.ActionLink("選擇收貨方式", "ShoppingCartDetail") ]
-
-            </p>
             <table class="table">
                 <tr>
                     <th>
-                       商品名稱
+                        商品名稱
                     </th>
                     <th>
                         單價
@@ -51,7 +46,7 @@
                     <tr>
                         <td>
                             <a href="@Url.Action("ProductDescription", "Home", new { ProductID = item.ProductID })"> @Html.DisplayFor(modelItem => item.ProductName)</a>
-</td>
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.UnitPrice)
                         </td>
@@ -64,8 +59,8 @@
 
                         <td>
                             @*
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
                             *@
                             @Html.ActionLink("刪除", "Delete", new { ProductID = item.ProductID, CartID = item.CarID })
                         </td>
@@ -73,8 +68,17 @@
                 }
 
             </table>
-
-
+            <div class="mydiv">
+                <p style="text-align:left"><button type="button" class="btn btn-default">@Html.ActionLink("上一步:繼續購物", "ProductCategory", "Home")</button></p>
+                <p style="text-align:right"><button type="button" class="btn btn-default"> @Html.ActionLink("下一步:選擇收貨方式", "ShoppingCartDetail") </button></p>
+            </div>
+            <style type="text/css">
+                .mydiv{
+                    display:flex;
+                    flex-direction:row;
+                    justify-content:space-between;
+                }
+            </style>
         </div>
     </div>
 </div>
