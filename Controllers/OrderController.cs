@@ -34,6 +34,23 @@ namespace ChoCastle.Controllers
                 {
                     result.DetailTotal += item.Price * item.Qty;
                 }
+                DeliveryType dt = (DeliveryType)result.order.Delivery;
+                ViewBag.DeliveryType = MyEnumHelper<DeliveryType>.GetDisplayValue(dt);
+                InvoiceType Invoice = (InvoiceType)result.order.InvoiceType;
+                ViewBag.InvoiceType = MyEnumHelper<InvoiceType>.GetDisplayValue(Invoice);
+
+                PaymentType payment = (PaymentType)result.order.Payment;
+                ViewBag.PaymentType = MyEnumHelper<PaymentType>.GetDisplayValue(payment);
+
+                if (result.order.PaymentTime != null)
+                {
+                    DateTime PaymentTime = (DateTime)result.order.PaymentTime;
+                    ViewBag.PaymentTime = String.Format("已付款(付款時間 {0})", PaymentTime.ToString("MM/dd/yyyy H:mm")); 
+                }
+                else {
+                    ViewBag.PaymentTime = "待付款";
+                }
+               
             }
             
 
