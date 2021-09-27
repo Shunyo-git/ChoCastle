@@ -1,0 +1,143 @@
+﻿@model IEnumerable<ChoCastle.Models.AspNetUser>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutBackEnd.cshtml";
+}
+
+
+
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i>會員管理</h3>
+        <!-- row -->
+        <div class="row mt">
+            <div class="col-md-12">
+                <div class="content-panel">
+                    <table class="table table-striped table-advance table-hover">
+                        <h4><i class="fa fa-angle-right"></i>會員列表</h4>
+                        <div style="text-align:left">
+                            <a class="btn btn-warning " href="@Url.Action("Create", "User")">新增</a>
+                        </div>
+                        <hr>
+
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.MemberID )
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.UserName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ChineseName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Gender)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PostCode)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Address)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Mobile)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.LineID)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Birthday)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.EmailConfirmed)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                                </th>
+
+
+
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--檢查資料是否有內容-->
+
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MemberID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ChineseName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Gender)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PostCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Address)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Mobile)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LineID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Birthday)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmailConfirmed)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                    </td>
+
+
+                                    <td>
+
+                                        <a class="btn btn-primary btn-xs" href="@Url.Action("Details", "User", new { id = item.Id })">檢視</a>
+                                        @* |<a class="btn btn-primary btn-xs" href="@Url.Action("Edit", "User", new { id = item.Id })">編輯</a> |
+        <a class="btn btn-danger btn-xs" href="@Url.Action("Delete", "User", new { id = item.Id })">刪除</a>*@
+                                    </td>
+                                </tr>
+                            }
+                            @if (Model.ToList().Count == 0)
+                            
+                            {
+                                <tr>
+                                    <td colspan="3" style="text-align:center">目前查無資料</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /content-panel -->
+            </div>
+            <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+    </section>
+</section>
+
+
