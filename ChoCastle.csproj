@@ -219,6 +219,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ChoCastleDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\GroupShoppingCartViewModels.cs" />
+    <Compile Include="Models\MyEnumHelper.cs" />
+    <Compile Include="Models\OrderEnum.cs" />
     <Compile Include="Models\DataAccessHelper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Image.cs">
@@ -701,8 +704,7 @@
     <Content Include="Views\Vendor\Index.cshtml" />
     <Content Include="Views\Vendor\VendorCreate.cshtml" />
     <Content Include="Views\Vendor\VendorEdit.cshtml" />
-    <Content Include="Views\Order\Index.cshtml" />
-    <Content Include="Views\Order\OrderDetail.cshtml" />
+    <Content Include="Views\ShoppingCart\OrderConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

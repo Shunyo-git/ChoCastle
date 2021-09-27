@@ -11,17 +11,7 @@ using ChoCastle.Models;
 using System.ComponentModel.DataAnnotations;
 namespace ChoCastle.Controllers
 {
-    public enum OrderStatus
-    {
-        [Display(Name = "待處理")]
-        NewOrder = 0,
-        [Display(Name = "處理中")]
-        Processing = 1,
-        [Display(Name = "已出貨")]
-        Shipped = 2,
-        [Display(Name = "已取消")]
-        Cancelled = 3
-    }
+    
 
     public class OrdersController : Controller
     {

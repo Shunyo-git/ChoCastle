@@ -31,7 +31,7 @@ namespace ChoCastle.Models
         public int ShippingCost { get; set; }
         public int TotalAmount { get; set; }
         public int Payment { get; set; }
-        public System.DateTime PaymentTime { get; set; }
+        public Nullable<System.DateTime>  PaymentTime { get; set; }
         public int OrderStatus { get; set; }
         public System.DateTime RequiredDate { get; set; }
         public string InvoiceNo { get; set; }

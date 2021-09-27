@@ -12,7 +12,43 @@
 <br />
 <br />
 
+<script type="text/javascript">
 
+    function changeDelivery(selectObject) {
+        var value = parseInt(selectObject.value);
+        
+        switch (value) {
+            case 1:
+                document.getElementById("Payment").selectedIndex = 0;
+                break;
+            case 2:
+            case 3:
+                document.getElementById("Payment").selectedIndex = 1;
+                break;
+            default:
+                document.getElementById("Payment").selectedIndex = 1;
+                break;
+        }
+   
+    }
+    function changePayment(selectObject) {
+        var value = parseInt(selectObject.value);
+        switch (value) {
+            case 1:
+                //document.getElementById("Delivery").selectedIndex = 0;
+                break;
+            case 2:
+                document.getElementById("Delivery").selectedIndex = 1;
+                break;
+            default:
+                document.getElementById("Delivery").selectedIndex = 1;
+                break;
+        }
+    }
+
+
+
+</script>
 
 <div id="fh5co-started" class="fh5co-section animate-box" style="background-image: url(/Template/images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
@@ -27,7 +63,6 @@
             @Html.HiddenFor(model => model.MemberID)
             @Html.HiddenFor(model => model.ShippingCost)
             @Html.HiddenFor(model => model.TotalAmount)
-            @Html.HiddenFor(model => model.Payment)
             @Html.HiddenFor(model => model.AddedDate)
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "color:#FFF" })
@@ -75,15 +110,28 @@
 
                         </div>
                     </div>
+                    
                     <div class="row form-group">
                         <div class="col-md-12">
                             <label for="Delivery">寄送方式</label>
 
-                            <select name="Delivery" id="Delivery" class="form-control custom_select">
-                                <option value="1">1.宅配</option>
-                                <option value="2">2.7-11</option>
-                                <option value="3">3.全家</option>
+                            <select name="Delivery" id="Delivery" class="form-control custom_select" onchange="changeDelivery(this);">
+                                <option value="1">宅配 (運費120)</option>
+                                <option value="2">7-11超商店取 (運費60)</option>
+                                <option value="3">全家超商店取 (運費60)</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="Delivery">付款方式</label>
+                            <select name="Payment" id="Payment" class="form-control custom_select" onchange="changePayment(this);">
+                                <option value="1">ATM轉帳</option>
+                                <option value="2">超商取貨付款</option>
+                            </select>
+                           
+
+
                         </div>
                     </div>
                     <div class="row form-group">
@@ -107,10 +155,9 @@
                     <div class="row form-group">
                         <div class="col-md-12">
                             <label for="Invoice">發票型別</label>
-                            @Html.RadioButtonFor(Model => Model.InvoiceType, "1", new { @id = "Genderradio0", @name = "Gender" })1.二聯式
-
-                            @Html.RadioButtonFor(Model => Model.InvoiceType, "2", new { @id = "Genderradio1", @name = "Gender" })2.三聯式
-                            @Html.RadioButtonFor(Model => Model.InvoiceType, "3f", new { @id = "Genderradio1", @name = "Gender" })3.電子發票
+                            @Html.RadioButtonFor(Model => Model.InvoiceType, "1", new { @id = "InvoiceTypeRadio1", @name = "InvoiceType" })二聯式
+                            @Html.RadioButtonFor(Model => Model.InvoiceType, "2", new { @id = "InvoiceTypeRadio2", @name = "InvoiceType" })三聯式
+                            @Html.RadioButtonFor(Model => Model.InvoiceType, "3", new { @id = "InvoiceTypeRadio3", @name = "InvoiceType" })電子發票
 
 
 

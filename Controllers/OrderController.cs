@@ -26,13 +26,16 @@ namespace ChoCastle.Controllers
         public ActionResult OrderDetail(int id)
         {
             OrderDetaillResult result = new OrderDetaillResult();
-            result.order = db.Orders.Find(id);
-            result.Detail = db.OrderDetails.Where(model => model.OrderID == id).ToList();
-            result.user = db.AspNetUsers.Where(model => model.MemberID == result.order.MemberID).FirstOrDefault();
-            foreach (var item in result.Detail)
-            {
-                result.DetailTotal += item.Price * item.Qty;
+            if (db.Orders.Find(id)!=null) {
+                result.order = db.Orders.Find(id);
+                result.Detail = db.OrderDetails.Where(model => model.OrderID == id).ToList();
+                result.user = db.AspNetUsers.Where(model => model.MemberID == result.order.MemberID).FirstOrDefault();
+                foreach (var item in result.Detail)
+                {
+                    result.DetailTotal += item.Price * item.Qty;
+                }
             }
+            
 
             return View(result);
         }
