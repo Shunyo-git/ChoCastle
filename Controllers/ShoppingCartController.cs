@@ -242,7 +242,8 @@ namespace ChoCastle.Controllers
                     db.SaveChanges();
                     return View(shoppingCart);
                 }
-               
+                return RedirectToAction("Login", "Account", new { returnUrl = "ShoppingCart" });
+
             }
 
             return RedirectToAction("Index");
@@ -304,12 +305,14 @@ namespace ChoCastle.Controllers
                 db.Entry(shoppingCart).State = EntityState.Modified;
                 db.SaveChanges();
 
-                 
 
+                return RedirectToAction("OrderConfirmation", "ShoppingCart");
             }
+
             //ModelState.AddModelError("", "訂單已完成。");
 
-            return RedirectToAction("OrderConfirmation", "ShoppingCart");
+            return RedirectToAction("Login", "Account", "ShoppingCart");
+ 
             //return View(shoppingCart);
         }
 

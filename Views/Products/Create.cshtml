@@ -61,42 +61,42 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.PurchasePrice, "進價", htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-3 col-xs-11">
-                                @Html.EditorFor(model => model.PurchasePrice, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.EditorFor(model => model.PurchasePrice, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "number", value = "0" } })
                                 @Html.ValidationMessageFor(model => model.PurchasePrice, "", new { @class = "help-block" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.RetailPrice, "定價", htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-3 col-xs-11">
-                                @Html.EditorFor(model => model.RetailPrice, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.EditorFor(model => model.RetailPrice, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "number", value = "0" } })
                                 @Html.ValidationMessageFor(model => model.RetailPrice, "", new { @class = "help-block" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.SellingPrice, "售價", htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-3 col-xs-11">
-                                @Html.EditorFor(model => model.SellingPrice, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.EditorFor(model => model.SellingPrice, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "number", value = "0" } })
                                 @Html.ValidationMessageFor(model => model.SellingPrice, "", new { @class = "help-block" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.SalePrice, "特價", htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-3 col-xs-11">
-                                @Html.EditorFor(model => model.SalePrice, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.EditorFor(model => model.SalePrice, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "number", value = "0" } })
                                 @Html.ValidationMessageFor(model => model.SalePrice, "", new { @class = "help-block" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.StockQty, "庫存數量", htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-3 col-xs-11">
-                                @Html.EditorFor(model => model.StockQty, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.EditorFor(model => model.StockQty, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "number", value = "0" } })
                                 @Html.ValidationMessageFor(model => model.StockQty, "", new { @class = "help-block" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.AvailableQty, "可賣數量", htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-3 col-xs-11">
-                                @Html.EditorFor(model => model.AvailableQty, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                                @Html.EditorFor(model => model.AvailableQty, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "number", value = "0" } })
                                 @Html.ValidationMessageFor(model => model.AvailableQty, "", new { @class = "help-block" })
                             </div>
                         </div>
