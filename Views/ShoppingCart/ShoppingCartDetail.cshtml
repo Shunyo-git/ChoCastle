@@ -70,15 +70,15 @@
                     <div class="row form-group">
                         <div class="col-md-12">
                             <label for="OrderName">訂購人</label>
-                            @Html.EditorFor(model => model.OrderName, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
-                            @Html.ValidationMessageFor(model => model.OrderName, "", new { @class = "help-block" , style = "font-family:'Microsoft JhengHei" })
+                            @Html.EditorFor(model => model.OrderName, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", style = "font-family:'Microsoft JhengHei", size = "16", type = "text", value = "" } })
+                            @Html.ValidationMessageFor(model => model.OrderName, "", new { @class = "help-block" })
 
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-12">
                             <label for="ShipName">收件人</label>
-                            @Html.EditorFor(model => model.ShipName, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                            @Html.EditorFor(model => model.ShipName, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", style = "font-family:'Microsoft JhengHei", size = "16", type = "text", value = "" } })
                             @Html.ValidationMessageFor(model => model.ShipName, "", new { @class = "help-block" })
 
                         </div>
@@ -86,7 +86,7 @@
                     <div class="row form-group">
                         <div class="col-md-12">
                             <label for="Phone">連絡電話</label>
-                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", style = "font-family:'Microsoft JhengHei", size = "16", type = "text", value = "" } })
                             @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "help-block" })
 
                         </div>
@@ -94,7 +94,7 @@
                     <div class="row form-group">
                         <div class="col-md-12">
                             <label for="Address">地址</label>
-                            @Html.EditorFor(model => model.ShippingAddress, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
+                            @Html.EditorFor(model => model.ShippingAddress, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", style = "font-family:'Microsoft JhengHei", size = "16", type = "text", value = "" } })
                             @Html.ValidationMessageFor(model => model.ShippingAddress, "", new { @class = "help-block" })
 
                         </div>
@@ -103,19 +103,19 @@
                     <div class="row form-group">
                         <div class="col-md-12">
                             <label for="Delivery">寄送方式</label>
-                            <select name="Delivery" id="Delivery" class="form-control custom_select" onchange="changeDelivery(this);">
-                                <option value="1">宅配 (運費120)</option>
-                                <option value="2">7-11超商店取 (運費60)</option>
-                                <option value="3">全家超商店取 (運費60)</option>
+                            <select name="Delivery" style="font-family:'Microsoft JhengHei'" id="Delivery" class="form-control custom_select" onchange="changeDelivery(this);">
+                                <option value="1" style="font-family:'Microsoft JhengHei'">宅配 (運費120)</option>
+                                <option value="2" style="font-family:'Microsoft JhengHei'">7-11超商店取 (運費60)</option>
+                                <option value="3" style="font-family:'Microsoft JhengHei'">全家超商店取 (運費60)</option>
                             </select>
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-12">
                             <label for="Delivery">付款方式</label>
-                            <select name="Payment" id="Payment" class="form-control custom_select" onchange="changePayment(this);">
-                                <option value="1">ATM轉帳</option>
-                                <option value="2">超商取貨付款</option>
+                            <select name="Payment" style="font-family:'Microsoft JhengHei'" id="Payment" class="form-control custom_select" onchange="changePayment(this);">
+                                <option value="1" style="font-family:'Microsoft JhengHei'">ATM轉帳</option>
+                                <option value="2" style="font-family:'Microsoft JhengHei'">超商取貨付款</option>
                             </select>
 
 
@@ -125,19 +125,19 @@
                     <div class="row form-group">
                         <div class="col-md-12">
                             <label for="RequireDate">希望配送日期</label>
-                            @Html.TextBoxFor(m => m.RequiredDate, new { @class = "form-control" })
+                            @Html.TextBoxFor(m => m.RequiredDate, new { @type = "date", @class = "form-control", style = "font-family:'Microsoft JhengHei'" })
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-12">
                             <label for="CompanyNumber">統一編號</label>
-                            @Html.TextBoxFor(m => m.CompanyNumber, new { @class = "form-control" })
+                            @Html.TextBoxFor(m => m.CompanyNumber, new { @class = "form-control", style = "font-family:'Microsoft JhengHei" })
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-12">
                             <label for="Heading">發票抬頭</label>
-                            @Html.TextBoxFor(m => m.InvoiceHeading, new { @class = "form-control" })
+                            @Html.TextBoxFor(m => m.InvoiceHeading, new { @class = "form-control", style = "font-family:'Microsoft JhengHei" })
                         </div>
                     </div>
                     <div class="row form-group">
@@ -149,10 +149,12 @@
                         </div>
                     </div>
                     <div>
-                        <button type="button" class="btn btn-primary btn-outline">@Html.ActionLink("←繼續購物", "ProductCategory", "Home" , new { style = "color:#FFFFFF" })</button>
+                       @* <button type="button" class="btn btn-primary btn-outline">@Html.ActionLink("←繼續購物", "ProductCategory", "Home", new { style = "color:#FFFFFF" })</button>*@
+                        <a style="color:#FFFFFF" href="@Url.Action("ProductCategory", "Home")"><button type="button" class="btn btn-primary btn-outline">←繼續購物</button></a>
                     </div>
                     <div>
-                        <button type="button" class="btn btn-primary btn-outline">@Html.ActionLink("←查看購物明細", "Index" ,"ShoppingCart", new { style = "color:#FFFFFF" })</button>
+                        @*<button type="button" class="btn btn-primary btn-outline">@Html.ActionLink("←查看購物明細", "Index", "ShoppingCart", new { style = "color:#FFFFFF" })</button>*@
+                        <a style="color:#FFFFFF" href="@Url.Action("Index", "ShoppingCart")"><button type="button" class="btn btn-primary btn-outline">←查看購物明細</button></a>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-12" style="text-align:right">

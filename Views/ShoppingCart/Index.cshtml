@@ -69,8 +69,10 @@
 
             <br />
             <div class="mydiv">
-                <button type="button" class="btn btn-primary btn-outline">@Html.ActionLink("←繼續購物", "ProductCategory", "Home", new { style = "color:#FFFFFF" })</button>
-                <button type="button" class="btn btn-primary btn-outline">@Html.ActionLink("選擇收貨方式→", "ShoppingCartDetail", "ShoppingCart", new { style = "color:#FFFFFF" })</button>
+                @*<button type="button" class="btn btn-primary btn-outline">@Html.ActionLink("←繼續購物", "ProductCategory", "Home", new { style = "color:#FFFFFF" })</button>*@
+                <a style="color:#FFFFFF" href="@Url.Action("ProductCategory", "Home")"><button type="button" class="btn btn-primary btn-outline">←繼續購物</button></a>
+                @*<button type="button" class="btn btn-primary btn-outline">@Html.ActionLink("選擇收貨方式→", "ShoppingCartDetail", "ShoppingCart", new { style = "color:#FFFFFF" })</button>*@
+                <a style="color:#FFFFFF" href="@Url.Action("ShoppingCartDetail", "ShoppingCart")"><button type="button" class="btn btn-primary btn-outline">選擇收貨方式→</button></a>
             </div>
 
             <style type="text/css">

@@ -33,7 +33,10 @@
                                 {
                                     <tr>
                                         <td>
-                                            <a href="@Url.Action("OrderDetail", "Order", new { id = order.OrderID })">@order.OrderID</a>
+                                            @*<a href="@Url.Action("OrderDetail", "Order", new { id = order.OrderID })">@order.OrderID</a>*@
+                                            <a href="@Url.Action("OrderDetail", "Order", new { id = order.OrderID })">
+                                                @String.Format("{0:D4}{1:D2}{2:D2}{3, 0:D4}", order.OrderDate.Year, order.OrderDate.Month, order.OrderDate.Day, order.OrderID)
+                                            </a>
                                         </td>
                                         <td class="hidden-phone">@order.OrderName</td>
                                         <td>@order.OrderDate </td>
@@ -58,7 +61,7 @@
                                             }
                                         </td>
                                         <td>
-                                            <a class="btn btn-primary btn-xs" href="@Url.Action("OrderDetail", "Order", new { id = order.OrderID })"><i class="fa fa-pencil"></i>訂單明細</a>                                        
+                                            <a class="btn btn-primary btn-xs" href="@Url.Action("OrderDetail", "Order", new { id = order.OrderID })"><i class="fa fa-pencil"></i>訂單明細</a>
                                         </td>
                                     </tr>
                                 }
