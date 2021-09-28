@@ -21,7 +21,7 @@ namespace ChoCastle.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        private ChoCastleDBEntities1 db = new ChoCastleDBEntities1();
+        private ChoCastleDBEntities db = new ChoCastleDBEntities();
 
         //2021/9/24 DataAccessFactory.CreateDefaultDataAccess()
         //資料庫存取提供者
@@ -231,11 +231,12 @@ namespace ChoCastle.Controllers
                 CartID = Int32.Parse(Session["CartID"].ToString());
                 shoppingCart = db.ShoppingCars.Find(CartID);
                 var user = UserManager.FindById(User.Identity.GetUserId());
-                if (user != null && shoppingCart!=null)
+                if (user != null && shoppingCart != null)
                 {
                     shoppingCart.MemberID = user.MemberID;
                     shoppingCart.isLogin = 1;
-                    if (shoppingCart.InvoiceType is null) {
+                    if (shoppingCart.InvoiceType is null)
+                    {
                         shoppingCart.InvoiceType = 1;
                     }
                     db.Entry(shoppingCart).State = EntityState.Modified;
@@ -312,7 +313,7 @@ namespace ChoCastle.Controllers
             //ModelState.AddModelError("", "訂單已完成。");
 
             return RedirectToAction("Login", "Account", "ShoppingCart");
- 
+
             //return View(shoppingCart);
         }
 
@@ -337,7 +338,7 @@ namespace ChoCastle.Controllers
         public ActionResult OrderConfirmation()
         {
 
-           
+
             //ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName");
             //ViewBag.CarID = new SelectList(db.ShoppingCars, "CarID", "OrderName");
 
@@ -356,12 +357,15 @@ namespace ChoCastle.Controllers
                     //ViewBag.DeliveryType = Enum.GetName(typeof(DeliveryType), shoppingCart.Delivery);
                     DeliveryType dt = (DeliveryType)shoppingCart.Delivery;
                     ViewBag.DeliveryType = MyEnumHelper<DeliveryType>.GetDisplayValue(dt);
+
                     InvoiceType Invoice = (InvoiceType)shoppingCart.InvoiceType;
                     ViewBag.InvoiceType = MyEnumHelper<InvoiceType>.GetDisplayValue(Invoice);
 
                     PaymentType payment = (PaymentType)shoppingCart.Payment;
                     ViewBag.PaymentType = MyEnumHelper<PaymentType>.GetDisplayValue(payment);
 
+                    DateTime requiredDate = (DateTime)shoppingCart.RequiredDate;
+                    ViewBag.RrequiredDate = requiredDate.ToString("yyyy/MM/dd");
                     var shoppingDetails = da.GetShoppingDetailsByCart(shoppingCart.CarID);
                     CartModel.ShoppingDetails = shoppingDetails;
                 }
@@ -378,41 +382,24 @@ namespace ChoCastle.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult OrderConfirmation([Bind(Include = "CarID")] ShoppingCar shoppingCart)
         {
-            
-            if (Session["CartID"] !=null) {
+
+            if (Session["CartID"] != null)
+            {
                 int CartID = Int32.Parse(Session["CartID"].ToString());
 
-            
-            if (db.ShoppingCars.Find(CartID) != null)
-            {
-                int OrderID = da.AddOrder(CartID);
 
-                if (OrderID > 0) {
-                    Session["CartID"] = null;
-                    ViewBag.OrderID = OrderID;
+                if (db.ShoppingCars.Find(CartID) != null)
+                {
+                    int OrderID = da.AddOrder(CartID);
+
+                    if (OrderID > 0)
+                    {
+                        Session["CartID"] = null;
+                        ViewBag.OrderID = OrderID;
+                    }
+
+
                 }
-                
-                //Order newOrder = new Order();
-                //int OrderID = db.Orders.Count() + 1;
-                ////newOrder.OrderID = OrderID;
-                //newOrder.CompanyNumber = shoppingCart.CompanyNumber;
-                //newOrder.Delivery = (int)shoppingCart.Delivery;
-                //newOrder.InvoiceHeading = shoppingCart.InvoiceHeading;
-                //newOrder.InvoiceType = (int)shoppingCart.InvoiceType;
-                //newOrder.Payment = (int)shoppingCart.Payment;
-
-                //newOrder.MemberID = (int)shoppingCart.MemberID;
-                //newOrder.OrderDate = DateTime.Now;
-                //newOrder.OrderName = shoppingCart.OrderName;
-                //newOrder.OrderStatus = 0;
-                //newOrder.PhoneNumber = shoppingCart.PhoneNumber;
-                //newOrder.RequiredDate = (DateTime)shoppingCart.RequiredDate;
-                //newOrder.ShipName = shoppingCart.ShipName;
-                //newOrder.ShippingAddress = shoppingCart.ShippingAddress;
-
-                //db.Orders.Add(newOrder);
-                //db.SaveChanges();
-            }
 
             }
 

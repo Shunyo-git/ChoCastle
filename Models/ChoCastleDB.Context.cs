@@ -15,10 +15,10 @@ namespace ChoCastle.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class ChoCastleDBEntities1 : DbContext
-    { 
-        public ChoCastleDBEntities1()
-            : base("name=ChoCastleDBEntities1")
+    public partial class ChoCastleDBEntities : DbContext
+    {
+        public ChoCastleDBEntities()
+            : base("name=ChoCastleDBEntities")
         {
         }
     

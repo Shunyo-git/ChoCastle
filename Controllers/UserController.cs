@@ -13,7 +13,7 @@ namespace ChoCastle.Controllers
 {
     public class UserController : Controller
     {
-        private ChoCastleDBEntities1 db = new ChoCastleDBEntities1();
+        private ChoCastleDBEntities db = new ChoCastleDBEntities();
 
         // GET: User
         public async Task<ActionResult> Index()

@@ -631,7 +631,6 @@ D:\Git-Repos\ChoCastle\obj\Debug\ChoCastle.csproj.CoreCompileInputs.cache
 D:\Git-Repos\ChoCastle\obj\Debug\ChoCastle.csproj.CopyComplete
 D:\Git-Repos\ChoCastle\obj\Debug\ChoCastle.dll
 D:\Git-Repos\ChoCastle\obj\Debug\ChoCastle.pdb
-D:\Git-Repos\ChoCastle\obj\Debug\ChoCastle.csproj.AssemblyReference.cache
 D:\Git-Repos\ChoCastle\obj\Debug\ChoCastle.Migrations.MemberID.resources
 D:\Git-Repos\ChoCastle\obj\Debug\ChoCastle.csproj.GenerateResource.cache
 D:\Git-Repos\ChoCastle\obj\Debug\ChoCastle.Migrations.MemberID1.resources
@@ -639,3 +638,4 @@ C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\obj\Debug\ChoCastle.Migrations.M
 C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\obj\Debug\ChoCastle.Migrations.MemberID1.resources
 C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\obj\Debug\ChoCastle.csproj.GenerateResource.cache
 C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\obj\Debug\ChoCastle.csproj.AssemblyReference.cache
+D:\Git-Repos\ChoCastle\obj\Debug\ChoCastle.csproj.AssemblyReference.cache

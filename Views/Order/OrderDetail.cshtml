@@ -132,6 +132,13 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">預計收貨時間</label>
+                            <div class="col-lg-10">
+                                @*<p class="form-control-static">@Model.user.Address</p>*@
+                                <p class="form-control-static">@Model.order.RequiredDate.ToString("yyyy/MM/dd")</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-lg-2 col-sm-2 control-label">寄送方式</label>
                             <div class="col-lg-10">
                                 @*<p class="form-control-static">@Model.user.Address</p>*@
