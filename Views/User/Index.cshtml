@@ -15,7 +15,7 @@
             <div class="col-md-12">
                 <div class="content-panel">
                     <table class="table table-striped table-advance table-hover">
-                        <h4><i class="fa fa-angle-right"></i>會員列表</h4>
+                        <h4><i class="fa fa-angle-right"></i> 會員列表</h4>
                         <div style="text-align:left">
                             <a class="btn btn-warning " href="@Url.Action("Create", "User")">新增</a>
                         </div>
@@ -23,54 +23,23 @@
 
                         <thead>
                             <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.MemberID )
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.UserName)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Email)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.ChineseName)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Gender)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.PostCode)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Address)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Mobile)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.LineID)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Birthday)
-                                </th>
-
-                                <th>
-                                    @Html.DisplayNameFor(model => model.EmailConfirmed)
-                                </th>
-
-                                <th>
-                                    @Html.DisplayNameFor(model => model.PhoneNumber)
-                                </th>
-
-
-
-                                <th>操作</th>
+                                <th><i class="fa fa-bullhorn"> 會員編號</i></th>
+                                <th><i class="fa fa-user"> 會員名稱</i></th>
+                                <th><i class="fa fa-envelope"> 信箱</i></th>
+                                <th><i class="fa fa-globe"> 會員姓名</i></th>
+                                <th><i class="fa fa-heart"> 性別</i></th>
+                                <th><i class="fa fa-location-arrow"> 郵遞區號</i></th>
+                                <th><i class="fa fa-map-marker"> 地址</i></th>
+                                <th><i class="fa fa-mobile"> 手機號碼</i></th>
+                                <th><i class="fa fa-bullhorn"> Line ID</i></th>
+                                <th><i class="fa fa-gift"> 生日</i></th>
+                                <th><i class="fa fa-check"> 信箱確認</i></th>
+                                <th><i class="fa fa-phone"> 聯絡電話</i></th>
+                                <th><i class="fa fa-edit"> 操作</i></th>
                             </tr>
                         </thead>
                         <tbody>
                             <!--檢查資料是否有內容-->
-
-
                             @foreach (var item in Model)
                             {
                                 <tr>
@@ -104,26 +73,20 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Birthday)
                                     </td>
-
                                     <td>
                                         @Html.DisplayFor(modelItem => item.EmailConfirmed)
                                     </td>
-
                                     <td>
                                         @Html.DisplayFor(modelItem => item.PhoneNumber)
                                     </td>
-
-
                                     <td>
-
-                                        <a class="btn btn-primary btn-xs" href="@Url.Action("Details", "User", new { id = item.Id })">檢視</a>
+                                        <a class="btn btn-primary btn-xs" href="@Url.Action("Details", "User", new { id = item.Id })"><i class="fa fa-eye"></i>檢視</a>
                                         @* |<a class="btn btn-primary btn-xs" href="@Url.Action("Edit", "User", new { id = item.Id })">編輯</a> |
-        <a class="btn btn-danger btn-xs" href="@Url.Action("Delete", "User", new { id = item.Id })">刪除</a>*@
+                                            <a class="btn btn-danger btn-xs" href="@Url.Action("Delete", "User", new { id = item.Id })">刪除</a>*@
                                     </td>
                                 </tr>
                             }
                             @if (Model.ToList().Count == 0)
-                            
                             {
                                 <tr>
                                     <td colspan="3" style="text-align:center">目前查無資料</td>

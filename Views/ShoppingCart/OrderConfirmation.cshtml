@@ -21,19 +21,19 @@
 
         @if (@ViewBag.OrderID != null)
         {
-        <div class="row animate-box text-capitalize">
-            <h2 style="color:#B8860B">訂單完成</h2>
+            <div class="row animate-box text-capitalize">
+                <h2 style="color:#B8860B">訂單完成</h2>
 
-            親愛的 顧客 您好：<br />
-            您的訂單已經完成，
-            已收到您的訂購資訊
-            @String.Format("(訂單編號： {0:D4}{1:D2}{2:D2}{3, 0:D4})", DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, @ViewBag.OrderID)
-            ，感謝您訂購巧克力城堡的優質產品！<br />
-            
-            <p>
-                [ @Html.ActionLink("繼續", "Index", "Home") ]
-            </p>
-        </div>
+                親愛的 顧客 您好：<br />
+                您的訂單已經完成，
+                已收到您的訂購資訊
+                @String.Format("(訂單編號： {0:D4}{1:D2}{2:D2}{3, 0:D4})", DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, @ViewBag.OrderID)
+                ，感謝您訂購巧克力城堡的優質產品！<br />
+
+                <p>
+                    [ @Html.ActionLink("繼續", "Index", "Home") ]
+                </p>
+            </div>
         }
         else
         {
@@ -113,7 +113,7 @@
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.ShoppingCart.RequiredDate)
+                        @ViewBag.RrequiredDate
                     </dd>
 
 
@@ -193,19 +193,33 @@
                     }
                     <tr>
                         <td>
+                            &nbsp;
                         </td>
                         <td>
+                            &nbsp;
                         </td>
                         <td>
+
                             @Html.DisplayNameFor(model => model.ShoppingCart.ShippingCost)
+
+                        </td>
+                        <td>
                             $ @Html.DisplayFor(model => model.ShoppingCart.ShippingCost)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
                         </td>
                         <td>
                             總計
+                        </td>
+                        <td>
                             $ @Html.DisplayFor(model => model.ShoppingCart.TotalAmount)
                         </td>
-
-
                     </tr>
                 </table>
                 <p>

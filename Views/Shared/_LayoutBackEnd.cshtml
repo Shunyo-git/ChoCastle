@@ -48,6 +48,11 @@
                         <li><a class="logout" href="javascript:document.getElementById('logoutForm').submit()">登出</a></li>
                     </ul>
                 </div>
+                <div class="top-menu">
+                    <ul class="nav pull-right top-menu">
+                        <li><a class="logout" href="@Url.Action("Index" ,"Home")"><i class="fa fa-home">  城堡大門</i></a></li>
+                    </ul>
+                </div>
             </header>
             <!--header end-->
             <!--sidebar start-->
@@ -58,7 +63,7 @@
                     <div id="sidebar" class="nav-collapse ">
                         <!-- sidebar menu start-->
                         <ul class="sidebar-menu" id="nav-accordion">
-                            <p class="centered"><a href="profile.html"><img src="~/Template/images/sunsun.png" class="img-circle" width="80"></a></p>
+                            <p class="centered"><a href="@Url.Action("Index" ,"Products")"><img src="~/Template/images/sunsun.png" class="img-circle" width="120"></a></p>
                             <h5 class="centered">@Html.ActionLink("您好 " + User.Identity.GetUserName().ToLower() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</h5>
                             <li class="mt">
                                 <a class="active" href="@Url.Action("Index" ,"Products")">
@@ -67,15 +72,10 @@
                                 </a>
                             </li>
                             <li class="sub-menu">
-                                <a href="javascript:;">
+                                <a href="@Url.Action("Index", "User")">
                                     <i class="fa fa-desktop"></i>
                                     <span>會員管理</span>
                                 </a>
-                                <ul class="sub">
-                             
-                                    <li><a href="@Url.Action("Index", "User")">會員列表</a></li>
-                                  
-                                </ul>
                             </li>
                             <li class="sub-menu">
                                 <a href="javascript:;">

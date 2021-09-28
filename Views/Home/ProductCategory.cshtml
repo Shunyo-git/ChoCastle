@@ -11,7 +11,9 @@
             <div class="col-md-12 text-center">
                 <div class="display-t js-fullheight">
                     <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
-                        <h1>@ViewBag.CategoryID</h1>
+                        <h1>@ViewBag.CategoryID</h1><br />
+                                                    <h3 class="animate-box" ><a href="#jump" style="color:white;">進一步了解 ></a></h3>
+                      
                     </div>
                 </div>
             </div>
@@ -19,12 +21,12 @@
     </div>
 </header>
 
-@*小標*@
+
 <div id="fh5co-featured-menu" class="fh5co-section">
     <div class="container">
         <div class="row">
             <div class="col-md-12 fh5co-heading animate-box">
-                <h2 style="font-family:'Microsoft JhengHei'">巧克力城堡的堅持</h2>
+                <h2 style="font-family:'Microsoft JhengHei'" id="jump">巧克力城堡的堅持</h2>
                 <div class="row">
                     <div class="col-md-6">
                         <p>
@@ -38,7 +40,7 @@
                 </div>
             </div>
 
-            <!--產品套版-->
+            
             @if (Model.Count > 0)
             {
                 foreach (var product in Model)
@@ -55,7 +57,6 @@
             {
                 <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap">
                     <div class="fh5co-item animate-box">
-                        @*<a href="#"><img src="~/Template/images/cake/法式生巧克力塔.jpg" class="img-responsive" alt=""></a>*@
                         <h3 style="color: #B8860B ">目前尚無產品</h3><br>
                     </div>
                 </div>

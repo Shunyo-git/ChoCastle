@@ -13,10 +13,9 @@
 <br />
 
 <script type="text/javascript">
-
     function changeDelivery(selectObject) {
         var value = parseInt(selectObject.value);
-        
+
         switch (value) {
             case 1:
                 document.getElementById("Payment").selectedIndex = 0;
@@ -29,7 +28,7 @@
                 document.getElementById("Payment").selectedIndex = 1;
                 break;
         }
-   
+
     }
     function changePayment(selectObject) {
         var value = parseInt(selectObject.value);
@@ -45,9 +44,6 @@
                 break;
         }
     }
-
-
-
 </script>
 
 <div id="fh5co-started" class="fh5co-section animate-box" style="background-image: url(/Template/images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
@@ -68,21 +64,14 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "color:#FFF" })
 
             <div class="row animate-box text-capitalize">
-                <h2 style="color:#B8860B">選擇收貨方式</h2>
-                <p>
-                    [ @Html.ActionLink("繼續購物", "ProductCategory", "Home") ]
-                    [ @Html.ActionLink("查看購物明細", "Index") ]
-
-                </p>
-
+                <h1 style="color:#B8860B"><strong>選擇收貨方式</strong></h1>
                 <hr />
-
-                <div class="col-md-6 col-md-push-6 col-sm-6 col-sm-push-6" style="left:0px ">
+                <div class="col-md-12" style="left:0px ">
                     <div class="row form-group">
                         <div class="col-md-12">
                             <label for="OrderName">訂購人</label>
                             @Html.EditorFor(model => model.OrderName, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "16", type = "text", value = "" } })
-                            @Html.ValidationMessageFor(model => model.OrderName, "", new { @class = "help-block" })
+                            @Html.ValidationMessageFor(model => model.OrderName, "", new { @class = "help-block" , style = "font-family:'Microsoft JhengHei" })
 
                         </div>
                     </div>
@@ -110,11 +99,10 @@
 
                         </div>
                     </div>
-                    
+
                     <div class="row form-group">
                         <div class="col-md-12">
                             <label for="Delivery">寄送方式</label>
-
                             <select name="Delivery" id="Delivery" class="form-control custom_select" onchange="changeDelivery(this);">
                                 <option value="1">宅配 (運費120)</option>
                                 <option value="2">7-11超商店取 (運費60)</option>
@@ -129,7 +117,7 @@
                                 <option value="1">ATM轉帳</option>
                                 <option value="2">超商取貨付款</option>
                             </select>
-                           
+
 
 
                         </div>
@@ -158,14 +146,17 @@
                             @Html.RadioButtonFor(Model => Model.InvoiceType, "1", new { @id = "InvoiceTypeRadio1", @name = "InvoiceType" })二聯式
                             @Html.RadioButtonFor(Model => Model.InvoiceType, "2", new { @id = "InvoiceTypeRadio2", @name = "InvoiceType" })三聯式
                             @Html.RadioButtonFor(Model => Model.InvoiceType, "3", new { @id = "InvoiceTypeRadio3", @name = "InvoiceType" })電子發票
-
-
-
                         </div>
                     </div>
+                    <div>
+                        <button type="button" class="btn btn-primary btn-outline">@Html.ActionLink("←繼續購物", "ProductCategory", "Home" , new { style = "color:#FFFFFF" })</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary btn-outline">@Html.ActionLink("←查看購物明細", "Index" ,"ShoppingCart", new { style = "color:#FFFFFF" })</button>
+                    </div>
                     <div class="row form-group">
-                        <div class="col-md-12">
-                            <input type="submit" class="btn btn-primary btn-outline btn-lg" value="送出">
+                        <div class="col-md-12" style="text-align:right">
+                            <input type="submit" class="btn btn-primary btn-outline btn-lg" value="送出訂單">
                         </div>
                     </div>
                 </div>

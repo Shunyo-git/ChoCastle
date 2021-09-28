@@ -184,6 +184,23 @@ namespace ChoCastle.Controllers
             CategoryID = CategoryID is null ? 1 : CategoryID;
             ProductCategory productCategory = db.ProductCategories.Find(CategoryID);
             ViewBag.CategoryID = productCategory.CategoryName;
+            switch (CategoryID)
+            {
+                case 1:
+                    ViewBag.CategoryEng = "CHOCOLATES";
+                    break;
+                case 2:
+                    ViewBag.CategoryEng = "COOKIES";
+                    break;
+                case 3:
+                    ViewBag.CategoryEng = "CAKES";
+                    break;
+                case 4:
+                    ViewBag.CategoryEng = "GIFT BOX COLLECTION";
+                    break;
+                default:
+                    break;
+            }
             return View(db.Products.Where(model => model.isDisplay.Value == true && model.CategoryID == CategoryID).ToList());
         }
 
