@@ -464,7 +464,7 @@ ul.sidebar-menu li a{
 }
 
     ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
-        background: #B8860B;
+        background: #4ECDC4;
         color: #fff;
         display: block;
         -webkit-transition: all 0.3s ease;
@@ -3417,7 +3417,7 @@ ul.chat-available-user li a:hover {
 
 /*footer*/
 .site-footer {
-    background: #B8860B;
+    background: #4ECDC4;
     color: #fff;
     padding: 15px 0;
 }
