@@ -16,7 +16,7 @@ namespace ChoCastle.Controllers
 {
     public class VendorController : Controller
     {
-        ChoCastleDBEntities1 db = new ChoCastleDBEntities1();
+        ChoCastleDBEntities db = new ChoCastleDBEntities();
 
         // GET: Vendor
         public ActionResult Index()

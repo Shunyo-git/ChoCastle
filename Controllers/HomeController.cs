@@ -19,7 +19,7 @@ namespace ChoCastle.Controllers
     [RequireHttps]
     public class HomeController : Controller
     {
-        ChoCastle.Models.ChoCastleDBEntities1 db = new Models.ChoCastleDBEntities1();
+        ChoCastle.Models.ChoCastleDBEntities db = new Models.ChoCastleDBEntities();
 
         public ActionResult Index()
         {

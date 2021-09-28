@@ -21,7 +21,7 @@ namespace ChoCastle.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        private ChoCastleDBEntities1 db = new ChoCastleDBEntities1();
+        private ChoCastleDBEntities db = new ChoCastleDBEntities();
 
         //2021/9/24 DataAccessFactory.CreateDefaultDataAccess()
         //資料庫存取提供者

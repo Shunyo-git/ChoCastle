@@ -16,7 +16,7 @@ namespace ChoCastle.Controllers
 {
     public class OrderController : Controller
     {
-        ChoCastleDBEntities1 db = new ChoCastleDBEntities1();
+        ChoCastleDBEntities db = new ChoCastleDBEntities();
         // GET: Order
         public ActionResult Index()
         {
