@@ -18,68 +18,90 @@
     <div class="container">
 
         <div class="row animate-box text-capitalize">
-            <h2 style="color:#B8860B">購物車明細  </h2>
-            @*
-                MemberID =@Session["MemberID"]  CartID =@Session["CartID"]  isRestored =@Session["isRestored"]
-            *@
-            <table class="table">
-                <tr>
-                    <th>
-                        商品名稱
-                    </th>
-                    <th>
-                        單價
-                    </th>
-                    <th>
-                        訂購數量
-                    </th>
-                    <th>
-                        小計
-                    </th>
-                    <th>
-                        功能
-                    </th>
-                </tr>
+            <h1 style="color:#B8860B"><strong>購物車明細  </strong></h1><hr />
+            @*MemberID =@Session["MemberID"]  CartID =@Session["CartID"]  isRestored =@Session["isRestored"]*@
 
-                @foreach (var item in Model.ToList())
-                {
+            <table border="0" cellspacing="0" id="shoppingcarinfo">
+                <thead>
                     <tr>
-                        <td>
-                            <a href="@Url.Action("ProductDescription", "Home", new { ProductID = item.ProductID })"> @Html.DisplayFor(modelItem => item.ProductName)</a>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UnitPrice)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.OrderQuantity)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Subtotal)
-                        </td>
+                        <th class="text-center">商品名稱</th>
+                        @*<th width="75px" height="42px"></th>*@
 
-                        <td>
-                            @*
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                            *@
-                            @Html.ActionLink("刪除", "Delete", new { ProductID = item.ProductID, CartID = item.CarID })
-                        </td>
+                        <th class="text-center">單價</th>
+                        <th class="text-center">數量</th>
+                        <th class="text-center">小計</th>
+                        <th class="text-center">操作</th>
                     </tr>
-                }
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ToList())
+                    {
+                        <tr>
+                            <td width="75px" height="90px" align="left" valign="middle">
+                                <div>
+                                    <a style="color: #B8860B; text-decoration:underline" href="@Url.Action("ProductDescription", "Home", new { ProductID = item.ProductID })"> @Html.DisplayFor(modelItem => item.ProductName)</a>
+                                </div>
+                                <div style="clear: both;"></div>
+                            </td>
+                            <td width="135px" height="90px" align="center" valign="middle">
+                                $ @Html.DisplayFor(modelItem => item.UnitPrice)
+                            </td>
+                            <td width="150px" height="90px" align="center" valign="middle">
+                                <i class="minus iconfont icon-subtract"></i>
+                                <i class="minus iconfont icon-jiahao"></i>
+                                @Html.DisplayFor(modelItem => item.OrderQuantity)
+                            </td>
+                            <td width="230px" height="90px" align="center" valign="middle">
+                                $ @Html.DisplayFor(modelItem => item.Subtotal)
+                            </td>
+
+                            <td width="115px" height="90px" align="center" valign="middle">
+                                @*
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                                *@
+                                <strong>@Html.ActionLink("刪除", "Delete", new { ProductID = item.ProductID, CartID = item.CarID })</strong>
+                            </td>
+                        </tr>
+                    }
 
             </table>
+
+            <br />
             <div class="mydiv">
-                <p style="text-align:left"><button type="button" class="btn btn-default">@Html.ActionLink("上一步:繼續購物", "ProductCategory", "Home")</button></p>
-                <p style="text-align:right"><button type="button" class="btn btn-default"> @Html.ActionLink("下一步:選擇收貨方式", "ShoppingCartDetail") </button></p>
+                <button type="button" class="btn btn-primary btn-outline">@Html.ActionLink("←繼續購物", "ProductCategory", "Home", new { style = "color:#FFFFFF" })</button>
+                <button type="button" class="btn btn-primary btn-outline">@Html.ActionLink("選擇收貨方式→", "ShoppingCartDetail", "ShoppingCart", new { style = "color:#FFFFFF" })</button>
             </div>
+
             <style type="text/css">
-                .mydiv{
-                    display:flex;
-                    flex-direction:row;
-                    justify-content:space-between;
+
+                .mydiv {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
                 }
+
+                #shoppingcarinfo thead {
+                    background-color: #B8860B;
+                }
+
+                #shoppingcarinfo tr th {
+                    font: 12px/1 "Microsoft JhengHei";
+                    color: black;
+                    width: 400px;
+                    height: 42px;
+                    /*text-align: center;*/
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+
+                #shoppingcarinfo tr {
+                    border: 1px solid #dcdcdc;
+                }
+                /*#shoppingcarinfo tr:hover {
+                        background-color: #F0E68C;
+                    }*/
             </style>
         </div>
     </div>
 </div>
-

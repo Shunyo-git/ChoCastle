@@ -42,19 +42,21 @@
                             <li>@Html.ActionLink("About us", "About", "")</li>
                             <li>|</li>
                             <li class="has-dropdown">
-                                <a href="@Url.Action("ProductCategory","Home", new { CategoryID = 1 })">Chocolate</a>
-                                <ul class="dropdown">
+                                <a href="@Url.Action("ProductCategory","Home", new { CategoryID = 1 })">Chocolates</a>
+                                @*<ul class="dropdown">
                                     <li><a href="@Url.Action("ProductCategory","Home", new { CategoryID = 1 })">生巧克力</a></li>
                                     <li><a href="@Url.Action("ProductCategory","Home", new { CategoryID = 2 })">餅乾</a></li>
-                                </ul>
+                                </ul>*@
                             </li>
                             <li>|</li>
-                            <li><a href="@Url.Action("ProductCategory","Home", new { CategoryID = 3 })">Cake</a></li>
+                            <li><a href="@Url.Action("ProductCategory","Home", new { CategoryID = 2 })">Cookies</a></li>
                             <li>|</li>
-                            <li><a href="@Url.Action("ProductCategory","Home", new { CategoryID = 4 })">Gift Box Collection</a></li>
+                            <li><a href="@Url.Action("ProductCategory","Home", new { CategoryID = 3 })">Cakes</a></li>
                             <li>|</li>
-                            <li>@Html.ActionLink("Castle Weather", "", "")</li>
+                            <li><a href="@Url.Action("ProductCategory","Home", new { CategoryID = 4 })">Gift Box Collections</a></li>
                             <li>|</li>
+                            @*<li>@Html.ActionLink("Castle Weather", "", "")</li>
+                            <li>|</li>*@
 
                         </ul>
                     </div>
@@ -74,16 +76,16 @@
                         <ul class="fh5co-footer-links">
                             <li><a href="@Url.Action("About","Home")">團隊介紹</a></li>
                             <li><a href="@Url.Action("About","Home")">心路歷程</a></li>
-                            <li><a href="@Url.Action("About","Home")">城堡天氣實況</a></li>
+                            @*<li><a href="@Url.Action("About","Home")">城堡天氣實況</a></li>*@
                         </ul>
                     </div>
                     <div class="col-md-3 col-md-push-1 fh5co-widget">
                         <h4>Products</h4>
                         <ul class="fh5co-footer-links">
                             <li><a href="@Url.Action("ProductCategory","Home", new { CategoryID = 1 })">生巧克力</a></li>
-                            <li><a href="@Url.Action("ProductCategory","Home", new { CategoryID = 2 } )">餅乾</a></li>
-                            <li><a href="@Url.Action("ProductCategory","Home", new { CategoryID = 4 })">禮盒系列</a></li>
+                            <li><a href="@Url.Action("ProductCategory","Home", new { CategoryID = 2 })">餅乾</a></li>
                             <li><a href="@Url.Action("ProductCategory","Home", new { CategoryID = 3 })">經典蛋糕</a></li>
+                            <li><a href="@Url.Action("ProductCategory","Home", new { CategoryID = 4 })">禮盒系列</a></li>
                         </ul>
                     </div>
 
