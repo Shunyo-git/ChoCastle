@@ -49,19 +49,20 @@
                                                             <span class="btn btn-default btn-file">
                                                                 Browse&hellip;
                                                                 @Html.TextBoxFor(m => m.FileAttach, new { type = "file", placeholder = Html.DisplayNameFor(m => m.FileAttach) })
-                                                                @Html.ValidationMessageFor(m => m.FileAttach, "", new { @class = "text-danger custom-danger" })
                                                             </span>
-                                                        </span><br />
-                                                        <input type="text" class="form-control" readonly>
+                                                        </span>
+
                                                     </div>
+                                                    @Html.ValidationMessageFor(m => m.FileAttach, "", new { @class = "text-danger custom-danger" })
                                                     <div class="input-group">
                                                         商品：
                                                         @Html.DropDownList("ProductID", null, htmlAttributes: new { @class = "form-control form-control-inline input-medium default-date-picker" })
 
-                                                        
+
                                                     </div>
                                                     <div class="input-group">
                                                         是否為主要圖片：
+                                                       
                                                         @Html.RadioButtonFor(model => model.isMain, 1) @Html.Label("是")
                                                         @Html.RadioButtonFor(model => model.isMain, 0) @Html.Label("否")
                                                         @Html.ValidationMessageFor(model => model.isMain, "", new { @class = "text-danger" })
@@ -102,49 +103,92 @@
 
                     <hr />
 
-                    
-                    @if (Model.ImgLst != null &&
-                         Model.ImgLst.Count > 0)
+
+
+                    @if (Model.ImgLst != null && Model.ImgLst.Count > 0)
                     {
-                        <div class="row">
-                            <div class="col-md-offset-1 col-md-8">
-                                <section>
-                                    <table class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th style="text-align: center;">圖片編號</th>
-                                                <th style="text-align: center;">圖片名稱</th>
-                                                <th style="text-align: center;"></th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-                                            @for (int i = 0; i < Model.ImgLst.Count; i++)
-                                            {
+                        using (Html.BeginForm("Delete", "PhotoImage", FormMethod.Post, new { @class = "form-horizontal", role = "form" ,name= "formImages" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" id="id" name="id" value="0">
+                            <div class="row">
+                                <div class="col-md-offset-1 col-md-8">
+                                    <section>
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
                                                 <tr>
-                                                    <td style="text-align: center;">@(i + 1)</td>
+                                                    <th style="text-align: center;">圖片編號</th>
+                                                    <th style="text-align: center;">產品編號</th>
+                                                    <th style="text-align: center;">產品名稱</th>
+                                                    <th style="text-align: center;">圖片名稱</th>
+                                                    <th style="text-align: center;">主圖片</th>
+                                                    <th style="text-align: center;">排序值</th>
+                                                    <th style="text-align: center;">預覽</th>
+                                                    <th style="text-align: center;">功能</th>
+                                                </tr>
+                                            </thead>
 
+                                            <tbody>
+                                                @for (int i = 0; i < Model.ImgLst.Count; i++)
+                                                {
+                                                <tr>
+                                                    <td style="text-align: center;">@Model.ImgLst[i].file_id</td>
+                                                    <td style="text-align: center;">@Model.ImgLst[i].ProductID</td>
+                                                    <td style="text-align: center;">@Model.ImgLst[i].ProductName</td>
                                                     <td style="text-align: center;">
                                                         <div class="input-group" style="height:40px;">
                                                             <i class="fa fa-2x fa-paperclip text-navy"></i>
-                                                            <a class="download-file1" href="@String.Format("/PhotoImages/{0}.jpeg",@Model.ImgLst[i].file_id)" target="_blank">
-                                                                @Model.ImgLst[i].file_name
-                                                            </a>
+                                                            @if (Model.ImgLst[i].isMain == 1)
+                                                            {
+                                                                <a class="download-file1" href="@String.Format("/PhotoImages/Main_{0}.jpeg", @Model.ImgLst[i].ProductID)" target="_blank">
+                                                                    @Model.ImgLst[i].file_name
+                                                                </a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a class="download-file1" href="@String.Format("/PhotoImages/{0}.jpeg", @Model.ImgLst[i].file_id)" target="_blank">
+                                                                    @Model.ImgLst[i].file_name
+                                                                </a>
+                                                            }
+
                                                         </div>
                                                     </td>
-
+                                                    <td style="text-align: center;">
+                                                     @if (Model.ImgLst[i].isMain == 1) {
+                                                         <span>是</span>
+                                                     } 
+                                                    </td>
+                                                    <td style="text-align: center;">@Model.ImgLst[i].SortID</td>
                                                     <td style="text-align: center;">
                                                         <div>
-                                                            <img src="@String.Format("/PhotoImages/{0}.jpeg",@Model.ImgLst[i].file_id)" width="100" height="100" />
+                                                            @if (Model.ImgLst[i].isMain == 1)
+                                                            {
+                                                                <img src="@String.Format("/PhotoImages/Main_{0}.jpeg", @Model.ImgLst[i].ProductID)" width="100" height="100" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <img src="@String.Format("/PhotoImages/{0}.jpeg", @Model.ImgLst[i].file_id)" width="100" height="100" />
+                                                            }
+
                                                         </div>
                                                     </td>
+                                                    <td style="text-align: center;">
+
+                                                        
+                                                        <a class="btn btn-primary btn-xs" href="@Url.Action("SetMain", "PhotoImage", new { id = @Model.ImgLst[i].file_id })" onclick="javascript: if(!confirm('確定設定圖片:@Model.ImgLst[i].file_id 為產品主圖嗎？')){return false;}"><i class="fa fa-pencil"></i>設為主圖</a>
+
+                                                        <a class="btn btn-danger btn-xs" href="@Url.Action("Delete", "PhotoImage", new { id = @Model.ImgLst[i].file_id })" onclick="javascript: if(!confirm('確定要刪除圖片:@Model.ImgLst[i].file_id 嗎？')){return false;}"><i class="fa fa-pencil"></i>刪除</a>
+
+
+                                                    </td>
                                                 </tr>
-                                            }
-                                        </tbody>
-                                    </table>
-                                </section>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                </div>
                             </div>
-                        </div>
+                        }
                     }
                 </div>
                 <!-- /content-panel -->

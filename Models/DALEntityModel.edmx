@@ -38,6 +38,9 @@
           <Parameter Name="isMain" Type="int" Mode="In" />
           <Parameter Name="SortID" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_set_main_file" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="file_id" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="ChoCastleModelsStoreContainer">
           <EntitySet Name="ProductImages" EntityType="Self.ProductImages" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -81,6 +84,9 @@
             <Parameter Name="isMain" Mode="In" Type="Int32" />
             <Parameter Name="SortID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="sp_set_main_file">
+            <Parameter Name="file_id" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -107,6 +113,8 @@
           <FunctionImportMapping FunctionImportName="sp_get_product_mainPhoto" FunctionName="ChoCastle.Models.Store.sp_get_product_mainPhoto" />
           <FunctionImportMapping FunctionImportName="sp_get_product_photos" FunctionName="ChoCastle.Models.Store.sp_get_product_photos" />
           <FunctionImportMapping FunctionImportName="sp_insert_file" FunctionName="ChoCastle.Models.Store.sp_insert_file" />
+          <FunctionImportMapping FunctionImportName="sp_set_main_file" FunctionName="ChoCastle.Models.Store.sp_set_main_file" />
+
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

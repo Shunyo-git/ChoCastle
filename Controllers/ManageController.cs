@@ -32,9 +32,9 @@ namespace ChoCastle.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -72,11 +72,11 @@ namespace ChoCastle.Controllers
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-               
+
             };
 
 
-             
+
 
 
             return View(model);
@@ -337,7 +337,7 @@ namespace ChoCastle.Controllers
         {
             var model = new MemberViewModel();
             var userId = User.Identity.GetUserId();
-            
+
             var user = await UserManager.FindByIdAsync(userId);
             if (user != null)
             {
@@ -359,7 +359,7 @@ namespace ChoCastle.Controllers
         //// GET: /Manage/Member
         //public ActionResult Member()
         //{
-           
+
         //    return View();
         //}
 
@@ -389,7 +389,7 @@ namespace ChoCastle.Controllers
                     {
                         return RedirectToAction("Index", new { Message = ManageMessageId.UpdateMemberSuccess });
                     }
-                    
+
                 }
                 AddErrors(result);
             }
@@ -462,7 +462,7 @@ namespace ChoCastle.Controllers
         }
 
 
-        
+
         #endregion
     }
 }

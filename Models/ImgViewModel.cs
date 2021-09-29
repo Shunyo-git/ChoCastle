@@ -27,7 +27,8 @@ namespace ChoCastle.Models
 
 
         public int PhotoID { get; set; }
-
+        public int ProductID { get; set; }
+        
         public int isMain { get; set; }
 
         public int SortID { get; set; }

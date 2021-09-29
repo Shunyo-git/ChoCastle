@@ -1,0 +1,63 @@
+﻿@model List<ChoCastle.Models.Carriage>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutBackEnd.cshtml";
+}
+
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> 物流管理</h3>
+        <!-- row -->
+        <div class="row mt">
+            <div class="col-md-12">
+                <div class="content-panel">
+                    <table class="table table-striped table-advance table-hover">
+                        <h4><i class="fa fa-angle-right"></i> 物流管理列表</h4>
+                        <div style="text-align:left">
+                            <a class="btn btn-warning " href="@Url.Action("CarriageCreate" , "Carriage")">新增</a>
+                        </div>
+                        <hr>
+                        <thead>
+                            <tr>
+                                <th><i class="fa fa-bullhorn"></i> 物流公司編號</th>
+                                <th><i class="fa fa-bookmark"></i> 物流公司名稱</th>
+                                <th><i class=" fa fa-edit"></i> 操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--檢查資料是否有內容-->
+                            @if (Model.ToList().Count > 0)
+                            {
+                                foreach (var carriage in Model.ToList())
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="basic_table.html">@carriage.CarriageCompanyID</a>
+                                        </td>
+                                        <td class="hidden-phone">@carriage.CarriageName</td>
+                                        <td>
+                                            <a class="btn btn-primary btn-xs" href="@Url.Action("CarriageEdit", "Carriage", new { id = carriage.CarriageCompanyID })"><i class="fa fa-pencil"></i>編輯</a>
+                                            <a class="btn btn-danger btn-xs" href="@Url.Action("CarriageDelete", "Carriage", new { id = carriage.CarriageCompanyID })"><i class="fa fa-pencil"></i>刪除</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="3" style="text-align:center">目前查無資料</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /content-panel -->
+            </div>
+            <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+    </section>
+</section>
+<!-- /MAIN CONTENT -->
+<!--main content end-->

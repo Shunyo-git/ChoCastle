@@ -19,6 +19,7 @@ namespace ChoCastle.Models
         public string file_ext { get; set; }
         public string file_base6 { get; set; }
         public int ProductID { get; set; }
+        public string ProductName { get; set; }
         public int isMain { get; set; }
         public int SortID { get; set; }
     }
