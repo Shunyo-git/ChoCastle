@@ -859,6 +859,77 @@ namespace ChoCastle.Models
         }
         #endregion
 
+        #region PhotoImage
+
+        private const string SP_PhotoImage_GetAllPhotos = "sp_get_all_files";
+        private const string SP_PhotoImage_GetPhotoByID = "sp_get_file_details";
+        private const string SP_PhotoImage_AddPhoto = "sp_insert_file";
+
+        public List<ProductImage> GetAllProductImage()
+        {
+
+            SqlCommand sqlCmd = new SqlCommand();
+
+
+            SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_PhotoImage_GetAllPhotos);
+
+            List<ProductImage> dataList = new List<ProductImage>();
+
+            TExecuteReaderCmd<ProductImage>(sqlCmd, ProductImage_TGenerateListFromReader<ProductImage>, ref dataList);
+            return dataList;
+
+        }
+
+        public ProductImage GetPhotoImageByID(int PhotID)
+        {
+            if (PhotID <= 0)
+                throw (new ArgumentOutOfRangeException("PhotID"));
+
+            SqlCommand sqlCmd = new SqlCommand();
+
+            AddParamToSQLCmd(sqlCmd, "@PhotID", SqlDbType.Int, 0, ParameterDirection.Input, PhotID);
+
+
+            SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_PhotoImage_GetPhotoByID);
+
+            List<ProductImage> dataList = new List<ProductImage>();
+
+            TExecuteReaderCmd<ProductImage>(sqlCmd, ProductImage_TGenerateListFromReader<ProductImage>, ref dataList);
+
+            if (dataList.Count > 0)
+                return dataList[0];
+
+            else
+                return null;
+        }
+
+        public int AddProductImage(string file_name, string file_ext, string file_base64, Nullable<int> productID, Nullable<int> isMain, Nullable<int> sortID)
+        {
+
+            SqlCommand sqlCmd = new SqlCommand();
+
+            AddParamToSQLCmd(sqlCmd, "@ReturnValue", SqlDbType.Int, 0, ParameterDirection.ReturnValue, null);
+
+            AddParamToSQLCmd(sqlCmd, "@file_name", SqlDbType.NVarChar, 50, ParameterDirection.Input, file_name);
+            AddParamToSQLCmd(sqlCmd, "@file_ext", SqlDbType.NVarChar, 50, ParameterDirection.Input, file_ext);
+            AddParamToSQLCmd(sqlCmd, "@file_base64", SqlDbType.NVarChar,0 , ParameterDirection.Input, file_base64);
+            AddParamToSQLCmd(sqlCmd, "@productID", SqlDbType.Int, 0, ParameterDirection.Input, productID);
+
+            AddParamToSQLCmd(sqlCmd, "@isMain", SqlDbType.Int, 0, ParameterDirection.Input, isMain);
+            AddParamToSQLCmd(sqlCmd, "@sortID", SqlDbType.Int, 0, ParameterDirection.Input, sortID);
+
+
+            SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_PhotoImage_AddPhoto);
+            ExecuteScalarCmd(sqlCmd);
+
+            int returnValue = (int)sqlCmd.Parameters["@ReturnValue"].Value;
+
+            return (returnValue);
+
+        }
+
+        #endregion
+
         /*****************************  SQL HELPER METHODS *****************************/
         #region SQL HELPER METHODS
         private void AddParamToSQLCmd(SqlCommand sqlCmd,
@@ -1150,6 +1221,49 @@ namespace ChoCastle.Models
                 currentItem.Subtotal = Subtotal;
                 currentItem.AddedDate = AddedDate;
                 //currentItem.ModifiedDate = ModifiedDate;
+
+                dataList.Add(currentItem);
+            }
+        }
+
+        //ProductImage_TGenerateListFromReader
+        private void ProductImage_TGenerateListFromReader<T>(SqlDataReader returnData, ref List<ProductImage> dataList)
+        {
+            while (returnData.Read())
+            {
+                
+                int file_id = 0;
+                if (returnData["file_id"] != DBNull.Value) { file_id = Convert.ToInt32(returnData["file_id"]); }
+
+                int ProductID = 0;
+                if (returnData["ProductID"] != DBNull.Value) { ProductID = Convert.ToInt32(returnData["ProductID"]); }
+
+                string file_name = string.Empty;
+                if (returnData["file_name"] != DBNull.Value) { file_name = Convert.ToString(returnData["file_name"]); }
+
+                string file_ext = string.Empty;
+                if (returnData["file_ext"] != DBNull.Value) { file_ext = Convert.ToString(returnData["file_ext"]); }
+
+                string file_base6 = string.Empty;
+                if (returnData["file_base6"] != DBNull.Value) { file_base6 = Convert.ToString(returnData["file_base6"]); }
+                
+                int SortID = 0;
+                if (returnData["SortID"] != DBNull.Value) { SortID = Convert.ToInt32(returnData["SortID"]); }
+
+                int isMain = 0;
+                if (returnData["isMain"] != DBNull.Value) { isMain = Convert.ToInt32(returnData["isMain"]); }
+                 
+
+
+                ProductImage currentItem = new ProductImage();
+                currentItem.file_id = file_id;
+                currentItem.file_name = file_name;
+                currentItem.file_ext = file_ext;
+                currentItem.file_base6 = file_base6;
+                currentItem.ProductID = ProductID;
+                currentItem.SortID = SortID;
+                currentItem.isMain = isMain;
+                
 
                 dataList.Add(currentItem);
             }

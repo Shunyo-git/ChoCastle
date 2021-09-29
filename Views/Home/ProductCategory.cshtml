@@ -47,7 +47,7 @@
                 {
                     <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap">
                         <div class="fh5co-item animate-box">
-                            <a href="@Url.Action("ProductDescription", "Home", new { ProductID = product.ProductID })"><img src="~/Template/images/cake/法式生巧克力塔.jpg" class="img-responsive" alt=""></a>
+                            <a href="@Url.Action("ProductDescription", "Home", new { ProductID = product.ProductID })"><img src="@String.Format("/PhotoImages/Main_{0}.jpeg",product.ProductID )" class="img-responsive" alt=""></a>
                             <h3 style="color: #B8860B ">@product.ProductName</h3><br>
                         </div>
                     </div>

@@ -174,6 +174,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\PhotoImageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -221,7 +222,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ChoCastleDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DALEntityModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DALEntityModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DALEntityModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DALEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DALEntityModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DALEntityModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\GroupShoppingCartViewModels.cs" />
+    <Compile Include="Models\ImgObj.cs" />
+    <Compile Include="Models\ImgViewModel.cs" />
     <Compile Include="Models\MyEnumHelper.cs" />
     <Compile Include="Models\OrderEnum.cs" />
     <Compile Include="Models\DataAccessHelper.cs" />
@@ -245,12 +263,17 @@
     <Compile Include="Models\ProductCategory.cs">
       <DependentUpon>ChoCastleDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductImage.cs">
+      <DependentUpon>DALEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ShoppingCar.cs">
       <DependentUpon>ChoCastleDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ShoppingDetail.cs">
       <DependentUpon>ChoCastleDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_get_all_files_Result.cs" />
+    <Compile Include="Models\sp_get_file_details_Result.cs" />
     <Compile Include="Models\SP_ShoppingDetail_GetShoppingDetailByCartID_Result.cs">
       <DependentUpon>ChoCastleDB.tt</DependentUpon>
     </Compile>
@@ -284,6 +307,16 @@
       <DependentUpon>ChoCastleDB.edmx</DependentUpon>
       <LastGenOutput>ChoCastleDB.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\DALEntityModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DALEntityModel.edmx</DependentUpon>
+      <LastGenOutput>DALEntityModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DALEntityModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DALEntityModel.edmx</DependentUpon>
+      <LastGenOutput>DALEntityModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\ChoCastleDB.edmx">
@@ -294,6 +327,13 @@
       <DependentUpon>ChoCastleDB.edmx</DependentUpon>
     </Content>
     <Content Include=".gitignore" />
+    <EntityDeploy Include="Models\DALEntityModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DALEntityModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DALEntityModel.edmx.diagram">
+      <DependentUpon>DALEntityModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -719,9 +759,12 @@
     <Content Include="Views\Carriage\Index.cshtml" />
     <Content Include="Views\Carriage\CarriageCreate.cshtml" />
     <Content Include="Views\Carriage\CarriageEdit.cshtml" />
+    <Content Include="Views\PhotoImage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="PhotoImages\" />
+    <Folder Include="Views\test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
