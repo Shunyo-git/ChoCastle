@@ -15,8 +15,10 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="row animate-box">
-            <h2 style="color:#B8860B">@ViewBag.Title</h2>
-            <hr />
+            <div class="col-md-12 text-center fh5co-heading">
+                <h1 style="color: #B8860B"><strong>管理您的外部登入</strong></h1>
+                <hr />
+            </div>
             @Html.ValidationSummary("", new { @class = "text-danger" })
             <p class="text-success">@ViewBag.StatusMessage</p>
             @{
@@ -34,7 +36,7 @@
                 {
                     if (Model.CurrentLogins.Count > 0)
                     {
-                        <h4>受限制的登入</h4>
+                        <h4 style="color:white">受限制的登入</h4>
                         <table class="table">
                             <tbody>
                                 @foreach (var account in Model.CurrentLogins)

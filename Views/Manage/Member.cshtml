@@ -2,7 +2,7 @@
 @model ChoCastle.Models.MemberViewModel
 @{
     ViewBag.Title = "基本資料";
-    
+
 }
 <br />
 <br />
@@ -20,9 +20,10 @@
             @using (Html.BeginForm("Member", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h2 style="color:#B8860B">基本資料管理</h2>
-
-                <hr />
+                <div class="col-md-12 text-center fh5co-heading">
+                    <h1 style="color: #B8860B"><strong>基本資料管理</strong></h1>
+                    <hr />
+                </div>
                 @Html.ValidationSummary("", new { @class = "text-danger" })
                 <div class="form-group">
                     @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
@@ -33,14 +34,14 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        
+
                         @Html.DisplayFor(m => m.Email, new { @class = "col-md-2 control-label" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.ChineseName, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.ChineseName, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.ChineseName, new { @class = "form-control", style = "font-family:'Microsoft JhengHei" })
                     </div>
                 </div>
 
@@ -57,38 +58,38 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.Birthday, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Birthday, new { @type = "date" , @class = "form-control", style = "font-family:'Microsoft JhengHei" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Mobile, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", style = "font-family:'Microsoft JhengHei" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.PostCode, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.PostCode, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.PostCode, new { @class = "form-control", style = "font-family:'Microsoft JhengHei" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control", style = "font-family:'Microsoft JhengHei" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(m => m.LineID, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.LineID, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.LineID, new { @class = "form-control", style = "font-family:'Microsoft JhengHei" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" class="btn btn-default" value="提交" />
+                    <div class="col-md-offset-2 col-md-10" style="text-align:center">
+                        <input type="submit" class="btn btn-primary btn-outline" value="儲存" />
                     </div>
                 </div>}
 

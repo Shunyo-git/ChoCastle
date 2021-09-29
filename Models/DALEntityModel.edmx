@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ChoCastle.Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ProductImages">
+          <Key>
+            <PropertyRef Name="file_id" />
+          </Key>
+          <Property Name="file_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="file_name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="file_ext" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="file_base6" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="isMain" Type="int" Nullable="false" />
+          <Property Name="SortID" Type="int" Nullable="false" />
+        </EntityType>
+        <Function Name="sp_delete_file" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="file_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_get_all_files" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_get_file_details" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="file_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_get_product_mainPhoto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_get_product_photos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_insert_file" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="file_name" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="file_ext" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="file_base64" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ProductID" Type="int" Mode="In" />
+          <Parameter Name="isMain" Type="int" Mode="In" />
+          <Parameter Name="SortID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="ChoCastleModelsStoreContainer">
+          <EntitySet Name="ProductImages" EntityType="Self.ProductImages" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ChoCastle.Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ProductImage">
+          <Key>
+            <PropertyRef Name="file_id" />
+          </Key>
+          <Property Name="file_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="file_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="file_ext" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="file_base6" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="isMain" Type="Int32" Nullable="false" />
+          <Property Name="SortID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ProductImages" EntityType="Self.ProductImage" />
+          <FunctionImport Name="sp_delete_file">
+            <Parameter Name="file_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_get_all_files" />
+          <FunctionImport Name="sp_get_file_details">
+            <Parameter Name="file_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_get_product_mainPhoto">
+            <Parameter Name="ProductID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_get_product_photos">
+            <Parameter Name="ProductID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_insert_file">
+            <Parameter Name="file_name" Mode="In" Type="String" />
+            <Parameter Name="file_ext" Mode="In" Type="String" />
+            <Parameter Name="file_base64" Mode="In" Type="String" />
+            <Parameter Name="ProductID" Mode="In" Type="Int32" />
+            <Parameter Name="isMain" Mode="In" Type="Int32" />
+            <Parameter Name="SortID" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ChoCastleModelsStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="ProductImages">
+            <EntityTypeMapping TypeName="ChoCastle.Models.ProductImage">
+              <MappingFragment StoreEntitySet="ProductImages">
+                <ScalarProperty Name="file_id" ColumnName="file_id" />
+                <ScalarProperty Name="file_name" ColumnName="file_name" />
+                <ScalarProperty Name="file_ext" ColumnName="file_ext" />
+                <ScalarProperty Name="file_base6" ColumnName="file_base6" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="isMain" ColumnName="isMain" />
+                <ScalarProperty Name="SortID" ColumnName="SortID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_delete_file" FunctionName="ChoCastle.Models.Store.sp_delete_file" />
+          <FunctionImportMapping FunctionImportName="sp_get_all_files" FunctionName="ChoCastle.Models.Store.sp_get_all_files" />
+          <FunctionImportMapping FunctionImportName="sp_get_file_details" FunctionName="ChoCastle.Models.Store.sp_get_file_details" />
+          <FunctionImportMapping FunctionImportName="sp_get_product_mainPhoto" FunctionName="ChoCastle.Models.Store.sp_get_product_mainPhoto" />
+          <FunctionImportMapping FunctionImportName="sp_get_product_photos" FunctionName="ChoCastle.Models.Store.sp_get_product_photos" />
+          <FunctionImportMapping FunctionImportName="sp_insert_file" FunctionName="ChoCastle.Models.Store.sp_insert_file" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,157 @@
+﻿
+@using ChoCastle.Models
+
+@model ChoCastle.Models.ImgViewModel
+
+@{
+    ViewBag.Title = "ASP.NET MVC5: Upload Image into Database";
+    Layout = "~/Views/Shared/_LayoutBackEnd.cshtml";
+}
+
+<br />
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> 圖片管理</h3>
+        <div class="row mt">
+            <div class="col-md-12">
+                <div class="content-panel">
+                    <h4><i class="fa fa-angle-right"></i> 商品圖片列表</h4>
+                    <hr>
+                    <div class="row">
+                        <div class="panel-heading">
+                            <div class="col-md-8">
+                                <h3>
+                                    <i class="fa fa-file-text-o"></i>
+                                    <span>上傳商品圖片</span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-6 col-md-push-2">
+                            <section>
+                                @using (Html.BeginForm("Index", "PhotoImage", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="well bs-component">
+                                        <br />
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="col-md-8 col-md-push-2">
+                                                    <div class="input-group">
+                                                        <span class="input-group-btn">
+                                                            <span class="btn btn-default btn-file">
+                                                                Browse&hellip;
+                                                                @Html.TextBoxFor(m => m.FileAttach, new { type = "file", placeholder = Html.DisplayNameFor(m => m.FileAttach) })
+                                                                @Html.ValidationMessageFor(m => m.FileAttach, "", new { @class = "text-danger custom-danger" })
+                                                            </span>
+                                                        </span><br />
+                                                        <input type="text" class="form-control" readonly>
+                                                    </div>
+                                                    <div class="input-group">
+                                                        商品：
+                                                        @Html.DropDownList("ProductID", null, htmlAttributes: new { @class = "form-control form-control-inline input-medium default-date-picker" })
+
+                                                        
+                                                    </div>
+                                                    <div class="input-group">
+                                                        是否為主要圖片：
+                                                        @Html.RadioButtonFor(model => model.isMain, 1) @Html.Label("是")
+                                                        @Html.RadioButtonFor(model => model.isMain, 0) @Html.Label("否")
+                                                        @Html.ValidationMessageFor(model => model.isMain, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="input-group">
+                                                        排序值：
+                                                        @Html.EditorFor(model => model.SortID, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium default-date-picker", size = "5", type = "number", value = "0" } })
+                                                        @Html.ValidationMessageFor(model => model.SortID, "", new { @class = "help-block" })
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-md-offset-5 col-md-10">
+                                                <input type="submit" class="btn btn-danger" value="Upload" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </section>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="row">
+                        <div class="col-md-offset-4 col-md-8">
+                            <h3>List of Imagess </h3>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    
+                    @if (Model.ImgLst != null &&
+                         Model.ImgLst.Count > 0)
+                    {
+                        <div class="row">
+                            <div class="col-md-offset-1 col-md-8">
+                                <section>
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: center;">圖片編號</th>
+                                                <th style="text-align: center;">圖片名稱</th>
+                                                <th style="text-align: center;"></th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @for (int i = 0; i < Model.ImgLst.Count; i++)
+                                            {
+                                                <tr>
+                                                    <td style="text-align: center;">@(i + 1)</td>
+
+                                                    <td style="text-align: center;">
+                                                        <div class="input-group" style="height:40px;">
+                                                            <i class="fa fa-2x fa-paperclip text-navy"></i>
+                                                            <a class="download-file1" href="@String.Format("/PhotoImages/{0}.jpeg",@Model.ImgLst[i].file_id)" target="_blank">
+                                                                @Model.ImgLst[i].file_name
+                                                            </a>
+                                                        </div>
+                                                    </td>
+
+                                                    <td style="text-align: center;">
+                                                        <div>
+                                                            <img src="@String.Format("/PhotoImages/{0}.jpeg",@Model.ImgLst[i].file_id)" width="100" height="100" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </section>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!-- /content-panel -->
+            </div>
+            <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+    </section>
+</section>
+

@@ -6,8 +6,12 @@
         @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
-            <li>
+            <li class="has-dropdown">
                 @Html.ActionLink("您好 " + User.Identity.GetUserName().ToLower() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                <ul class="dropdown">
+                    <li><a href="@Url.Action("Member","Manage")">基本資料管理</a></li>
+                    <li><a href="@Url.Action("SetPassword","Manage")">密碼管理</a></li>
+                </ul>
             </li>
             <li>@Html.ActionLink("後臺管理", "Index", "Products", routeValues: null, htmlAttributes: new { id = "productLink" })</li>
             <li>@Html.ActionLink("我的購物車", "Index", "ShoppingCart", routeValues: null, htmlAttributes: new { id = "cartLink" })</li>
@@ -17,10 +21,9 @@
 }
 else
 {
-<ul class="nav navbar-nav navbar-right">
-    <li>@Html.ActionLink("我的購物車", "Index", "ShoppingCart", routeValues: null, htmlAttributes: new { id = "cartLink" })</li>
-
-    <li>@Html.ActionLink("註冊", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-    <li>@Html.ActionLink("登入", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-</ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("我的購物車", "Index", "ShoppingCart", routeValues: null, htmlAttributes: new { id = "cartLink" })</li>
+        <li>@Html.ActionLink("註冊", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("登入", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
 }
