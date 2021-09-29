@@ -49,16 +49,16 @@
                                                             <span class="btn btn-default btn-file">
                                                                 Browse&hellip;
                                                                 @Html.TextBoxFor(m => m.FileAttach, new { type = "file", placeholder = Html.DisplayNameFor(m => m.FileAttach) })
-                                                                @Html.ValidationMessageFor(m => m.FileAttach, "", new { @class = "text-danger custom-danger" })
                                                             </span>
-                                                        </span><br />
-                                                        <input type="text" class="form-control" readonly>
+                                                        </span>
+                                                        
                                                     </div>
+                                                    @Html.ValidationMessageFor(m => m.FileAttach, "", new { @class = "text-danger custom-danger" })
                                                     <div class="input-group">
                                                         商品：
                                                         @Html.DropDownList("ProductID", null, htmlAttributes: new { @class = "form-control form-control-inline input-medium default-date-picker" })
 
-                                                        
+
                                                     </div>
                                                     <div class="input-group">
                                                         是否為主要圖片：
@@ -127,15 +127,32 @@
                                                     <td style="text-align: center;">
                                                         <div class="input-group" style="height:40px;">
                                                             <i class="fa fa-2x fa-paperclip text-navy"></i>
-                                                            <a class="download-file1" href="@String.Format("/PhotoImages/{0}.jpeg",@Model.ImgLst[i].file_id)" target="_blank">
-                                                                @Model.ImgLst[i].file_name
-                                                            </a>
+                                                            @if (Model.ImgLst[i].isMain == 1)
+                                                            {
+                                                                <a class="download-file1" href="@String.Format("/PhotoImages/Main_{0}.jpeg",@Model.ImgLst[i].ProductID)" target="_blank">
+                                                                    @Model.ImgLst[i].file_name
+                                                                </a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a class="download-file1" href="@String.Format("/PhotoImages/{0}.jpeg",@Model.ImgLst[i].file_id)" target="_blank">
+                                                                    @Model.ImgLst[i].file_name
+                                                                </a>
+                                                            }
+
                                                         </div>
                                                     </td>
 
                                                     <td style="text-align: center;">
                                                         <div>
-                                                            <img src="@String.Format("/PhotoImages/{0}.jpeg",@Model.ImgLst[i].file_id)" width="100" height="100" />
+                                                            @if (Model.ImgLst[i].isMain == 1)
+                                                            {
+                                                            <img src="@String.Format("/PhotoImages/Main_{0}.jpeg", @Model.ImgLst[i].ProductID)" width="100" height="100" />
+                                                            }
+                                                            else { 
+                                                        <img src="@String.Format("/PhotoImages/{0}.jpeg",@Model.ImgLst[i].file_id)" width="100" height="100" />
+                                                            }
+                                                            
                                                         </div>
                                                     </td>
                                                 </tr>

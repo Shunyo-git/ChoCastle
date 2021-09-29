@@ -89,11 +89,9 @@ namespace ChoCastle.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "ProductID,isMain,SortID")] ImgViewModel model)
+        public ActionResult Index([Bind(Include = "ProductID,isMain,SortID,FileAttach")] ImgViewModel model)
         {
-            ViewBag.ProductID = new SelectList(db.Products.OrderBy(x => x.CategoryID), "ProductID", "ProductName");
-
-
+            
 
             // Initialization.
             string fileContent = string.Empty;
@@ -114,8 +112,13 @@ namespace ChoCastle.Controllers
 
                     // Saving info.
                     //int PhotoID = this.databaseManager.sp_insert_file(model.FileAttach.FileName, fileContentType, fileContent, model.PhotoID, model.isMain, model.SortID);
-                    int PhotoID = da.AddProductImage(model.FileAttach.FileName, fileContentType, fileContent, model.PhotoID, model.isMain, model.SortID);
-                     string _FileName = String.Format("{0}.jpeg", PhotoID);
+                   
+
+                    int PhotoID = da.AddProductImage(model.FileAttach.FileName, fileContentType, fileContent, model.ProductID, model.isMain, model.SortID);
+                    string _FileName = String.Format("{0}.jpeg", PhotoID);
+                    if (model.isMain == 1) {
+                        _FileName = String.Format("Main_{0}.jpeg", model.ProductID);
+                    }
                     string _path = Path.Combine(Server.MapPath("~/PhotoImages"), _FileName);
                     model.FileAttach.SaveAs(_path);
                 }
@@ -132,9 +135,7 @@ namespace ChoCastle.Controllers
 
                 //}).ToList();
                 model.ImgLst = da.GetAllProductImage();
-                model.PhotoID = 0;
-                model.isMain = 0;
-                model.SortID = 0;
+               
             }
             catch (Exception ex)
             {
@@ -142,6 +143,9 @@ namespace ChoCastle.Controllers
                 //Console.Write(ex);
                 throw ex;
             }
+
+            ViewBag.ProductID = new SelectList(db.Products.OrderBy(x => x.CategoryID), "ProductID", "ProductName");
+
 
             // Info
             return this.View(model);
