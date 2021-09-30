@@ -98,5 +98,14 @@ namespace ChoCastle.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_file", file_nameParameter, file_extParameter, file_base64Parameter, productIDParameter, isMainParameter, sortIDParameter);
         }
+
+        public virtual int sp_set_main_file(Nullable<int> file_id)
+        {
+            var file_idParameter = file_id.HasValue ?
+                new ObjectParameter("file_id", file_id) :
+                new ObjectParameter("file_id", typeof(int));
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_set_main_file", file_idParameter);
+        }
     }
 }

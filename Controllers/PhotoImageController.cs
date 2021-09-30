@@ -34,7 +34,7 @@ namespace ChoCastle.Controllers
 
         #region Index view method.
 
-        #region Get: /Img/Index method.
+        #region Get: /PhotoImage/Index method.
 
         /// <summary>
         /// Get: /Img/Index method.
@@ -62,9 +62,7 @@ namespace ChoCastle.Controllers
                 //}).ToList();
 
                 model.ImgLst = da.GetAllProductImage();
-                model.PhotoID = 0;
-                model.isMain = 0;
-                model.SortID = 0;
+                
                 //ViewBag.Base64String = "data:image/png;base64," + Convert.ToBase64String(image.Data, 0, image.Data.Length);
             }
             catch (Exception ex)
@@ -79,7 +77,7 @@ namespace ChoCastle.Controllers
 
         #endregion
 
-        #region POST: /Img/Index
+        #region POST: /PhotoImage/Index
 
         /// <summary>
         /// POST: /Img/Index
@@ -116,11 +114,14 @@ namespace ChoCastle.Controllers
 
                     int PhotoID = da.AddProductImage(model.FileAttach.FileName, fileContentType, fileContent, model.ProductID, model.isMain, model.SortID);
                     string _FileName = String.Format("{0}.jpeg", PhotoID);
-                    if (model.isMain == 1) {
-                        _FileName = String.Format("Main_{0}.jpeg", model.ProductID);
-                    }
                     string _path = Path.Combine(Server.MapPath("~/PhotoImages"), _FileName);
                     model.FileAttach.SaveAs(_path);
+                    if (model.isMain == 1) {
+                        _FileName = String.Format("Main_{0}.jpeg", model.ProductID);
+                        _path = Path.Combine(Server.MapPath("~/PhotoImages"), _FileName);
+                        model.FileAttach.SaveAs(_path);
+                    }
+                     
                 }
 
                 // Settings.
@@ -153,6 +154,35 @@ namespace ChoCastle.Controllers
 
         #endregion
 
+
+        // GET: PhotoImage/Delete/5
+        public ActionResult Delete(int id)
+        {
+
+            this.databaseManager.sp_delete_file(id);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+
+            this.databaseManager.sp_delete_file(id);
+            
+            return RedirectToAction("Index");
+        }
+
+        
+
+         public ActionResult SetMain(int id)
+        {
+
+            this.databaseManager.sp_set_main_file(id);
+
+            return RedirectToAction("Index");
+        }
         #endregion
 
         #region Download file methods

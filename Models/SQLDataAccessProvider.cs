@@ -864,6 +864,7 @@ namespace ChoCastle.Models
         private const string SP_PhotoImage_GetAllPhotos = "sp_get_all_files";
         private const string SP_PhotoImage_GetPhotoByID = "sp_get_file_details";
         private const string SP_PhotoImage_AddPhoto = "sp_insert_file";
+        private const string SP_PhotoImage_SetMainPhoto = "sp_set_main_file";
 
         public List<ProductImage> GetAllProductImage()
         {
@@ -925,6 +926,26 @@ namespace ChoCastle.Models
             int returnValue = (int)sqlCmd.Parameters["@ReturnValue"].Value;
 
             return (returnValue);
+
+        }
+
+        public bool SetMainPhoto(int PhotoID)
+        {
+
+            if (PhotoID <= 0)
+                throw (new ArgumentOutOfRangeException("PhotoID"));
+
+            SqlCommand sqlCmd = new SqlCommand();
+
+            AddParamToSQLCmd(sqlCmd, "@ReturnValue", SqlDbType.Int, 0, ParameterDirection.ReturnValue, null);
+            AddParamToSQLCmd(sqlCmd, "@PhotoID", SqlDbType.Int, 0, ParameterDirection.Input, PhotoID);
+
+            SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_PhotoImage_SetMainPhoto);
+            ExecuteScalarCmd(sqlCmd);
+
+            int returnValue = (int)sqlCmd.Parameters["@ReturnValue"].Value;
+
+            return (returnValue == 0 ? true : false);
 
         }
 
@@ -1252,7 +1273,9 @@ namespace ChoCastle.Models
 
                 int isMain = 0;
                 if (returnData["isMain"] != DBNull.Value) { isMain = Convert.ToInt32(returnData["isMain"]); }
-                 
+
+                string ProductName = string.Empty;
+                if (returnData["ProductName"] != DBNull.Value) { ProductName = Convert.ToString(returnData["ProductName"]); }
 
 
                 ProductImage currentItem = new ProductImage();
@@ -1263,7 +1286,7 @@ namespace ChoCastle.Models
                 currentItem.ProductID = ProductID;
                 currentItem.SortID = SortID;
                 currentItem.isMain = isMain;
-                
+                currentItem.ProductName = ProductName;
 
                 dataList.Add(currentItem);
             }
