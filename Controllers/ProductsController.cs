@@ -11,14 +11,37 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Threading.Tasks;
+using System.IO;
 
 
 namespace ChoCastle.Controllers
 {
     public class ProductsController : Controller
     {
-        private ChoCastleDBEntities db = new ChoCastleDBEntities();      
-       
+        private ChoCastleDBEntities db = new ChoCastleDBEntities();
+
+        #region Private Properties
+
+        /// <summary>
+        /// Gets or sets database manager property.
+        /// </summary>
+        private db_imgEntities databaseManager = new db_imgEntities();
+        //ChoCastle.Models.ChoCastleDBEntities db = new Models.ChoCastleDBEntities();
+        //資料庫存取提供者
+        private SQLDataAccessProvider _da;
+        public SQLDataAccessProvider da
+        {
+            get
+            {
+                return _da ?? DataAccessFactory.CreateDefaultDataAccess();
+            }
+            private set
+            {
+                _da = value;
+            }
+        }
+        #endregion
+
         // GET: Products
         public ActionResult Index()
         {
@@ -69,7 +92,7 @@ namespace ChoCastle.Controllers
 
             var model = new Product();
 
-            var user =  UserManager.FindById(User.Identity.GetUserId());
+            var user = UserManager.FindById(User.Identity.GetUserId());
             if (user != null)
             {
                 model.AddedUserID = user.MemberID;
@@ -87,14 +110,14 @@ namespace ChoCastle.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,CategoryID,ProductName,ProductSpec,ProductDisc,isDisplay,PurchasePrice,RetailPrice,SellingPrice,SalePrice,StockQty,AvailableQty,VendorID,AddedDate,AddedUserID,ModifiedDate,ModifiedUserID")] Product product)
+        public ActionResult Create([Bind(Include = "ProductID,CategoryID,ProductName,ProductSpec,ProductDisc,isDisplay,PurchasePrice,RetailPrice,SellingPrice,SalePrice,StockQty,AvailableQty,VendorID,AddedDate,AddedUserID,ModifiedDate,ModifiedUserID")] Product product, List<HttpPostedFileBase> FileAttach)
         {
             var userId = User.Identity.GetUserId();
-             
+
 
             if (ModelState.IsValid)
             {
-                var user =  UserManager.FindById(User.Identity.GetUserId());
+                var user = UserManager.FindById(User.Identity.GetUserId());
                 if (user != null)
                 {
                     product.AddedUserID = user.MemberID;
@@ -103,6 +126,47 @@ namespace ChoCastle.Controllers
 
                 db.Products.Add(product);
                 db.SaveChanges();
+
+                #region 檔案上傳
+                if (FileAttach.Count > 0 && FileAttach.FirstOrDefault() != null)
+                {
+                    // Initialization.
+                    string fileContent = string.Empty;
+                    string fileContentType = string.Empty;
+                    foreach (var pic in FileAttach)
+                    {
+                        // Converting to bytes.
+                        byte[] uploadedFile = new byte[pic.InputStream.Length];
+                        pic.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
+
+                        // Initialization.
+                        fileContent = Convert.ToBase64String(uploadedFile);
+                        fileContentType = pic.ContentType;
+
+                        // Saving info.
+                        //int PhotoID = this.databaseManager.sp_insert_file(model.FileAttach.FileName, fileContentType, fileContent, model.PhotoID, model.isMain, model.SortID);
+
+
+                        int PhotoID = da.AddProductImage(pic.FileName, fileContentType, fileContent, product.ProductID, 0, 0); //產品KEY、是否為主要圖片、排序
+                        string _FileName = String.Format("{0}.jpeg", PhotoID);
+                        string _path = Path.Combine(Server.MapPath("~/PhotoImages"), _FileName);
+                        pic.SaveAs(_path);
+                        //if (model.isMain == 1)
+                        //{
+                        //    _FileName = String.Format("Main_{0}.jpeg", pic.ProductID);
+                        //    _path = Path.Combine(Server.MapPath("~/PhotoImages"), _FileName);
+                        //    pic.FileAttach.SaveAs(_path);
+                        //}
+                    }
+                }
+                else
+                {
+
+                }
+
+
+                #endregion
+
                 return RedirectToAction("ProductManage");
             }
 
@@ -119,14 +183,25 @@ namespace ChoCastle.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Product product = db.Products.Find(id);
+            Product product = new Product();
+            product = db.Products.Find(id);
+            List<ProductImage> lst_image = new List<ProductImage>();
+            lst_image = db.ProductImages.Where(model => model.ProductID == id).ToList();
+
+
+
             if (product == null)
             {
                 return HttpNotFound();
             }
             ViewBag.CategoryID = new SelectList(db.ProductCategories.OrderBy(model => model.SortID), "CategoryID", "CategoryName", product.CategoryID);
             ViewBag.VendorID = new SelectList(db.Vendors, "VendorID", "VendorName", product.VendorID);
-            return View(product);
+
+            ImgResult imgResult = new ImgResult();
+            imgResult.Product = product;
+            imgResult.ProductImage = lst_image;
+
+            return View(imgResult);
         }
 
         // POST: Products/Edit/5
@@ -135,13 +210,13 @@ namespace ChoCastle.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,CategoryID,ProductName,ProductSpec,ProductDisc,isDisplay,PurchasePrice,RetailPrice,SellingPrice,SalePrice,StockQty,AvailableQty,VendorID,AddedDate,AddedUserID,ModifiedDate,ModifiedUserID")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductID,CategoryID,ProductName,ProductSpec,ProductDisc,isDisplay,PurchasePrice,RetailPrice,SellingPrice,SalePrice,StockQty,AvailableQty,VendorID,AddedDate,AddedUserID,ModifiedDate,ModifiedUserID")] Product product, List<HttpPostedFileBase> FileAttach)
         {
             var userId = User.Identity.GetUserId();
             if (ModelState.IsValid)
             {
-                var user =  UserManager.FindById(User.Identity.GetUserId());
-                
+                var user = UserManager.FindById(User.Identity.GetUserId());
+
                 if (user != null)
                 {
                     product.AddedUserID = user.MemberID;
@@ -255,7 +330,7 @@ namespace ChoCastle.Controllers
             {
                 return HttpNotFound();
             }
-            
+
             return View(product);
         }
 
@@ -282,7 +357,7 @@ namespace ChoCastle.Controllers
                 db.SaveChanges();
                 return RedirectToAction("productCategory");
             }
-            
+
             return View(productCategory);
         }
 
@@ -299,5 +374,12 @@ namespace ChoCastle.Controllers
 
             return RedirectToAction("ProductCategory");
         }
+
+        public class ImgResult
+        {
+            public Product Product { get; set; }
+            public List<ProductImage> ProductImage { get; set; }
+        }
+
     }
 }

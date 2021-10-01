@@ -16,7 +16,7 @@
                             <label class="col-lg-2 col-sm-2 control-label">訂單編號</label>
                             <div class="col-lg-10">
                                 <p class="form-control-static">
-                                    @String.Format("{0:D4}{1:D2}{2:D2}{3, 0:D4}", Model.order.OrderDate.Year, Model.order.OrderDate.Month, Model.order.OrderDate.Day, Model.order.OrderID)
+                                    @String.Format("{0:D4}{1:D2}{2:D2}{3, 0:D4}", Model.order.OrderDate.Value.Year, Model.order.OrderDate.Value.Month, Model.order.OrderDate.Value.Day, Model.order.OrderID)
 
 
                                 </p>
@@ -135,7 +135,7 @@
                             <label class="col-lg-2 col-sm-2 control-label">預計收貨時間</label>
                             <div class="col-lg-10">
                                 @*<p class="form-control-static">@Model.user.Address</p>*@
-                                <p class="form-control-static">@Model.order.RequiredDate.ToString("yyyy/MM/dd")</p>
+                                <p class="form-control-static">@Model.order.RequiredDate.Value.ToString("yyyy/MM/dd")</p>
                             </div>
                         </div>
                         <div class="form-group">

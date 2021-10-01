@@ -41,6 +41,8 @@ namespace ChoCastle.Models
         public virtual DbSet<ShoppingDetail> ShoppingDetails { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<ProductImage> ProductImages { get; set; }
     
         public virtual int SP_Order_AddOrder(Nullable<int> cartID)
         {
@@ -139,6 +141,85 @@ namespace ChoCastle.Models
                 new ObjectParameter("AddedDate", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ShoppingDetail_UpdateItem", carIDParameter, productIDParameter, productNameParameter, unitPriceParameter, orderQuantityParameter, subtotalParameter, addedDateParameter);
+        }
+    
+        public virtual int sp_delete_file(Nullable<int> file_id)
+        {
+            var file_idParameter = file_id.HasValue ?
+                new ObjectParameter("file_id", file_id) :
+                new ObjectParameter("file_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_delete_file", file_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_get_all_files_Result> sp_get_all_files()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_get_all_files_Result>("sp_get_all_files");
+        }
+    
+        public virtual ObjectResult<sp_get_file_details_Result> sp_get_file_details(Nullable<int> file_id)
+        {
+            var file_idParameter = file_id.HasValue ?
+                new ObjectParameter("file_id", file_id) :
+                new ObjectParameter("file_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_get_file_details_Result>("sp_get_file_details", file_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_get_product_mainPhoto_Result> sp_get_product_mainPhoto(Nullable<int> productID)
+        {
+            var productIDParameter = productID.HasValue ?
+                new ObjectParameter("ProductID", productID) :
+                new ObjectParameter("ProductID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_get_product_mainPhoto_Result>("sp_get_product_mainPhoto", productIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_get_product_photos_Result> sp_get_product_photos(Nullable<int> productID)
+        {
+            var productIDParameter = productID.HasValue ?
+                new ObjectParameter("ProductID", productID) :
+                new ObjectParameter("ProductID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_get_product_photos_Result>("sp_get_product_photos", productIDParameter);
+        }
+    
+        public virtual int sp_insert_file(string file_name, string file_ext, string file_base64, Nullable<int> productID, Nullable<int> isMain, Nullable<int> sortID)
+        {
+            var file_nameParameter = file_name != null ?
+                new ObjectParameter("file_name", file_name) :
+                new ObjectParameter("file_name", typeof(string));
+    
+            var file_extParameter = file_ext != null ?
+                new ObjectParameter("file_ext", file_ext) :
+                new ObjectParameter("file_ext", typeof(string));
+    
+            var file_base64Parameter = file_base64 != null ?
+                new ObjectParameter("file_base64", file_base64) :
+                new ObjectParameter("file_base64", typeof(string));
+    
+            var productIDParameter = productID.HasValue ?
+                new ObjectParameter("ProductID", productID) :
+                new ObjectParameter("ProductID", typeof(int));
+    
+            var isMainParameter = isMain.HasValue ?
+                new ObjectParameter("isMain", isMain) :
+                new ObjectParameter("isMain", typeof(int));
+    
+            var sortIDParameter = sortID.HasValue ?
+                new ObjectParameter("SortID", sortID) :
+                new ObjectParameter("SortID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_file", file_nameParameter, file_extParameter, file_base64Parameter, productIDParameter, isMainParameter, sortIDParameter);
+        }
+    
+        public virtual int sp_set_main_file(Nullable<int> file_id)
+        {
+            var file_idParameter = file_id.HasValue ?
+                new ObjectParameter("file_id", file_id) :
+                new ObjectParameter("file_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_set_main_file", file_idParameter);
         }
     }
 }

@@ -29,6 +29,11 @@
         <AssociationConnector Association="ChoCastleDBModel.FK_ShoppingDetail_dbo_Products" ManuallyRouted="false" />
         <AssociationConnector Association="ChoCastleDBModel.FK_ShoppingDetail_dbo_ShoppingCar" ManuallyRouted="false" />
         <AssociationConnector Association="ChoCastleDBModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ChoCastleDBModel.C__MigrationHistory" Width="1.5" PointX="10.375" PointY="2.625" />
+        <EntityTypeShape EntityType="ChoCastleDBModel.ProductImage" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="ChoCastleDBModel.FK_OrderDetail_dbo_Orders" />
+        <AssociationConnector Association="ChoCastleDBModel.FK_ProductImages_Products" />
+        <AssociationConnector Association="ChoCastleDBModel.FK_OrderDetail_dbo_Products" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -11,7 +11,7 @@ namespace ChoCastle.Models
 {
     using System;
     
-    public partial class sp_get_file_details_Result
+    public partial class sp_get_product_photos_Result
     {
         public int file_id { get; set; }
         public string file_name { get; set; }
@@ -20,6 +20,5 @@ namespace ChoCastle.Models
         public int ProductID { get; set; }
         public int isMain { get; set; }
         public int SortID { get; set; }
-        public string ProductName { get; set; }
     }
 }

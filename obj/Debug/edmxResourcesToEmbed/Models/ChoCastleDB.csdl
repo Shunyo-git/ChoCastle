@@ -106,19 +106,19 @@
       <PropertyRef Name="OrderID" />
     </Key>
     <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="MemberID" Type="Int32" Nullable="false" />
-    <Property Name="OrderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ShipName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ShippingAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Delivery" Type="Int32" Nullable="false" />
-    <Property Name="ShippingCost" Type="Int32" Nullable="false" />
-    <Property Name="TotalAmount" Type="Int32" Nullable="false" />
-    <Property Name="Payment" Type="Int32" Nullable="false" />
-    <Property Name="PaymentTime" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="OrderStatus" Type="Int32" Nullable="false" />
-    <Property Name="RequiredDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <Property Name="MemberID" Type="Int32" />
+    <Property Name="OrderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShipName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="ShippingAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Delivery" Type="Int32" />
+    <Property Name="ShippingCost" Type="Int32" />
+    <Property Name="TotalAmount" Type="Int32" />
+    <Property Name="Payment" Type="Int32" />
+    <Property Name="PaymentTime" Type="DateTime" Precision="3" />
+    <Property Name="OrderStatus" Type="Int32" />
+    <Property Name="RequiredDate" Type="DateTime" Precision="3" />
     <Property Name="InvoiceNo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
     <Property Name="CompanyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="InvoiceHeading" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -129,6 +129,7 @@
     <Property Name="ReceiveDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Carriage" Relationship="Self.FK_Orders_carriage" FromRole="Orders" ToRole="Carriage" />
     <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoice_dbo_Orders" FromRole="Orders" ToRole="Invoice" />
+    <NavigationProperty Name="OrderDetails" Relationship="ChoCastleDBModel.FK_OrderDetail_dbo_Orders" FromRole="Order" ToRole="OrderDetail" />
   </EntityType>
   <EntityType Name="ProductCategory">
     <Key>
@@ -169,6 +170,8 @@
     <NavigationProperty Name="ProductCategory" Relationship="Self.FK_Products_ProductCategory" FromRole="Products" ToRole="ProductCategory" />
     <NavigationProperty Name="Vendor" Relationship="Self.FK_Products_Vendor" FromRole="Products" ToRole="Vendor" />
     <NavigationProperty Name="ShoppingDetails" Relationship="Self.FK_ShoppingDetail_dbo_Products" FromRole="Products" ToRole="ShoppingDetail" />
+    <NavigationProperty Name="ProductImages" Relationship="ChoCastleDBModel.FK_ProductImages_Products" FromRole="Product" ToRole="ProductImage" />
+    <NavigationProperty Name="OrderDetails" Relationship="ChoCastleDBModel.FK_OrderDetail_dbo_Products" FromRole="Product" ToRole="OrderDetail" />
   </EntityType>
   <EntityType Name="ShoppingCar">
     <Key>
@@ -240,6 +243,8 @@
     <Property Name="Price" Type="Int32" Nullable="false" />
     <Property Name="Subtotal" Type="Int32" Nullable="false" />
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Order" Relationship="ChoCastleDBModel.FK_OrderDetail_dbo_Orders" FromRole="OrderDetail" ToRole="Order" />
+    <NavigationProperty Name="Product" Relationship="ChoCastleDBModel.FK_OrderDetail_dbo_Products" FromRole="OrderDetail" ToRole="Product" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -442,6 +447,44 @@
       <Parameter Name="Subtotal" Mode="In" Type="Int32" />
       <Parameter Name="AddedDate" Mode="In" Type="DateTime" />
     </FunctionImport>
+    <EntitySet Name="C__MigrationHistory" EntityType="ChoCastleDBModel.C__MigrationHistory" />
+    <EntitySet Name="ProductImages" EntityType="ChoCastleDBModel.ProductImage" />
+    <AssociationSet Name="FK_OrderDetail_dbo_Orders" Association="ChoCastleDBModel.FK_OrderDetail_dbo_Orders">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductImages_Products" Association="ChoCastleDBModel.FK_ProductImages_Products">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ProductImage" EntitySet="ProductImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_dbo_Products" Association="ChoCastleDBModel.FK_OrderDetail_dbo_Products">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <FunctionImport Name="sp_delete_file">
+      <Parameter Name="file_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_get_all_files" ReturnType="Collection(ChoCastleDBModel.sp_get_all_files_Result)" />
+    <FunctionImport Name="sp_get_file_details" ReturnType="Collection(ChoCastleDBModel.sp_get_file_details_Result)">
+      <Parameter Name="file_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_get_product_mainPhoto" ReturnType="Collection(ChoCastleDBModel.sp_get_product_mainPhoto_Result)">
+      <Parameter Name="ProductID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_get_product_photos" ReturnType="Collection(ChoCastleDBModel.sp_get_product_photos_Result)">
+      <Parameter Name="ProductID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_insert_file">
+      <Parameter Name="file_name" Mode="In" Type="String" />
+      <Parameter Name="file_ext" Mode="In" Type="String" />
+      <Parameter Name="file_base64" Mode="In" Type="String" />
+      <Parameter Name="ProductID" Mode="In" Type="Int32" />
+      <Parameter Name="isMain" Mode="In" Type="Int32" />
+      <Parameter Name="SortID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_set_main_file">
+      <Parameter Name="file_id" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="SP_ShoppingDetail_GetShoppingDetailByCartID_Result">
     <Property Type="Int32" Name="CarID" Nullable="false" />
@@ -462,5 +505,103 @@
     <Property Type="Int32" Name="Subtotal" Nullable="true" />
     <Property Type="DateTime" Name="AddedDate" Nullable="true" Precision="23" />
     <Property Type="String" Name="ModifiedDate" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ProductImage">
+    <Key>
+      <PropertyRef Name="file_id" />
+    </Key>
+    <Property Name="file_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="file_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="file_ext" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="file_base6" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="isMain" Type="Int32" Nullable="false" />
+    <Property Name="SortID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="ChoCastleDBModel.FK_ProductImages_Products" FromRole="ProductImage" ToRole="Product" />
+    <Property Name="ProductName" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_OrderDetail_dbo_Orders">
+    <End Type="ChoCastleDBModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="ChoCastleDBModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductImages_Products">
+    <End Type="ChoCastleDBModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="ChoCastleDBModel.ProductImage" Role="ProductImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ProductImage">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_dbo_Products">
+    <End Type="ChoCastleDBModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="ChoCastleDBModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="sp_get_all_files_Result">
+    <Property Type="Int32" Name="file_id" Nullable="false" />
+    <Property Type="String" Name="file_name" Nullable="false" />
+    <Property Type="String" Name="file_ext" Nullable="false" />
+    <Property Type="String" Name="file_base6" Nullable="false" />
+    <Property Type="Int32" Name="ProductID" Nullable="false" />
+    <Property Type="Int32" Name="isMain" Nullable="false" />
+    <Property Type="Int32" Name="SortID" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_get_file_details_Result">
+    <Property Type="Int32" Name="file_id" Nullable="false" />
+    <Property Type="String" Name="file_name" Nullable="false" />
+    <Property Type="String" Name="file_ext" Nullable="false" />
+    <Property Type="String" Name="file_base6" Nullable="false" />
+    <Property Type="Int32" Name="ProductID" Nullable="false" />
+    <Property Type="Int32" Name="isMain" Nullable="false" />
+    <Property Type="Int32" Name="SortID" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_get_product_mainPhoto_Result">
+    <Property Type="Int32" Name="file_id" Nullable="false" />
+    <Property Type="String" Name="file_name" Nullable="false" />
+    <Property Type="String" Name="file_ext" Nullable="false" />
+    <Property Type="String" Name="file_base6" Nullable="false" />
+    <Property Type="Int32" Name="ProductID" Nullable="false" />
+    <Property Type="Int32" Name="isMain" Nullable="false" />
+    <Property Type="Int32" Name="SortID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_get_product_photos_Result">
+    <Property Type="Int32" Name="file_id" Nullable="false" />
+    <Property Type="String" Name="file_name" Nullable="false" />
+    <Property Type="String" Name="file_ext" Nullable="false" />
+    <Property Type="String" Name="file_base6" Nullable="false" />
+    <Property Type="Int32" Name="ProductID" Nullable="false" />
+    <Property Type="Int32" Name="isMain" Nullable="false" />
+    <Property Type="Int32" Name="SortID" Nullable="false" />
   </ComplexType>
 </Schema>

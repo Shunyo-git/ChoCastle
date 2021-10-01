@@ -10,16 +10,13 @@
 namespace ChoCastle.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_get_file_details_Result
+    public partial class C__MigrationHistory
     {
-        public int file_id { get; set; }
-        public string file_name { get; set; }
-        public string file_ext { get; set; }
-        public string file_base6 { get; set; }
-        public int ProductID { get; set; }
-        public int isMain { get; set; }
-        public int SortID { get; set; }
-        public string ProductName { get; set; }
+        public string MigrationId { get; set; }
+        public string ContextKey { get; set; }
+        public byte[] Model { get; set; }
+        public string ProductVersion { get; set; }
     }
 }

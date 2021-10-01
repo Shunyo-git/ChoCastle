@@ -270,5 +270,85 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SP_ShoppingDetail_RemoveItem" FunctionName="ChoCastleDBModel.Store.SP_ShoppingDetail_RemoveItem" />
     <FunctionImportMapping FunctionImportName="SP_ShoppingDetail_UpdateItem" FunctionName="ChoCastleDBModel.Store.SP_ShoppingDetail_UpdateItem" />
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="ChoCastleDBModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductImages">
+      <EntityTypeMapping TypeName="ChoCastleDBModel.ProductImage">
+        <MappingFragment StoreEntitySet="ProductImages">
+          <ScalarProperty Name="SortID" ColumnName="SortID" />
+          <ScalarProperty Name="isMain" ColumnName="isMain" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="file_base6" ColumnName="file_base6" />
+          <ScalarProperty Name="file_ext" ColumnName="file_ext" />
+          <ScalarProperty Name="file_name" ColumnName="file_name" />
+          <ScalarProperty Name="file_id" ColumnName="file_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_delete_file" FunctionName="ChoCastleDBModel.Store.sp_delete_file" />
+    <FunctionImportMapping FunctionImportName="sp_get_all_files" FunctionName="ChoCastleDBModel.Store.sp_get_all_files">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ChoCastleDBModel.sp_get_all_files_Result">
+          <ScalarProperty Name="file_id" ColumnName="file_id" />
+          <ScalarProperty Name="file_name" ColumnName="file_name" />
+          <ScalarProperty Name="file_ext" ColumnName="file_ext" />
+          <ScalarProperty Name="file_base6" ColumnName="file_base6" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="isMain" ColumnName="isMain" />
+          <ScalarProperty Name="SortID" ColumnName="SortID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_get_file_details" FunctionName="ChoCastleDBModel.Store.sp_get_file_details">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ChoCastleDBModel.sp_get_file_details_Result">
+          <ScalarProperty Name="file_id" ColumnName="file_id" />
+          <ScalarProperty Name="file_name" ColumnName="file_name" />
+          <ScalarProperty Name="file_ext" ColumnName="file_ext" />
+          <ScalarProperty Name="file_base6" ColumnName="file_base6" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="isMain" ColumnName="isMain" />
+          <ScalarProperty Name="SortID" ColumnName="SortID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_get_product_mainPhoto" FunctionName="ChoCastleDBModel.Store.sp_get_product_mainPhoto">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ChoCastleDBModel.sp_get_product_mainPhoto_Result">
+          <ScalarProperty Name="file_id" ColumnName="file_id" />
+          <ScalarProperty Name="file_name" ColumnName="file_name" />
+          <ScalarProperty Name="file_ext" ColumnName="file_ext" />
+          <ScalarProperty Name="file_base6" ColumnName="file_base6" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="isMain" ColumnName="isMain" />
+          <ScalarProperty Name="SortID" ColumnName="SortID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_get_product_photos" FunctionName="ChoCastleDBModel.Store.sp_get_product_photos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ChoCastleDBModel.sp_get_product_photos_Result">
+          <ScalarProperty Name="file_id" ColumnName="file_id" />
+          <ScalarProperty Name="file_name" ColumnName="file_name" />
+          <ScalarProperty Name="file_ext" ColumnName="file_ext" />
+          <ScalarProperty Name="file_base6" ColumnName="file_base6" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="isMain" ColumnName="isMain" />
+          <ScalarProperty Name="SortID" ColumnName="SortID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_insert_file" FunctionName="ChoCastleDBModel.Store.sp_insert_file" />
+    <FunctionImportMapping FunctionImportName="sp_set_main_file" FunctionName="ChoCastleDBModel.Store.sp_set_main_file" />
   </EntityContainerMapping>
 </Mapping>
