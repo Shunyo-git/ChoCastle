@@ -6,7 +6,7 @@
 //     如果重新產生程式碼，將會覆寫對這個檔案的手動變更。
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+using System.ComponentModel.DataAnnotations;
 namespace ChoCastle.Models
 {
     using System;
@@ -29,6 +29,10 @@ namespace ChoCastle.Models
         public string Address { get; set; }
         public string Mobile { get; set; }
         public string LineID { get; set; }
+
+        [Display(Name = "生日")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> Birthday { get; set; }
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }

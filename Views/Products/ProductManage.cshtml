@@ -52,7 +52,7 @@
                                         </td>
                                         <td>
                                             <a class="btn btn-primary btn-xs" href="@Url.Action("Edit", "Products", new { id = product.ProductID })"><i class="fa fa-pencil"></i>編輯</a>
-                                            <a class="btn btn-danger btn-xs" href="@Url.Action("Delete", "Products", new { id = product.ProductID })"><i class="fa fa-pencil"></i>刪除</a>
+                                            <a class="btn btn-danger btn-xs" href="@Url.Action("Delete", "Products", new { id = product.ProductID })"  onclick="javascript: if(!confirm('確定要刪除 編號:@product.ProductID 產品嗎？')){return false;}"><i class="fa fa-pencil"></i>刪除</a>
                                         </td>
                                     </tr>
                                 }
