@@ -257,9 +257,49 @@ namespace ChoCastle.Controllers
         public ActionResult ShoppingCartDetail([Bind(Include = "CarID, isLogin, MemberID, OrderName, ShipName, PhoneNumber, ShippingAddress, Delivery,Payment,  ShippingCost, TotalAmount, Payment, RequiredDate, AddedDate, ModifiedDate, CompanyNumber, InvoiceHeading,  InvoiceType")] ShoppingCar shoppingCart)
         {
 
-            //20210921 by sean
+            if (shoppingCart.OrderName == null)
+            {
+                ModelState.AddModelError("OrderName", "請輸入訂購人資料。");
+            }
 
-            if (ModelState.IsValid)
+            if (shoppingCart.ShipName == null)
+            {
+                ModelState.AddModelError("ShipName", "請輸入收件人資料。");
+
+            }
+            if (shoppingCart.PhoneNumber == null)
+            {
+                ModelState.AddModelError("PhoneNumber", "請輸入連絡電話。");
+
+            }
+            if (shoppingCart.ShippingAddress == null)
+            {
+                ModelState.AddModelError("ShippingAddress", "請輸入地址。");
+
+            }
+            if (shoppingCart.RequiredDate == null)
+            {
+                ModelState.AddModelError("RequiredDate", "請輸入希望配送日期。");
+            }
+            else
+            {
+                DateTime rDate = (DateTime)shoppingCart.RequiredDate;
+                if (DateTime.Compare(rDate.AddDays(5), DateTime.Now.AddDays(5)) < 1)
+                {
+                    ModelState.AddModelError("RequiredDate", "最快配送日期，需為訂單成立後五天起。。");
+                }
+            }
+
+
+
+
+
+            //20210921 by sean
+            if (!ModelState.IsValid)
+            {
+                return View(shoppingCart);
+            }
+            else
             {
                 var user = UserManager.FindById(User.Identity.GetUserId());
                 if (user != null)
@@ -267,6 +307,10 @@ namespace ChoCastle.Controllers
                     shoppingCart.MemberID = user.MemberID;
                     shoppingCart.isLogin = 1;
                     shoppingCart.ModifiedDate = DateTime.Now;
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Account", new { returnUrl = "/ShoppingCart" });
                 }
 
 
@@ -311,10 +355,9 @@ namespace ChoCastle.Controllers
             }
 
             //ModelState.AddModelError("", "訂單已完成。");
-
-            return RedirectToAction("Login", "Account", "ShoppingCart");
-
+            //return RedirectToAction("Login", "Account", "ShoppingCart");
             //return View(shoppingCart);
+            return RedirectToAction("ShoppingCartDetail");
         }
 
         // 2021/9/21 by sean
@@ -338,43 +381,49 @@ namespace ChoCastle.Controllers
         public ActionResult OrderConfirmation()
         {
 
-
-            //ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName");
-            //ViewBag.CarID = new SelectList(db.ShoppingCars, "CarID", "OrderName");
-
-            GroupShoppingCartViewModels CartModel = new GroupShoppingCartViewModels();
-            int CartID = 0;
-            ShoppingCar shoppingCart;
-            if (Session["CartID"] != null)
+            if (ModelState.IsValid)
             {
-                //取得購物車
-                CartID = Int32.Parse(Session["CartID"].ToString());
-                shoppingCart = db.ShoppingCars.Find(CartID);
-                if (shoppingCart != null)
+                //ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName");
+                //ViewBag.CarID = new SelectList(db.ShoppingCars, "CarID", "OrderName");
+
+                GroupShoppingCartViewModels CartModel = new GroupShoppingCartViewModels();
+                int CartID = 0;
+                ShoppingCar shoppingCart;
+                if (Session["CartID"] != null)
                 {
+                    //取得購物車
+                    CartID = Int32.Parse(Session["CartID"].ToString());
+                    shoppingCart = db.ShoppingCars.Find(CartID);
+                    if (shoppingCart != null)
+                    {
 
-                    //轉換寄送方式與發票種類說明
-                    //ViewBag.DeliveryType = Enum.GetName(typeof(DeliveryType), shoppingCart.Delivery);
-                    DeliveryType dt = (DeliveryType)shoppingCart.Delivery;
-                    ViewBag.DeliveryType = MyEnumHelper<DeliveryType>.GetDisplayValue(dt);
+                        //轉換寄送方式與發票種類說明
+                        //ViewBag.DeliveryType = Enum.GetName(typeof(DeliveryType), shoppingCart.Delivery);
+                        DeliveryType dt = (DeliveryType)shoppingCart.Delivery;
+                        ViewBag.DeliveryType = MyEnumHelper<DeliveryType>.GetDisplayValue(dt);
 
-                    InvoiceType Invoice = (InvoiceType)shoppingCart.InvoiceType;
-                    ViewBag.InvoiceType = MyEnumHelper<InvoiceType>.GetDisplayValue(Invoice);
+                        InvoiceType Invoice = (InvoiceType)shoppingCart.InvoiceType;
+                        ViewBag.InvoiceType = MyEnumHelper<InvoiceType>.GetDisplayValue(Invoice);
 
-                    PaymentType payment = (PaymentType)shoppingCart.Payment;
-                    ViewBag.PaymentType = MyEnumHelper<PaymentType>.GetDisplayValue(payment);
+                        PaymentType payment = (PaymentType)shoppingCart.Payment;
+                        ViewBag.PaymentType = MyEnumHelper<PaymentType>.GetDisplayValue(payment);
 
-                    DateTime requiredDate = (DateTime)shoppingCart.RequiredDate;
-                    ViewBag.RrequiredDate = requiredDate.ToString("yyyy/MM/dd");
-                    var shoppingDetails = da.GetShoppingDetailsByCart(shoppingCart.CarID);
-                    CartModel.ShoppingDetails = shoppingDetails;
+                        if (shoppingCart.RequiredDate != null)
+                        {
+                            DateTime requiredDate = (DateTime)shoppingCart.RequiredDate;
+                            ViewBag.RrequiredDate = requiredDate.ToString("yyyy/MM/dd");
+                        }
+
+                        var shoppingDetails = da.GetShoppingDetailsByCart(shoppingCart.CarID);
+                        CartModel.ShoppingDetails = shoppingDetails;
+                    }
+
+                    CartModel.ShoppingCart = shoppingCart;
+                    return View(CartModel);
                 }
-
-                CartModel.ShoppingCart = shoppingCart;
-                return View(CartModel);
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
-
+            return RedirectToAction("ShoppingCartDetail");
         }
 
         // ShoppingCart/OrderConfirmation
