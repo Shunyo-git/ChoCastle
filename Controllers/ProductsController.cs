@@ -210,26 +210,61 @@ namespace ChoCastle.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,CategoryID,ProductName,ProductSpec,ProductDisc,isDisplay,PurchasePrice,RetailPrice,SellingPrice,SalePrice,StockQty,AvailableQty,VendorID,AddedDate,AddedUserID,ModifiedDate,ModifiedUserID")] Product product, List<HttpPostedFileBase> FileAttach)
+        //public ActionResult Edit([Bind(Include = "ProductID,CategoryID,ProductName,ProductSpec,ProductDisc,isDisplay,PurchasePrice,RetailPrice,SellingPrice,SalePrice,StockQty,AvailableQty,VendorID,AddedDate,AddedUserID,ModifiedDate,ModifiedUserID")] Product product, List<HttpPostedFileBase> FileAttach)
+        public ActionResult Edit(int CategoryID, int VendorID, ImgResult data, List<HttpPostedFileBase> FileAttach)
         {
             var userId = User.Identity.GetUserId();
             if (ModelState.IsValid)
             {
                 var user = UserManager.FindById(User.Identity.GetUserId());
-
+                data.Product.CategoryID = CategoryID;
+                data.Product.VendorID = VendorID;
                 if (user != null)
                 {
-                    product.AddedUserID = user.MemberID;
-                    product.AddedDate = DateTime.Now;
+                    data.Product.AddedUserID = user.MemberID;
+                    data.Product.AddedDate = DateTime.Now;
                 }
-
-                db.Entry(product).State = EntityState.Modified;
+                db.Entry(data.Product).State = EntityState.Modified;
                 db.SaveChanges();
+
+                #region 檔案上傳
+                if (FileAttach.Count > 0 && FileAttach.FirstOrDefault() != null)
+                {
+                    // Initialization.
+                    string fileContent = string.Empty;
+                    string fileContentType = string.Empty;
+                    foreach (var pic in FileAttach)
+                    {
+                        // Converting to bytes.
+                        byte[] uploadedFile = new byte[pic.InputStream.Length];
+                        pic.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
+
+                        // Initialization.
+                        fileContent = Convert.ToBase64String(uploadedFile);
+                        fileContentType = pic.ContentType;
+
+                        // Saving info.
+                        //int PhotoID = this.databaseManager.sp_insert_file(model.FileAttach.FileName, fileContentType, fileContent, model.PhotoID, model.isMain, model.SortID);
+
+
+                        int PhotoID = da.AddProductImage(pic.FileName, fileContentType, fileContent, data.Product.ProductID, 0, 0); //產品KEY、是否為主要圖片、排序
+                        string _FileName = String.Format("{0}.jpeg", PhotoID);
+                        string _path = Path.Combine(Server.MapPath("~/PhotoImages"), _FileName);
+                        pic.SaveAs(_path);
+                        //if (model.isMain == 1)
+                        //{
+                        //    _FileName = String.Format("Main_{0}.jpeg", pic.ProductID);
+                        //    _path = Path.Combine(Server.MapPath("~/PhotoImages"), _FileName);
+                        //    pic.FileAttach.SaveAs(_path);
+                        //}
+                    }
+                }
+                #endregion
                 return RedirectToAction("ProductManage");
             }
-            ViewBag.CategoryID = new SelectList(db.ProductCategories, "CategoryID", "CategoryName", product.CategoryID);
-            ViewBag.VendorID = new SelectList(db.Vendors, "VendorID", "VendorName", product.VendorID);
-            return View(product);
+            ViewBag.CategoryID = new SelectList(db.ProductCategories, "CategoryID", "CategoryName", data.Product.CategoryID);
+            ViewBag.VendorID = new SelectList(db.Vendors, "VendorID", "VendorName", data.Product.VendorID);
+            return View(data);
         }
 
         // GET: Products/Delete/5

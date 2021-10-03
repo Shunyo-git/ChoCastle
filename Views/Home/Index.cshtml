@@ -1,4 +1,4 @@
-﻿@model List<ChoCastle.Models.Product>
+﻿@model List<ChoCastle.Controllers.HomeController.imgResult>
 
 @{
     //Layout = "~/Views/Shared/_Layout.cshtml";
@@ -36,22 +36,22 @@
                             {
                                 foreach (var item in Model)
                                 {
-                                    <li style="background-image: url(/Template/images/choco/生巧克力.jpg);">
-                                        <div class="overlay-gradient"></div>
-                                        <div class="container-fluid">
-                                            <div class="row">
-                                                <div class="col-md-12 col-md-offset-0 col-md-pull-10 slider-text slider-text-bg">
-                                                    <div class="slider-text-inner">
-                                                        <div class="desc">
-                                                            <h2>@item.ProductName</h2>
-                                                            <p>@item.ProductDisc</p>
-                                                            <p><a href="@Url.Action("ProductDescription","Home",new { ProductID = item.ProductID })" class="btn btn-primary btn-outline">Learn More</a></p>
-                                                        </div>
-                                                    </div>
+                            <li style="background-image: url(@String.Format("/PhotoImages/{0}.jpeg", item.Image.file_id));">
+                                <div class="overlay-gradient"></div>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-12 col-md-offset-0 col-md-pull-10 slider-text slider-text-bg">
+                                            <div class="slider-text-inner">
+                                                <div class="desc">
+                                                    <h2>@item.Product.ProductName</h2>
+                                                    <p>@item.Product.ProductDisc</p>
+                                                    <p><a href="@Url.Action("ProductDescription","Home",new { ProductID = item.Product.ProductID })" class="btn btn-primary btn-outline">Learn More</a></p>
                                                 </div>
                                             </div>
                                         </div>
-                                    </li>
+                                    </div>
+                                </div>
+                            </li>
                                 }
                             }
                         </ul>

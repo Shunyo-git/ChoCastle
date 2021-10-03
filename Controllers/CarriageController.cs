@@ -20,6 +20,7 @@ namespace ChoCastle.Controllers
         // GET: Carriage
         public ActionResult Index()
         {
+            
             return View(db.Carriages.ToList());
         }
 

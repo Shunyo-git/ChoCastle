@@ -156,12 +156,14 @@ namespace ChoCastle.Controllers
 
 
         // GET: PhotoImage/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, int ProductId)
         {
 
             this.databaseManager.sp_delete_file(id);
 
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return RedirectToAction("Edit", "Products", new { id = ProductId });
+
         }
 
         [HttpPost, ActionName("Delete")]
@@ -170,18 +172,18 @@ namespace ChoCastle.Controllers
         {
 
             this.databaseManager.sp_delete_file(id);
-            
-            return RedirectToAction("Index");
-        }
 
-        
+            return RedirectToAction("Index");        }
 
-         public ActionResult SetMain(int id)
+
+
+        public ActionResult SetMain(int id, int ProductId)
         {
 
             this.databaseManager.sp_set_main_file(id);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Edit", "Products", new { id = ProductId });
+            //return RedirectToAction("Index");
         }
         #endregion
 

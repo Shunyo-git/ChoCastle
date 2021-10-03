@@ -918,6 +918,7 @@ namespace ChoCastle.Models
 
             AddParamToSQLCmd(sqlCmd, "@isMain", SqlDbType.Int, 0, ParameterDirection.Input, isMain);
             AddParamToSQLCmd(sqlCmd, "@sortID", SqlDbType.Int, 0, ParameterDirection.Input, sortID);
+            //AddParamToSQLCmd(sqlCmd, "@ProductName", SqlDbType.NChar, 50, ParameterDirection.Input, "");
 
 
             SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_PhotoImage_AddPhoto);

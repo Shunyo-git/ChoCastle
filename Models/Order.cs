@@ -22,7 +22,7 @@ namespace ChoCastle.Models
         }
     
         public int OrderID { get; set; }
-        public Nullable<System.DateTime> OrderDate { get; set; }
+        public System.DateTime OrderDate { get; set; }
         public Nullable<int> MemberID { get; set; }
         public string OrderName { get; set; }
         public string ShipName { get; set; }

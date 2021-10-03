@@ -18,9 +18,9 @@ namespace ChoCastle.Models
         public Product()
         {
             this.Images = new HashSet<Image>();
-            this.ShoppingDetails = new HashSet<ShoppingDetail>();
             this.ProductImages = new HashSet<ProductImage>();
             this.OrderDetails = new HashSet<OrderDetail>();
+            this.ShoppingDetails = new HashSet<ShoppingDetail>();
         }
     
         public int ProductID { get; set; }
@@ -44,12 +44,12 @@ namespace ChoCastle.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Image> Images { get; set; }
         public virtual ProductCategory ProductCategory { get; set; }
-        public virtual Vendor Vendor { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShoppingDetail> ShoppingDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductImage> ProductImages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual Vendor Vendor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ShoppingDetail> ShoppingDetails { get; set; }
     }
 }

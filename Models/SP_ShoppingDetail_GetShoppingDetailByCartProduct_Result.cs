@@ -13,6 +13,7 @@ namespace ChoCastle.Models
     
     public partial class SP_ShoppingDetail_GetShoppingDetailByCartProduct_Result
     {
+        public int Id { get; set; }
         public int CarID { get; set; }
         public int ProductID { get; set; }
         public string ProductName { get; set; }

@@ -23,8 +23,16 @@ namespace ChoCastle.Controllers
 
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.ProductCategory).Include(p => p.Vendor);
-            return View(products.Take(5).ToList());
+            var result = (from pd in db.Products
+                         join img in db.ProductImages on pd.ProductID equals img.ProductID
+                         where img.isMain == 1
+                         select new imgResult
+                         {
+                             Product = pd,
+                             Image = img
+                         }).OrderByDescending(x => x.Product.AddedDate.Value).Take(5).ToList();            
+
+            return View(result);
         }
 
         public ActionResult About()
@@ -73,15 +81,21 @@ namespace ChoCastle.Controllers
         // GET
         public ActionResult ProductDescription(int? ProductID)
         {
-
+            imgResultDes imgResult = new imgResultDes();
             Product product = db.Products.Find(ProductID);
+            List<ProductImage> lst_images = db.ProductImages.Where(x => x.ProductID == ProductID.Value).ToList();
             if (product == null)
             {
                 return HttpNotFound();
             }
+
+            imgResult.Product = product;
+            imgResult.lst_Image = lst_images;
+
             ViewBag.CategoryID = new SelectList(db.ProductCategories.OrderBy(model => model.SortID), "CategoryID", "CategoryName", product.CategoryID);
             ViewBag.VendorID = new SelectList(db.Vendors, "VendorID", "VendorName", product.VendorID);
-            return View(product);
+            return View(imgResult);
+            //return View(product);
 
         }
 
@@ -184,29 +198,51 @@ namespace ChoCastle.Controllers
             CategoryID = CategoryID is null ? 1 : CategoryID;
             ProductCategory productCategory = db.ProductCategories.Find(CategoryID);
             ViewBag.CategoryID = productCategory.CategoryName;
-            switch (CategoryID)
-            {
-                case 1:
-                    ViewBag.CategoryEng = "CHOCOLATES";
-                    break;
-                case 2:
-                    ViewBag.CategoryEng = "COOKIES";
-                    break;
-                case 3:
-                    ViewBag.CategoryEng = "CAKES";
-                    break;
-                case 4:
-                    ViewBag.CategoryEng = "GIFT BOX COLLECTION";
-                    break;
-                default:
-                    break;
-            }
-            return View(db.Products.Where(model => model.isDisplay.Value == true && model.CategoryID == CategoryID).ToList());
+            //switch (CategoryID)
+            //{
+            //    case 1:
+            //        ViewBag.CategoryEng = "CHOCOLATES";
+            //        break;
+            //    case 2:
+            //        ViewBag.CategoryEng = "COOKIES";
+            //        break;
+            //    case 3:
+            //        ViewBag.CategoryEng = "CAKES";
+            //        break;
+            //    case 4:
+            //        ViewBag.CategoryEng = "GIFT BOX COLLECTION";
+            //        break;
+            //    default:
+            //        break;
+            //}
+
+            var result = from product in db.Products
+                         join image in db.ProductImages on product.ProductID equals image.ProductID
+                         where product.CategoryID == CategoryID && product.isDisplay.Value == true && image.isMain == 1
+                         select new imgResult
+                         {
+                             Product = product,
+                             Image = image
+                         };
+
+            return View(result.ToList());
         }
 
         public ActionResult ShoppingFAQ()
         {
             return View();
+        }
+
+        public class imgResult
+        {
+            public Product Product { get; set; }
+            public ProductImage Image { get; set; }
+        }
+
+        public class imgResultDes
+        {
+            public Product Product { get; set; }
+            public List<ProductImage> lst_Image { get; set; }
         }
     }
 }

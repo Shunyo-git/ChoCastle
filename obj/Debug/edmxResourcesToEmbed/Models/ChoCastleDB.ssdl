@@ -133,8 +133,8 @@
     <Key>
       <PropertyRef Name="OrderID" />
     </Key>
-    <Property Name="OrderID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="OrderDate" Type="datetime" />
+    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="OrderDate" Type="datetime" Nullable="false" />
     <Property Name="MemberID" Type="int" />
     <Property Name="OrderName" Type="nvarchar" MaxLength="50" />
     <Property Name="ShipName" Type="nvarchar" MaxLength="50" />
@@ -180,6 +180,7 @@
     <Property Name="ProductID" Type="int" Nullable="false" />
     <Property Name="isMain" Type="int" Nullable="false" />
     <Property Name="SortID" Type="int" Nullable="false" />
+    <Property Name="ProductName" Type="nchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Products">
     <Key>
@@ -225,12 +226,11 @@
     <Property Name="InvoiceHeading" Type="nvarchar" MaxLength="50" />
     <Property Name="InvoiceType" Type="int" />
   </EntityType>
-  <!--產生期間發現錯誤:
-警告 6002: 資料表/檢視 'ChoCastleDB.dbo.ShoppingDetail' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
   <EntityType Name="ShoppingDetail">
     <Key>
-      <PropertyRef Name="CarID" />
+      <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CarID" Type="int" Nullable="false" />
     <Property Name="ProductID" Type="int" Nullable="false" />
     <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
@@ -419,7 +419,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ShoppingDetail_dbo_ShoppingCar">
+  <Association Name="FK_ShoppingDetail_ShoppingCar">
     <End Role="ShoppingCar" Type="Self.ShoppingCar" Multiplicity="1" />
     <End Role="ShoppingDetail" Type="Self.ShoppingDetail" Multiplicity="*" />
     <ReferentialConstraint>
@@ -500,6 +500,7 @@
     <EntitySet Name="ProductImages" EntityType="Self.ProductImages" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ShoppingCar" EntityType="Self.ShoppingCar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShoppingDetail" EntityType="Self.ShoppingDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -511,18 +512,6 @@
     [OrderDetail].[Subtotal] AS [Subtotal], 
     [OrderDetail].[ModifiedDate] AS [ModifiedDate]
     FROM [dbo].[OrderDetail] AS [OrderDetail]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="ShoppingDetail" EntityType="Self.ShoppingDetail" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [ShoppingDetail].[CarID] AS [CarID], 
-    [ShoppingDetail].[ProductID] AS [ProductID], 
-    [ShoppingDetail].[ProductName] AS [ProductName], 
-    [ShoppingDetail].[UnitPrice] AS [UnitPrice], 
-    [ShoppingDetail].[OrderQuantity] AS [OrderQuantity], 
-    [ShoppingDetail].[Subtotal] AS [Subtotal], 
-    [ShoppingDetail].[AddedDate] AS [AddedDate], 
-    [ShoppingDetail].[ModifiedDate] AS [ModifiedDate]
-    FROM [dbo].[ShoppingDetail] AS [ShoppingDetail]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -576,7 +565,7 @@
       <End Role="Products" EntitySet="Products" />
       <End Role="ShoppingDetail" EntitySet="ShoppingDetail" />
     </AssociationSet>
-    <AssociationSet Name="FK_ShoppingDetail_dbo_ShoppingCar" Association="Self.FK_ShoppingDetail_dbo_ShoppingCar">
+    <AssociationSet Name="FK_ShoppingDetail_ShoppingCar" Association="Self.FK_ShoppingDetail_ShoppingCar">
       <End Role="ShoppingCar" EntitySet="ShoppingCar" />
       <End Role="ShoppingDetail" EntitySet="ShoppingDetail" />
     </AssociationSet>
