@@ -888,7 +888,7 @@ namespace ChoCastle.Models
 
             SqlCommand sqlCmd = new SqlCommand();
 
-            AddParamToSQLCmd(sqlCmd, "@PhotID", SqlDbType.Int, 0, ParameterDirection.Input, PhotID);
+            AddParamToSQLCmd(sqlCmd, "@file_id", SqlDbType.Int, 0, ParameterDirection.Input, PhotID);
 
 
             SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_PhotoImage_GetPhotoByID);
