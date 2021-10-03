@@ -51,10 +51,29 @@ namespace ChoCastle.Controllers
                     ViewBag.PaymentTime = "待付款";
                 }
                
-            }
-            
+            }           
 
             return View(result);
+        }
+
+        public ActionResult Shipment(int orderID, int type)
+        {
+            Order order = db.Orders.Find(orderID);
+            order.OrderStatus = type;
+            db.Entry(order).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("OrderDetail", "Order", new { id = orderID });
+        }
+
+        public ActionResult Payment(int orderID)
+        {
+            Order order = db.Orders.Find(orderID);
+            order.PaymentTime = DateTime.Now;
+            db.Entry(order).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("OrderDetail", "Order", new { id = orderID });
         }
 
         public class OrderDetaillResult
