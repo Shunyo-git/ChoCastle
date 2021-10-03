@@ -26,7 +26,6 @@ namespace ChoCastle.Controllers
         /// Gets or sets database manager property.
         /// </summary>
         private db_imgEntities databaseManager = new db_imgEntities();
-        //ChoCastle.Models.ChoCastleDBEntities db = new Models.ChoCastleDBEntities();
         //資料庫存取提供者
         private SQLDataAccessProvider _da;
         public SQLDataAccessProvider da
@@ -151,19 +150,8 @@ namespace ChoCastle.Controllers
                         string _FileName = String.Format("{0}.jpeg", PhotoID);
                         string _path = Path.Combine(Server.MapPath("~/PhotoImages"), _FileName);
                         pic.SaveAs(_path);
-                        //if (model.isMain == 1)
-                        //{
-                        //    _FileName = String.Format("Main_{0}.jpeg", pic.ProductID);
-                        //    _path = Path.Combine(Server.MapPath("~/PhotoImages"), _FileName);
-                        //    pic.FileAttach.SaveAs(_path);
-                        //}
                     }
                 }
-                else
-                {
-
-                }
-
 
                 #endregion
 
@@ -210,7 +198,6 @@ namespace ChoCastle.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "ProductID,CategoryID,ProductName,ProductSpec,ProductDisc,isDisplay,PurchasePrice,RetailPrice,SellingPrice,SalePrice,StockQty,AvailableQty,VendorID,AddedDate,AddedUserID,ModifiedDate,ModifiedUserID")] Product product, List<HttpPostedFileBase> FileAttach)
         public ActionResult Edit(int CategoryID, int VendorID, ImgResult data, List<HttpPostedFileBase> FileAttach)
         {
             var userId = User.Identity.GetUserId();
@@ -251,12 +238,6 @@ namespace ChoCastle.Controllers
                         string _FileName = String.Format("{0}.jpeg", PhotoID);
                         string _path = Path.Combine(Server.MapPath("~/PhotoImages"), _FileName);
                         pic.SaveAs(_path);
-                        //if (model.isMain == 1)
-                        //{
-                        //    _FileName = String.Format("Main_{0}.jpeg", pic.ProductID);
-                        //    _path = Path.Combine(Server.MapPath("~/PhotoImages"), _FileName);
-                        //    pic.FileAttach.SaveAs(_path);
-                        //}
                     }
                 }
                 #endregion

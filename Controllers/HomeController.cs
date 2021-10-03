@@ -198,24 +198,6 @@ namespace ChoCastle.Controllers
             CategoryID = CategoryID is null ? 1 : CategoryID;
             ProductCategory productCategory = db.ProductCategories.Find(CategoryID);
             ViewBag.CategoryID = productCategory.CategoryName;
-            //switch (CategoryID)
-            //{
-            //    case 1:
-            //        ViewBag.CategoryEng = "CHOCOLATES";
-            //        break;
-            //    case 2:
-            //        ViewBag.CategoryEng = "COOKIES";
-            //        break;
-            //    case 3:
-            //        ViewBag.CategoryEng = "CAKES";
-            //        break;
-            //    case 4:
-            //        ViewBag.CategoryEng = "GIFT BOX COLLECTION";
-            //        break;
-            //    default:
-            //        break;
-            //}
-
             var result = from product in db.Products
                          join image in db.ProductImages on product.ProductID equals image.ProductID
                          where product.CategoryID == CategoryID && product.isDisplay.Value == true && image.isMain == 1
