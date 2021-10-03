@@ -24,13 +24,13 @@ namespace ChoCastle.Controllers
         public ActionResult Index()
         {
             var result = (from pd in db.Products
-                         join img in db.ProductImages on pd.ProductID equals img.ProductID
-                         where img.isMain == 1
-                         select new imgResult
-                         {
-                             Product = pd,
-                             Image = img
-                         }).OrderByDescending(x => x.Product.AddedDate.Value).Take(5).ToList();            
+                          join img in db.ProductImages on pd.ProductID equals img.ProductID
+                          where img.isMain == 1
+                          select new imgResult
+                          {
+                              Product = pd,
+                              Image = img
+                          }).OrderByDescending(x => x.Product.AddedDate.Value).Take(5).ToList();
 
             return View(result);
         }
@@ -178,8 +178,8 @@ namespace ChoCastle.Controllers
                 {
                     //已有商品更新數量
                     int OrderQty = Int32.Parse(Request.Form["OrderQty"]);
-                    da.UpdateShoppingDetail(CartID, product.ProductID, shoppingDetail.ProductName, product.SellingPrice, (int)shoppingDetail.OrderQuantity + OrderQty, 0,DateTime.Now);
-                    
+                    da.UpdateShoppingDetail(CartID, product.ProductID, shoppingDetail.ProductName, product.SellingPrice, (int)shoppingDetail.OrderQuantity + OrderQty, 0, DateTime.Now);
+
                     //shoppingDetail.OrderQuantity += 1;
                     //shoppingDetail.Subtotal = shoppingDetail.UnitPrice * shoppingDetail.OrderQuantity;
                     //db.Entry(shoppingDetail).State = EntityState.Modified;
@@ -206,7 +206,26 @@ namespace ChoCastle.Controllers
                              Product = product,
                              Image = image
                          };
+            String imgurl = "/Template/images/";
+            switch (CategoryID)
+            {
+                case 1:
+                    imgurl += "choco/生巧克力7.jpg";
+                    break;
+                case 2:
+                    imgurl += "cookies.jpg";
+                    break;
+                case 3:
+                    imgurl += "cakes.jpg";
+                    break;
+                case 4:
+                    imgurl += "gift.jpg";
+                    break;
+                default:
+                    break;
 
+            }
+            ViewBag.img = imgurl;
             return View(result.ToList());
         }
 
