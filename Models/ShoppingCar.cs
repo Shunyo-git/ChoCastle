@@ -11,6 +11,7 @@ namespace ChoCastle.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class ShoppingCar
     {
@@ -20,22 +21,37 @@ namespace ChoCastle.Models
             this.ShoppingDetails = new HashSet<ShoppingDetail>();
         }
     
-        public int CarID { get; set; }
+         public int CarID { get; set; }
         public int isLogin { get; set; }
+        [Display(Name = "會員編號")]
         public Nullable<int> MemberID { get; set; }
+        [Display(Name = "訂購人")]
         public string OrderName { get; set; }
+        [Display(Name = "收件人")]
         public string ShipName { get; set; }
+        [Display(Name = "連絡電話")]
         public string PhoneNumber { get; set; }
+        [Display(Name = "收件地址")]
         public string ShippingAddress { get; set; }
+        [Display(Name = "寄送方式")]
         public Nullable<int> Delivery { get; set; }
+        [Display(Name = "運費")]
         public Nullable<int> ShippingCost { get; set; }
+        [Display(Name = "訂單金額")]
         public Nullable<int> TotalAmount { get; set; }
+        [Display(Name = "付款方式")]
         public Nullable<int> Payment { get; set; }
+        [Display(Name = "預計收件日期")]
         public Nullable<System.DateTime> RequiredDate { get; set; }
+        [Display(Name = "新增日期")]
         public Nullable<System.DateTime> AddedDate { get; set; }
+        [Display(Name = "修改日期")]
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        [Display(Name = "統一編號")]
         public string CompanyNumber { get; set; }
+        [Display(Name = "公司抬頭")]
         public string InvoiceHeading { get; set; }
+        [Display(Name = "發票種類")]
         public Nullable<int> InvoiceType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
