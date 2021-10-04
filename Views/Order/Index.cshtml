@@ -42,7 +42,14 @@
                                         <td class="hidden-phone">@order.OrderName</td>
                                         <td>@order.OrderDate </td>
                                         <td>$ @order.TotalAmount</td>
-                                        <td>@order.DeliverDate </td>
+                                        @if (order.PaymentTime is null)
+                                        {
+                                            <td><button type="button" class="btn btn-danger btn-xs">待付款</button></td>
+                                        }
+                                        else
+                                        {
+                                            <td><button type="button" class="btn btn-success btn-xs">已付款</button></td>
+                                        }
                                         <td>
                                             @if (order.OrderStatus == 0)
                                             {

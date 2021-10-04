@@ -47,10 +47,81 @@ namespace ChoCastle.Controllers
             var products = db.Products.Include(p => p.ProductCategory).Include(p => p.Vendor);
             return View(products.ToList());
         }
+
         public ActionResult ProductManage()
         {
-            var products = db.Products.Include(p => p.ProductCategory).Include(p => p.Vendor);
-            return View(products.ToList());
+            //下拉式選單
+            viewModel model = new viewModel();
+            List<ProductCategory> productCategories = db.ProductCategories.ToList();
+            List<SelectListItem> lst_item = new List<SelectListItem>();
+            lst_item.Add(new SelectListItem { Text = "請選擇", Value = "" });
+            if (productCategories.Count > 0)
+            {
+                foreach (var item in productCategories)
+                {
+                    lst_item.Add(new SelectListItem { Text = item.CategoryName, Value = item.CategoryID.ToString() });
+                }
+            }
+
+            List<SelectListItem> lst_display = new List<SelectListItem>();
+            lst_display.Add(new SelectListItem { Text = "請選擇", Value = "" });
+            lst_display.Add(new SelectListItem { Text = "上架", Value = "true" });
+            lst_display.Add(new SelectListItem { Text = "下架", Value = "false" });
+
+            //列表
+            var result = (from pd in db.Products
+                          join ca in db.ProductCategories on pd.CategoryID equals ca.CategoryID
+                          where
+                          (
+                          (pd.ProductID == model.ProductID || model.ProductID == null) &&
+                          (pd.CategoryID == model.CategoryID || model.CategoryID == null) &&
+                          (pd.ProductName.Contains(model.ProductName) || string.IsNullOrEmpty(model.ProductName)) &&
+                          (pd.isDisplay == model.isDisplay || model.isDisplay == null)
+                          )
+                          select pd).ToList();
+
+            model.lst_Product = result;
+            model.lst_Selectitem_CID = lst_item;
+            model.lst_Selectitem_Display = lst_display;
+            
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProductManage(viewModel rita)
+        {
+            List<ProductCategory> productCategories = db.ProductCategories.ToList();
+            List<SelectListItem> lst_item = new List<SelectListItem>();
+            List<SelectListItem> lst_display = new List<SelectListItem>();
+            if (productCategories.Count > 0)
+            {
+                lst_item.Add(new SelectListItem { Text = "請選擇", Value = "" });
+                foreach (var item in productCategories)
+                {
+                    lst_item.Add(new SelectListItem { Text = item.CategoryName, Value = item.CategoryID.ToString() });
+                }
+            }
+
+            lst_display.Add(new SelectListItem { Text = "請選擇", Value = "" });
+            lst_display.Add(new SelectListItem { Text = "上架", Value = "true" });
+            lst_display.Add(new SelectListItem { Text = "下架", Value = "false" });
+
+            var result = (from pd in db.Products
+                          join ca in db.ProductCategories on pd.CategoryID equals ca.CategoryID
+                          where
+                          (
+                          (pd.ProductID == rita.ProductID || rita.ProductID == null) &&
+                          (pd.CategoryID == rita.CategoryID || rita.CategoryID == null) &&
+                          (pd.ProductName.Contains(rita.ProductName) || string.IsNullOrEmpty(rita.ProductName)) &&
+                          (pd.isDisplay == rita.isDisplay || rita.isDisplay == null)
+                          )
+                          select pd).ToList();
+
+            rita.lst_Product = result;
+            rita.lst_Selectitem_CID = lst_item;
+            rita.lst_Selectitem_Display = lst_display;
+            return View(rita);
         }
         // GET: Products/Details/5
         public ActionResult Details(int? id)
@@ -397,5 +468,15 @@ namespace ChoCastle.Controllers
             public List<ProductImage> ProductImage { get; set; }
         }
 
+        public class viewModel
+        {
+            public Int32? ProductID { get; set; }
+            public Int32? CategoryID { get; set; }
+            public String ProductName { get; set; }
+            public Boolean? isDisplay { get; set; }
+            public List<Product> lst_Product { get; set; }
+            public List<SelectListItem> lst_Selectitem_CID { get; set; }
+            public List<SelectListItem> lst_Selectitem_Display { get; set; }
+        }
     }
 }
