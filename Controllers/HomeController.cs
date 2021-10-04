@@ -79,6 +79,11 @@ namespace ChoCastle.Controllers
         }
 
         // GET
+        /// <summary>
+        /// GET: /Home/ProductDescription?ProductID=3
+        /// </summary>
+        /// <param name="ProductID">ProductID parameter</param>
+        /// <returns>Return download file</returns>
         public ActionResult ProductDescription(int? ProductID)
         {
             imgResultDes imgResult = new imgResultDes();

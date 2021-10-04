@@ -175,6 +175,7 @@
                                                                 <img src="@String.Format("/PhotoImages/{0}.jpeg", @Model.ImgLst[i].file_id)" width="100" height="100" />
 
 
+                                                                <img src="@Url.Action("DownloadFile", "PhotoImage", new { fileId = @Model.ImgLst[i].file_id })" width="100" height="100" />
                                                             </div>
                                                         </td>
                                                         <td style="text-align: center;">
