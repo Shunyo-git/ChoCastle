@@ -11,6 +11,7 @@ namespace ChoCastle.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Product
     {
@@ -26,7 +27,9 @@ namespace ChoCastle.Models
         public int ProductID { get; set; }
         public int CategoryID { get; set; }
         public string ProductName { get; set; }
+        [DataType(DataType.MultilineText)]
         public string ProductSpec { get; set; }
+        [DataType(DataType.MultilineText)]
         public string ProductDisc { get; set; }
         public Nullable<bool> isDisplay { get; set; }
         public Nullable<int> PurchasePrice { get; set; }
