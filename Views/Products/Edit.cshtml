@@ -16,7 +16,7 @@
                     <form action="#" class="form-horizontal style-form" method="post" enctype="multipart/form-data">
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        @Html.HiddenFor(model => model.Product.ProductID)                        
+                        @Html.HiddenFor(model => model.Product.ProductID)
                         <div class="form-group">
                             @Html.LabelFor(model => model.Product.CategoryID, "商品分類", htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-3 col-xs-11">
@@ -106,48 +106,51 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">產品照片</label>
                             <div class="col-md-9">
-                                <input id="FileAttach" name="FileAttach" type="file" multiple="multiple" class="default" />
-                                <br />
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th style="text-align: center;">圖片編號</th>
-                                            <th style="text-align: center;">圖片名稱</th>
-                                            <th style="text-align: center;">排序值</th>
-                                            <th style="text-align: center;">預覽</th>
-                                            <th style="text-align: center;">操作</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if (Model.ProductImage.Count > 0)
-                                        {
-                                            foreach (var item in Model.ProductImage)
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <span class="btn btn-theme02 btn-file">
+                                        <span class="fileupload-new"><i class="fa fa-paperclip"></i> 選擇檔案</span>
+                                        <input id="FileAttach" name="FileAttach" type="file" multiple="multiple" class="default" />
+                                    </span>
+                                    <span class="fileupload-preview" style="margin-left:5px;"></span>
+                                    <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
+                                    <br /><br />
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: center;">圖片名稱</th>
+                                                @*<th style="text-align: center;">排序值</th>*@
+                                                <th style="text-align: center;">預覽</th>
+                                                <th style="text-align: center;">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.ProductImage.Count > 0)
                                             {
-                                        <tr>
-                                            <td style="text-align: center;">@item.file_id</td>
-                                            <td style="text-align: center;">@item.file_name</td>
-                                            <td style="text-align: center;">@item.SortID</td>
-                                            @*<td style="text-align: center;"><img width="100px" height="100px" src="@String.Format("/PhotoImages/Main_{0}.jpeg", item.file_id)" /></td>*@
-                                            @*<td style="text-align: center;"><img width="100px" height="100px" src="@String.Format("/PhotoImages/{0}.jpeg", item.file_id)" /></td>*@
-                                            <td style="text-align: center;"><img src="@Url.Action("DownloadFile", "PhotoImage", new { fileId = @item.file_id })" width="100" height="100" /></td>
-
-                                            <td style="text-align: center;">
-                                                @if (item.isMain == 0)
+                                                foreach (var item in Model.ProductImage)
                                                 {
-                                                    <a class="btn btn-primary btn-xs" href="@Url.Action("SetMain", "PhotoImage", new { id = item.file_id, ProductId = item.ProductID })" onclick="javascript: if(!confirm('確定設定圖片:@item.file_name 為產品主圖嗎？')){return false;}"><i class="fa fa-pencil"></i>設為主圖</a>
+                                                    <tr>
+                                                        <td style="text-align: center;">@item.file_name</td>
+                                                        @*<td style="text-align: center;">@item.SortID</td>*@
+                                                        @*<td style="text-align: center;"><img width="100px" height="100px" src="@String.Format("/PhotoImages/Main_{0}.jpeg", item.file_id)" /></td>*@
+                                                        <td style="text-align: center;"><img width="100px" height="100px" src="@String.Format("/PhotoImages/{0}.jpeg", item.file_id)" /></td>
+                                                        <td style="text-align: center;">
+                                                            @if (item.isMain == 0)
+                                                            {
+                                                                <a class="btn btn-primary btn-xs" href="@Url.Action("SetMain", "PhotoImage", new { id = item.file_id, ProductId = item.ProductID })" onclick="javascript: if(!confirm('確定設定圖片:@item.file_name 為產品主圖嗎？')){return false;}"><i class="fa fa-pencil"></i>設為主圖</a>
+                                                            }
+                                                            <a class="btn btn-danger btn-xs" href="@Url.Action("Delete", "PhotoImage", new { id = item.file_id, ProductId = item.ProductID })" onclick="javascript: if(!confirm('確定要刪除圖片:@item.file_name 嗎？')){return false;}"><i class="fa fa-pencil"></i>刪除</a>
+                                                        </td>
+                                                    </tr>
                                                 }
-                                                <a class="btn btn-danger btn-xs" href="@Url.Action("Delete", "PhotoImage", new { id = item.file_id, ProductId = item.ProductID })" onclick="javascript: if(!confirm('確定要刪除圖片:@item.file_name 嗎？')){return false;}"><i class="fa fa-pencil"></i>刪除</a>
-                                            </td>
-                                        </tr>
                                             }
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                        </div>
-                        <div style="text-align:center">
-                            <button type="submit" class="btn btn-warning">儲存</button>
+                            </div>
+                            <div style="text-align:center">
+                                <button type="submit" class="btn btn-warning">儲存</button>
+                            </div>
                         </div>
                     </form>
                 </div>

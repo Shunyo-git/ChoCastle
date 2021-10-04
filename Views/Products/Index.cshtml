@@ -3,49 +3,52 @@
     Layout = "~/Views/Shared/_LayoutBackEnd.cshtml";
 }
 
-<!--main content start-->
-<section id="main-content">
-    <section class="wrapper">
-        <div class="row">
-            <div class="col-lg-12 main-chart">
-                <!--CUSTOM CHART START -->
-                <div class="row mt">
-                    <!-- /col-md-4 -->
-                    <!-- WEATHER PANEL -->
-                    <div class="col-md-4 mb">
-                        <div class="weather pn">
-                            <i class="fa fa-cloud fa-4x"></i>
-                            <h2>26º C</h2>
-                            <h4>Castle Weather</h4>
+
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="row">
+                <div class="col-lg-12 main-chart">
+                    <!--CUSTOM CHART START -->
+                    <div class="row mt">
+                        <!-- /col-md-4 -->
+                        <!-- WEATHER PANEL -->
+                        <div class="col-md-4 mb">
+                            <div class="weather pn">
+                                <i class="fa fa-cloud fa-4x"></i>
+                                <h2 id="lblWeather" class="Msg"><div>Weather</div></h2>
+                                <h4>Castle Weather</h4>
+                                <h2><div id="MyClockDisplay" class="mt" onload="showTime()">2021</div></h2>
+</div>
                         </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 mb">
-                        <!-- instagram PANEL -->
-                        <div class="white-panel pn">
-                            <div class="instagram-panel pn">
-                                <i class="fa fa-instagram fa-4x"></i>
-                                <p>
-                                    THISISYOU<br /> 5 min. ago
-                                </p>
-                                <p><i class="fa fa-comment"></i> 18 | <i class="fa fa-heart"></i> 49</p>
+                        <div class="col-md-4 col-sm-4 mb">
+                            <!-- instagram PANEL -->
+                            <div class="white-panel pn">
+                                <div class="instagram-panel pn">
+                                    <i class="fa fa-instagram fa-4x"></i>
+                                    <p>
+                                        THISISYOU<br /> 5 min. ago
+                                    </p>
+                                    <p><i class="fa fa-comment"></i> 18 | <i class="fa fa-heart"></i> 49</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 mb">
-                        <!-- REVENUE PANEL -->
-                        <div class="green-panel pn">
-                            <div class="green-header">
-                                <h5>收入</h5>
+                        <div class="col-md-4 col-sm-4 mb">
+                            <!-- REVENUE PANEL -->
+                            <div class="green-panel pn">
+                                <div class="green-header">
+                                    <h5>收入</h5>
+                                </div>
+                                <div class="chart mt">
+                                    <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,464,655]"></div>
+                                </div>
+                                <p class="mt"><b>$ 17,980</b><br />當月收入</p>
                             </div>
-                            <div class="chart mt">
-                                <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,464,655]"></div>
-                            </div>
-                            <p class="mt"><b>$ 17,980</b><br />當月收入</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </section>
-</section>
-<!--main content end-->
+    <!--main content end-->
+ 
