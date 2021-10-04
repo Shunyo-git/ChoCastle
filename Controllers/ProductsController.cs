@@ -105,7 +105,7 @@ namespace ChoCastle.Controllers
 
             lst_display.Add(new SelectListItem { Text = "請選擇", Value = "" });
             lst_display.Add(new SelectListItem { Text = "上架", Value = "true" });
-            lst_display.Add(new SelectListItem { Text = "未上架", Value = "false" });
+            lst_display.Add(new SelectListItem { Text = "下架", Value = "false" });
 
             var result = (from pd in db.Products
                           join ca in db.ProductCategories on pd.CategoryID equals ca.CategoryID

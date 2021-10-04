@@ -12,56 +12,42 @@
         <!-- row -->
         <div class="row mt">
             <div class="col-md-12">
-                <div class="content-panel">
-                    <form method="post">
+                <div class="form-panel">
+                    <form method="post" class="form-horizontal style-form">
                         @Html.AntiForgeryToken()
                         <div class="form-group">
-                            @*@Html.LabelFor(model => model.Product.CategoryID, "商品分類", htmlAttributes: new { @class = "control-label col-md-3" })*@
-                            <label class="control-label col-md-6" style="text-align:right">商品編號:</label>
-                            <div class="col-md-6 col-xs-11">
-                                @Html.EditorFor(model => model.ProductID)                                
-                                @*@Html.Editor("ProductID", new {id = "ProductID", @class = "form-control form-control-inline input-medium" })*@
-                                @*@Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control form-control-inline input-medium default-date-picker" })*@
-                                @*@Html.ValidationMessageFor(model => model.Product.VendorID, "", new { @class = "help-block" })*@
+                            <label class=" col-md-2 control-label" style="width:100px"><strong> 商品編號:</strong></label>
+                            <div class="col-md-3 col-xs-11">
+                                @Html.EditorFor(model => model.ProductID, new { htmlAttributes = new { id = "ProductID", @class = "form-control form-control-inline input-medium default-date-picker", size = "20", type = "text", value = "" } })
                             </div>
-                            <label class="control-label col-md-6" style="text-align:right">商品分類:</label>
-                            <div class="col-md-6 col-xs-11">
-                                @*@Html.DropDownList("CategoryID", null, htmlAttributes: new { id = "ProductCategory", @class = "form-control form-control-inline input-medium " })*@
-                                @Html.DropDownListFor(model => model.CategoryID, Model.lst_Selectitem_CID, new {  })
-                                @*@Html.Editor("ProductCategory", new { id = "ProductCategory", @class = "form-control form-control-inline input-medium" })*@
-                                @*@Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control form-control-inline input-medium default-date-picker" })*@
-                                @*@Html.ValidationMessageFor(model => model.Product.VendorID, "", new { @class = "help-block" })*@
+                            <label class="col-md-2 control-label" style="width:100px"><strong> 商品分類:</strong></label>
+                            <div class="col-md-3 col-xs-11">
+                                @Html.DropDownListFor(model => model.CategoryID, Model.lst_Selectitem_CID, new { id = "CategoryID", @class = "form-control form-control-inline input-medium default-date-picker" })
                             </div>
-                            <label class="control-label col-md-6" style="text-align:right">商品名稱:</label>
-                            <div class="col-md-6 col-xs-11">
-                                @Html.EditorFor(model => model.ProductName)
-                                @*@Html.Editor("ProductName", new {id = "ProductName" , @class = "form-control form-control-inline input-medium" })*@
-                                @*@Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control form-control-inline input-medium default-date-picker" })*@
-                                @*@Html.ValidationMessageFor(model => model.Product.VendorID, "", new { @class = "help-block" })*@
-                            </div>
-                            <label class="control-label col-md-6" style="text-align:right">上架情況:</label>
-                            <div class="col-md-6 col-xs-11">
-                                @Html.DropDownListFor(model => model.isDisplay, Model.lst_Selectitem_Display)
-                                @*@Html.Editor("isDisplay", new {id = "isDisplay" , @class = "form-control form-control-inline input-medium" })*@
-                                @*@Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control form-control-inline input-medium default-date-picker" })*@
-                                @*@Html.ValidationMessageFor(model => model.Product.VendorID, "", new { @class = "help-block" })*@
-                            </div>
-                            
                         </div>
                         <div class="form-group">
-                            <div class="col-md-6 col-xs-11">
-                                <button type="submit">查詢</button>
+                            <label class="col-md-2 control-label" style="width:100px"><strong> 商品名稱:</strong></label>
+                            <div class="col-md-3 col-xs-11">
+                                @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { id = "ProductName", @class = "form-control input-medium " } })
+                            </div>
+                            <label class="col-md-2 control-label" style="width:100px"><strong> 上架情況:</strong></label>
+                            <div class="col-md-3 col-xs-11">
+                                @Html.DropDownListFor(model => model.isDisplay, Model.lst_Selectitem_Display, new { id = "isDisplay", @class = "form-control input-medium" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 col-xs-11">
+                                <button type="submit" class="btn btn-theme"> 查詢</button>
                             </div>
                         </div>
                     </form>
-                    
-                    <hr />
+
                     <table class="table table-striped table-advance table-hover">
                         <h4><i class="fa fa-angle-right"></i> 產品列表</h4>
-                        <hr />
                         <div style="text-align:left">
-                            <a class="btn btn-warning " href="@Url.Action("Create", "Products")"> 新增</a>
+                            <a class="btn btn-warning" href="@Url.Action("Create", "Products")"> 新增</a>
                         </div>
+                        <hr />
                         <thead>
                             <tr>
                                 <th><i class="fa fa-bullhorn"></i> 商品編號</th>
