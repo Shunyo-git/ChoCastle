@@ -284,7 +284,7 @@ namespace ChoCastle.Controllers
             else
             {
                 DateTime rDate = (DateTime)shoppingCart.RequiredDate;
-                if (DateTime.Compare(rDate.AddDays(5), DateTime.Now.AddDays(5)) < 1)
+                if (DateTime.Compare(rDate, DateTime.Now.AddDays(5)) < 0)
                 {
                     ModelState.AddModelError("RequiredDate", "最快配送日期，需為訂單成立後五天起。。");
                 }

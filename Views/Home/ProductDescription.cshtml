@@ -37,7 +37,8 @@
                     <div class="col-md-5 animate-box img-to-responsive animate-box" data-animate-effect="fadeInLeft">
                         @if (Model.lst_Image.Count > 0)
                         {
-                            <img src="@String.Format("/PhotoImages/{0}.jpeg", Model.lst_Image.Where(x => x.isMain == 1).FirstOrDefault().file_id)" alt="@Model.Product.ProductName">
+                            @*<img src="@String.Format("/PhotoImages/{0}.jpeg", Model.lst_Image.Where(x => x.isMain == 1).FirstOrDefault().file_id)" alt="@Model.Product.ProductName">*@
+                            <img src="@Url.Action("DownloadFile", "PhotoImage", new { fileId =  Model.lst_Image.Where(x => x.isMain == 1).FirstOrDefault().file_id })"   alt="@Model.Product.ProductName" />
                         }
                     </div>
                     <div class="col-md-7 animate-box" data-animate-effect="fadeInRight">
@@ -66,9 +67,11 @@
                     {
                         foreach (var img in Model.lst_Image)
                         {
-                            <div class="col-md-6 col-sm-6 fh5co-gallery_item">
-                                <div class="fh5co-bg-img fh5co-gallery_big" style="background-image: url(@String.Format("/PhotoImages/{0}.jpeg", img.file_id)" alt="@img.ProductName" );" data-trigger="zoomerang"></div>
-                            </div>
+                <div class="col-md-6 col-sm-6 fh5co-gallery_item">
+                    
+                    @*<div class="fh5co-bg-img fh5co-gallery_big" style="background-image: url(@String.Format("/PhotoImages/{0}.jpeg", img.file_id)" alt="@img.ProductName" );" data-trigger="zoomerang"></div>*@
+                    <div class="fh5co-bg-img fh5co-gallery_big" style="background-image: url(@Url.Action("DownloadFile", "PhotoImage", new { fileId = img.file_id })" alt="@img.ProductName" );" data-trigger="zoomerang"></div>
+                </div>
                         }
                     }
                 </div>
