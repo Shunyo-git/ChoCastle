@@ -83,7 +83,7 @@ namespace ChoCastle.Controllers
             model.lst_Product = result;
             model.lst_Selectitem_CID = lst_item;
             model.lst_Selectitem_Display = lst_display;
-            
+
             return View(model);
         }
 
@@ -361,7 +361,74 @@ namespace ChoCastle.Controllers
         /// <returns></returns>
         public ActionResult ProductCategory()
         {
-            return View(db.ProductCategories.ToList());
+            viewModel model = new viewModel();
+            List<ProductCategory> productCategories = db.ProductCategories.ToList();
+            List<SelectListItem> lst_item = new List<SelectListItem>();
+            lst_item.Add(new SelectListItem { Text = "請選擇", Value = "" });
+            if (productCategories.Count > 0)
+            {
+                foreach (var item in productCategories)
+                {
+                    lst_item.Add(new SelectListItem { Text = item.CategoryName, Value = item.CategoryName.ToString() });
+                }
+            }
+
+            List<SelectListItem> lst_display = new List<SelectListItem>();
+            lst_display.Add(new SelectListItem { Text = "請選擇", Value = "" });
+            lst_display.Add(new SelectListItem { Text = "上架", Value = "true" });
+            lst_display.Add(new SelectListItem { Text = "下架", Value = "false" });
+
+            var result = (from ca in db.ProductCategories
+                          where
+                          (
+                          (ca.CategoryID == model.CategoryID || model.CategoryID == null) &&
+                          (ca.CategoryName.Contains(model.CategoryName) || string.IsNullOrEmpty(model.CategoryName)) &&
+                          (ca.isDisplay == model.isDisplay || model.isDisplay == null)
+                          )
+                          select ca).ToList();
+
+            model.lst_Category = result;
+            model.lst_Selectitem_CID = lst_item;
+            model.lst_Selectitem_Display = lst_display;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProductCategory(viewModel rita)
+        {
+            viewModel model = rita;
+            List<ProductCategory> productCategories = db.ProductCategories.ToList();
+            List<SelectListItem> lst_item = new List<SelectListItem>();
+            lst_item.Add(new SelectListItem { Text = "請選擇", Value = "" });
+            if (productCategories.Count > 0)
+            {
+                foreach (var item in productCategories)
+                {
+                    lst_item.Add(new SelectListItem { Text = item.CategoryName, Value = item.CategoryName.ToString() });
+                }
+            }
+
+            List<SelectListItem> lst_display = new List<SelectListItem>();
+            lst_display.Add(new SelectListItem { Text = "請選擇", Value = "" });
+            lst_display.Add(new SelectListItem { Text = "上架", Value = "true" });
+            lst_display.Add(new SelectListItem { Text = "下架", Value = "false" });
+
+            var result = (from ca in db.ProductCategories
+                          where
+                          (
+                          (ca.CategoryID == model.CategoryID || model.CategoryID == null) &&
+                          (ca.CategoryName.Contains(model.CategoryName) || string.IsNullOrEmpty(model.CategoryName)) &&
+                          (ca.isDisplay == model.isDisplay || model.isDisplay == null)
+                          )
+                          select ca).ToList();
+
+            rita.lst_Category = result;
+            rita.lst_Selectitem_CID = lst_item;
+            rita.lst_Selectitem_Display = lst_display;
+
+            return View(rita);
         }
 
         /// <summary>
@@ -473,8 +540,10 @@ namespace ChoCastle.Controllers
             public Int32? ProductID { get; set; }
             public Int32? CategoryID { get; set; }
             public String ProductName { get; set; }
+            public String CategoryName { get; set; }
             public Boolean? isDisplay { get; set; }
             public List<Product> lst_Product { get; set; }
+            public List<ProductCategory> lst_Category { get; set; }
             public List<SelectListItem> lst_Selectitem_CID { get; set; }
             public List<SelectListItem> lst_Selectitem_Display { get; set; }
         }
