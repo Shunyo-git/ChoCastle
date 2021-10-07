@@ -638,7 +638,6 @@ C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\obj\Debug\ChoCastle.Migrations.M
 C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\obj\Debug\ChoCastle.Migrations.MemberID1.resources
 C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\obj\Debug\ChoCastle.csproj.GenerateResource.cache
 D:\Git-Repos\ChoCastle\obj\Debug\ChoCastle.csproj.AssemblyReference.cache
-C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\obj\Debug\ChoCastle.csproj.AssemblyReference.cache
 C:\Users\hanah\Desktop\ChoCastle\bin\ChoCastle.dll.config
 C:\Users\hanah\Desktop\ChoCastle\bin\ChoCastle.dll
 C:\Users\hanah\Desktop\ChoCastle\bin\ChoCastle.pdb
@@ -769,3 +768,4 @@ C:\Users\hanah\Desktop\ChoCastle\obj\Debug\ChoCastle.csproj.CopyComplete
 C:\Users\hanah\Desktop\ChoCastle\obj\Debug\ChoCastle.dll
 C:\Users\hanah\Desktop\ChoCastle\obj\Debug\ChoCastle.pdb
 C:\Users\hanah\Desktop\ChoCastle\obj\Debug\ChoCastle.csproj.AssemblyReference.cache
+C:\Users\User\Source\Repos\Shunyo-git\ChoCastle\obj\Debug\ChoCastle.csproj.AssemblyReference.cache

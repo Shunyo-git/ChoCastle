@@ -26,18 +26,21 @@
     <script src="~/TemplateBackEnd/lib/chart-master/Chart.js"></script>
 
  
-        <script>
+    <script>
             function loadWeather() {
                 const xhttp = new XMLHttpRequest();
+               
                 xhttp.onload = function () {
                     if (document.getElementById("lblWeather") != null) {
                         document.getElementById("lblWeather").innerHTML = this.responseText;
+                        console.log(this.responseText);
                         loadWeather();
                     }
-                   
+
                 }
                 //xhttp.open("GET","http://" + location.hostname + ":8000/cgi-bin/temperature.py",true);
                 xhttp.open("GET", "http://192.168.1.10:8000/cgi-bin/temperature.py", true);
+             
                 xhttp.send();
             }
 
@@ -85,11 +88,11 @@
                 if (document.getElementById("MyClockDisplay") != null) {
                     setTimeout(showTime, 1000);
                 }
-               
+
 
             }
 
-        </script>
+    </script>
     
 </head>
 <body onload="loadWeather();showTime();">

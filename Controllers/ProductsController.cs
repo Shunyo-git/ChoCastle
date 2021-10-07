@@ -12,10 +12,13 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Threading.Tasks;
 using System.IO;
+using System.Web.Http.Cors;
 
 
 namespace ChoCastle.Controllers
 {
+
+
     public class ProductsController : Controller
     {
         private ChoCastleDBEntities db = new ChoCastleDBEntities();
@@ -41,11 +44,37 @@ namespace ChoCastle.Controllers
         }
         #endregion
 
-        // GET: Products
+
+
+        // GET: Index
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.ProductCategory).Include(p => p.Vendor);
-            return View(products.ToList());
+            //http://localhost:11775/Products
+            //Response.AppendHeader("Access-Control-Allow-Origin", "*");
+            //ControllerContext.HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            //var products = db.Products.Include(p => p.ProductCategory).Include(p => p.Vendor);
+            //return View(products.ToList());
+
+            var date = DateTime.Now;
+            var orders = (from od in db.Orders 
+                          where DbFunctions.DiffDays( od.OrderDate, date) < 30
+                          select od);
+            string strAmount = string.Empty;
+            int TotalAmount = 0;
+            foreach (var od in orders)
+            {
+                if (strAmount != string.Empty)
+                {
+                    strAmount += ",";
+                }
+                strAmount += od.TotalAmount;
+                TotalAmount += (int)od.TotalAmount;
+            }
+
+            ViewBag.LastOrders = strAmount;
+            ViewBag.LastAmount = TotalAmount;
+            return View(orders.ToList());
         }
 
         public ActionResult ProductManage()
@@ -83,7 +112,7 @@ namespace ChoCastle.Controllers
             model.lst_Product = result;
             model.lst_Selectitem_CID = lst_item;
             model.lst_Selectitem_Display = lst_display;
-            
+
             return View(model);
         }
 
@@ -361,7 +390,74 @@ namespace ChoCastle.Controllers
         /// <returns></returns>
         public ActionResult ProductCategory()
         {
-            return View(db.ProductCategories.ToList());
+            viewModel model = new viewModel();
+            List<ProductCategory> productCategories = db.ProductCategories.ToList();
+            List<SelectListItem> lst_item = new List<SelectListItem>();
+            lst_item.Add(new SelectListItem { Text = "請選擇", Value = "" });
+            if (productCategories.Count > 0)
+            {
+                foreach (var item in productCategories)
+                {
+                    lst_item.Add(new SelectListItem { Text = item.CategoryName, Value = item.CategoryName.ToString() });
+                }
+            }
+
+            List<SelectListItem> lst_display = new List<SelectListItem>();
+            lst_display.Add(new SelectListItem { Text = "請選擇", Value = "" });
+            lst_display.Add(new SelectListItem { Text = "上架", Value = "true" });
+            lst_display.Add(new SelectListItem { Text = "下架", Value = "false" });
+
+            var result = (from ca in db.ProductCategories
+                          where
+                          (
+                          (ca.CategoryID == model.CategoryID || model.CategoryID == null) &&
+                          (ca.CategoryName.Contains(model.CategoryName) || string.IsNullOrEmpty(model.CategoryName)) &&
+                          (ca.isDisplay == model.isDisplay || model.isDisplay == null)
+                          )
+                          select ca).ToList();
+
+            model.lst_Category = result;
+            model.lst_Selectitem_CID = lst_item;
+            model.lst_Selectitem_Display = lst_display;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProductCategory(viewModel rita)
+        {
+            viewModel model = rita;
+            List<ProductCategory> productCategories = db.ProductCategories.ToList();
+            List<SelectListItem> lst_item = new List<SelectListItem>();
+            lst_item.Add(new SelectListItem { Text = "請選擇", Value = "" });
+            if (productCategories.Count > 0)
+            {
+                foreach (var item in productCategories)
+                {
+                    lst_item.Add(new SelectListItem { Text = item.CategoryName, Value = item.CategoryName.ToString() });
+                }
+            }
+
+            List<SelectListItem> lst_display = new List<SelectListItem>();
+            lst_display.Add(new SelectListItem { Text = "請選擇", Value = "" });
+            lst_display.Add(new SelectListItem { Text = "上架", Value = "true" });
+            lst_display.Add(new SelectListItem { Text = "下架", Value = "false" });
+
+            var result = (from ca in db.ProductCategories
+                          where
+                          (
+                          (ca.CategoryID == model.CategoryID || model.CategoryID == null) &&
+                          (ca.CategoryName.Contains(model.CategoryName) || string.IsNullOrEmpty(model.CategoryName)) &&
+                          (ca.isDisplay == model.isDisplay || model.isDisplay == null)
+                          )
+                          select ca).ToList();
+
+            rita.lst_Category = result;
+            rita.lst_Selectitem_CID = lst_item;
+            rita.lst_Selectitem_Display = lst_display;
+
+            return View(rita);
         }
 
         /// <summary>
@@ -473,8 +569,10 @@ namespace ChoCastle.Controllers
             public Int32? ProductID { get; set; }
             public Int32? CategoryID { get; set; }
             public String ProductName { get; set; }
+            public String CategoryName { get; set; }
             public Boolean? isDisplay { get; set; }
             public List<Product> lst_Product { get; set; }
+            public List<ProductCategory> lst_Category { get; set; }
             public List<SelectListItem> lst_Selectitem_CID { get; set; }
             public List<SelectListItem> lst_Selectitem_Display { get; set; }
         }
