@@ -177,7 +177,7 @@
                                     <div style="clear: both;"></div>
                                 </td>
                                 <td width="135px" height="60px" align="center" valign="middle">
-                                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                                    $ @Html.DisplayFor(modelItem => item.UnitPrice)
                                 </td>
                                 <td width="150px" height="60px" align="center" valign="middle">
                                     <i class="minus iconfont icon-subtract"></i>
@@ -185,7 +185,7 @@
                                     @Html.DisplayFor(modelItem => item.OrderQuantity)
                                 </td>
                                 <td width="230px" height="60px" align="center" valign="middle">
-                                    @Html.DisplayFor(modelItem => item.Subtotal)
+                                    $  @Html.DisplayFor(modelItem => item.Subtotal)
                                 </td>
                             </tr>
 
@@ -196,7 +196,7 @@
                     <tr>
                         <th style="background-color: #DEB887" class="text-center"></th>
                         <th style="background-color: #DEB887" class="text-center"></th>
-                        <th style="background-color: #DEB887" >運費</th>
+                        <th style="background-color: #DEB887">運費</th>
                         <th style="background-color: #DEB887" class="text-center"></th>
 
                     </tr>
@@ -210,20 +210,20 @@
                         <td>
                             &nbsp;
                         </td>
-                        <td align="right" valign="middle"> 
+                        <td align="right" valign="middle">
                             @Html.DisplayNameFor(model => model.ShoppingCart.ShippingCost)：
                         </td>
-                        <td width="230px" height="40px" align="center" valign="middle" >
-                            @Html.DisplayFor(model => model.ShoppingCart.ShippingCost)
+                        <td width="230px" height="40px" align="center" valign="middle">
+                           $ @Html.DisplayFor(model => model.ShoppingCart.ShippingCost)
                         </td>
                     </tr>
 
 
-                    <tr >
-                        <th style="background-color: #DEB887 " ></th>
-                        <th style="background-color: #DEB887 " ></th>
-                        <th style="background-color: #DEB887 " >總計</th>
-                        <th style="background-color: #DEB887 " ></th>
+                    <tr>
+                        <th style="background-color: #DEB887 "></th>
+                        <th style="background-color: #DEB887 "></th>
+                        <th style="background-color: #DEB887 ">總計</th>
+                        <th style="background-color: #DEB887 "></th>
 
                     </tr>
 
@@ -239,7 +239,7 @@
                             本次消費總金額：
                         </td>
                         <td width="230px" height="40px" align="center" valign="middle" style="color: #DAA520 ;font-weight: bold">
-                            @Html.DisplayFor(model => model.ShoppingCart.TotalAmount)
+                           $ @Html.DisplayFor(model => model.ShoppingCart.TotalAmount)
                         </td>
                     </tr>
                 </table>
