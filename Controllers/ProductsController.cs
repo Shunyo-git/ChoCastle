@@ -12,10 +12,13 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Threading.Tasks;
 using System.IO;
+using System.Web.Http.Cors;
 
 
 namespace ChoCastle.Controllers
 {
+
+
     public class ProductsController : Controller
     {
         private ChoCastleDBEntities db = new ChoCastleDBEntities();
@@ -41,11 +44,37 @@ namespace ChoCastle.Controllers
         }
         #endregion
 
-        // GET: Products
+
+
+        // GET: Index
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.ProductCategory).Include(p => p.Vendor);
-            return View(products.ToList());
+            //http://localhost:11775/Products
+            //Response.AppendHeader("Access-Control-Allow-Origin", "*");
+            //ControllerContext.HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            //var products = db.Products.Include(p => p.ProductCategory).Include(p => p.Vendor);
+            //return View(products.ToList());
+
+            var date = DateTime.Now;
+            var orders = (from od in db.Orders 
+                          where DbFunctions.DiffDays( od.OrderDate, date) < 30
+                          select od);
+            string strAmount = string.Empty;
+            int TotalAmount = 0;
+            foreach (var od in orders)
+            {
+                if (strAmount != string.Empty)
+                {
+                    strAmount += ",";
+                }
+                strAmount += od.TotalAmount;
+                TotalAmount += (int)od.TotalAmount;
+            }
+
+            ViewBag.LastOrders = strAmount;
+            ViewBag.LastAmount = TotalAmount;
+            return View(orders.ToList());
         }
 
         public ActionResult ProductManage()

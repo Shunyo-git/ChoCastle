@@ -75,7 +75,7 @@
                             <label class="col-lg-2 col-sm-2 control-label">付款狀態</label>
                             <div class="col-lg-10">
 
-                                <p class="form-control-static">  @ViewBag.PaymentTime</p>
+                                <p class="form-control-static"> <button type="button" class="btn btn-danger btn-xs">@ViewBag.PaymentTime</button> </p>
 
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                             <div class="form-group">
                                 <label class="col-lg-2 col-sm-2 control-label">付款操作</label>
                                 <div class="col-lg-10">
-                                    <a href="@Url.Action("Payment", "Order", new { orderID = Model.order.OrderID })"><button type="button" class="btn btn-success">已付款</button></a>
+                                    <a href="@Url.Action("Payment", "Order", new { orderID = Model.order.OrderID })"><button type="button" class="btn btn-success">設定為已付款</button></a>
                                 </div>
                             </div>
                         }
