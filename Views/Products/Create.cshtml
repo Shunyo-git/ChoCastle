@@ -106,24 +106,28 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">產品照片</label>
                             <div class="col-md-4">
-                                <input id="FileAttach" name="FileAttach" type="file" multiple="multiple" class="default" />
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <span class="btn btn-theme02 btn-file">
+                                        <span class="fileupload-new"><i class="fa fa-paperclip"></i> 選擇檔案</span>
+                                        <input id="FileAttach" name="FileAttach" type="file" multiple="multiple" class="default" />
+                                    </span>
+                                    <span class="fileupload-preview" style="margin-left:5px;"></span>
+                                    <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
+
+                                </div>
                             </div>
                         </div>
-
-                        
-
-                        <div style="text-align:center">
-                            <button type="submit" class="btn btn-warning">儲存</button>
-                        </div>
-
+                            <div style="text-align:center">
+                                <button type="submit" class="btn btn-warning">儲存</button>
+                            </div>
                     }
 
 
+
+                    <!-- /form-panel -->
                 </div>
-                <!-- /form-panel -->
+                <!-- /col-lg-12 -->
             </div>
-            <!-- /col-lg-12 -->
-        </div>
     </section>
     <!-- /wrapper -->
 </section>
