@@ -39,7 +39,7 @@
 
                 }
                 //xhttp.open("GET","http://" + location.hostname + ":8000/cgi-bin/temperature.py",true);
-                xhttp.open("GET", "http://192.168.1.10:8000/cgi-bin/temperature.py", true);
+                xhttp.open("GET", "https://192.168.1.10:443/cgi-bin/temperature.py", true);
              
                 xhttp.send();
             }
@@ -95,7 +95,7 @@
     </script>
     
 </head>
-<body onload="loadWeather();showTime();">
+<body onload="showTime();">
 
 
     @if (Request.IsAuthenticated)

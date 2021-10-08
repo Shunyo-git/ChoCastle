@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Threading.Tasks;
 using System.IO;
-using System.Web.Http.Cors;
+
 
 
 namespace ChoCastle.Controllers
@@ -47,7 +47,7 @@ namespace ChoCastle.Controllers
 
 
         // GET: Index
-        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        //[EnableCors(origins: "*", headers: "*", methods: "*")]
         public ActionResult Index()
         {
             //http://localhost:11775/Products
